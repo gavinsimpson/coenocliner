@@ -2,7 +2,7 @@
 \alias{sim1dPoisson}
 \title{Simulate Poisson counts along a single gradient}
 \usage{
-sim1dPoisson(x, opt, tol, h)
+sim1dPoisson(x, opt, tol, h, expectation = FALSE)
 }
 \arguments{
   \item{x}{numeric; gradient locations.}
@@ -13,6 +13,9 @@ sim1dPoisson(x, opt, tol, h)
 
   \item{h}{numeric; species abundance at optima, one per
   taxon.}
+
+  \item{expectation}{logical; should expectations (mean
+  response) be returned?}
 }
 \value{
 a matrix of simulated counts.
@@ -27,6 +30,18 @@ The response model used is the classical Gaussian response
 with parameters \eqn{\mu}{mu}, the species optimum,
 \eqn{t}, the species tolerance, and \eqn{h}, the height of
 the response curve at the optimum.
+
+If \code{expectation = TRUE} the mean response for the
+parameters is returned. If \code{expectation = FALSE}
+counts are drawn randomly from a Poisson distribution with
+mean (argument \code{lamba}) given by the Gaussian
+response.
+}
+\section{Note}{
+  When called with \code{expectation = FALSE} the function
+  does not use the pseudorandom number generator, but when
+  called with the defaults a single call to pseudorandom
+  number generator is made.
 }
 \examples{
 set.seed(1)

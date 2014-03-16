@@ -6,11 +6,23 @@
 ##' species tolerance, and \eqn{h}, the height of the response curve
 ##' at the optimum.
 ##'
+##' If \code{expectation = TRUE} the mean response for the parameters
+##' is returned. If \code{expectation = FALSE} counts are drawn randomly
+##' from a Poisson distribution with mean (argument \code{lamba}) given
+##' by the Gaussian response.
+##'
+##' @section Note:
+##' When called with \code{expectation = FALSE} the function does not use
+##' the pseudorandom number generator, but when called with the defaults
+##' a single call to pseudorandom number generator is made.
+##'
 ##' @title Simulate Poisson counts along a single gradient
 ##' @param x numeric; gradient locations.
 ##' @param opt numeric; species optima, one per taxon.
 ##' @param tol numeric; species tolerances, one per taxon.
 ##' @param h numeric; species abundance at optima, one per taxon.
+##' @param expectation logical; should expectations (mean response) be
+##' returned?
 ##'
 ##' @return a matrix of simulated counts.
 ##'
@@ -28,12 +40,15 @@
 ##' H <- rep(20, 5)
 ##' y <- sim1dPoisson(x1, Opt, Tol, H)
 ##'
-`sim1dPoisson` <- function(x, opt, tol, h) {
+`sim1dPoisson` <- function(x, opt, tol, h, expectation = FALSE) {
     n <- length(x)
     ex <- expandGauss(x, opt, tol, h)
     mu <- gaussianResponse(x = ex[,"x"], opt = ex[,"opt"],
                            tol = ex[,"tol"], h = ex[,"h"])
-    sim <- rpois(nrow(ex), mu)
+    if (expectation)
+        sim <- mu
+    else
+        sim <- rpois(nrow(ex), mu)
     sim <- matrix(sim, nrow = n)
     sim
 }
