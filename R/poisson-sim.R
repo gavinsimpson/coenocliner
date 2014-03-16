@@ -34,21 +34,25 @@
 ##'
 ##' @examples
 ##' set.seed(1)
-##' x1 <- runif(300, min = 4, max = 6)
+##' x1 <- seq(from = 4, to = 6, length = 100)
 ##' Opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
 ##' Tol <- rep(0.25, 5)
 ##' H <- rep(20, 5)
 ##' y <- sim1dPoisson(x1, Opt, Tol, H)
+##'
+##' y <- sim1dPoisson(x1, Opt, Tol, H, expectation = TRUE)
+##' matplot(x1, y, type = "l", lty = "solid")
 ##'
 `sim1dPoisson` <- function(x, opt, tol, h, expectation = FALSE) {
     n <- length(x)
     ex <- expandGauss(x, opt, tol, h)
     mu <- gaussianResponse(x = ex[,"x"], opt = ex[,"opt"],
                            tol = ex[,"tol"], h = ex[,"h"])
-    if (expectation)
+    if (expectation) {
         sim <- mu
-    else
+    } else {
         sim <- rpois(nrow(ex), mu)
+    }
     sim <- matrix(sim, nrow = n)
     sim
 }
@@ -116,10 +120,11 @@
                              opt2 = ex2[, "opt2"], tol2 = ex2[, "tol2"],
                              h = ex1[, "h"], corr = corr)
 
-    if (expectation)
+    if (expectation) {
         sim <- mu
-    else
+    } else {
         sim <- rpois(n1, mu)
+    }
     sim <- matrix(sim, nrow = n1)
     sim
 }
