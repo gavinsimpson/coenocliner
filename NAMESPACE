@@ -1,0 +1,7 @@
+export(expandGauss)
+export(sim1dNegbinom)
+export(sim1dPoisson)
+export(sim2dNegbinom)
+export(sim2dPoisson)
+importFrom(stats,rgamma)
+importFrom(stats,rpois)
