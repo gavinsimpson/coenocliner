@@ -34,8 +34,8 @@
 `sim1dNegbinom` <- function(x, opt, tol, h, alpha) {
     n <- length(x)
     ex <- expandGauss(x, opt, tol, h)
-    mu <- ex[, "h"] * exp(-((ex[, "x"] - ex[, "opt"])^2 /
-                            (2*ex[, "tol"]^2)))
+    mu <- gaussianResponse(x = ex[,"x"], opt = ex[,"opt"],
+                           tol = ex[,"tol"], h = ex[,"h"])
     nr <- nrow(ex)
     sim <- rpois(nr, mu * rgamma(nr, shape = alpha, rate = 1/alpha))
     sim <- matrix(sim, nrow = n)
@@ -91,11 +91,10 @@
     colnames(ex1) <- c("x1", "opt1", "tol1", "h")
     colnames(ex2) <- c("x2", "opt2", "tol2")
 
-    mu <- h * exp(-(1/(2*(1 - corr^2))) *
-                  (((x1 - opt1) / tol1)^2 +
-                   ((x2 - opt2) / tol2)^2 -
-                   ((2 * corr) * ((x1 - opt1) / tol1) *
-                    ((x2 - opt2) / tol2))))
+    mu <- biGaussianResponse(x1 = ex1[, "x1"], x2 = ex2[, "x2"],
+                             opt1 = ex1[, "opt1"], tol1 = ex1[, "tol1"],
+                             opt2 = ex2[, "opt2"], tol2 = ex2[, "tol2"],
+                             h = ex1[, "h"], corr = corr)
     mu <- mu * rgamma(n1, shape = alpha, rate = 1/alpha)
     sim <- rpois(n1, mu)
     sim <- matrix(sim, nrow = n1)

@@ -1,4 +1,6 @@
+export(biGaussianResponse)
 export(expandGauss)
+export(gaussianResponse)
 export(sim1dNegbinom)
 export(sim1dPoisson)
 export(sim2dNegbinom)
