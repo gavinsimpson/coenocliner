@@ -3,7 +3,8 @@
 \title{Simulate negative binomial counts along two, possibly
 correlated gradients}
 \usage{
-sim2dNegbinom(x1, x2, opt1, tol1, h, opt2, tol2, corr = 0, alpha)
+sim2dNegbinom(x1, x2, opt1, tol1, h, opt2, tol2, corr = 0, alpha,
+  expectation = FALSE)
 }
 \arguments{
   \item{x1}{numeric; locations along gradient 1.}
@@ -28,6 +29,9 @@ sim2dNegbinom(x1, x2, opt1, tol1, h, opt2, tol2, corr = 0, alpha)
 
   \item{alpha}{numeric; dispersion parameter for the
   negative binomial.}
+
+  \item{expectation}{logical; should expectations (mean
+  response) be returned?}
 }
 \value{
 A matrix of simulate counts.
@@ -42,6 +46,18 @@ The response model used is the classical Gaussian response
 with parameters \eqn{\mu}{mu}, the species optimum,
 \eqn{t}, the species tolerance, and \eqn{h}, the height of
 the response curve at the optimum.
+
+If \code{expectation = TRUE} the mean response for the
+parameters is returned. If \code{expectation = FALSE}
+counts are drawn randomly from a negative binomial
+distribution with mean (argument \code{lamba}) given by the
+Gaussian response.
+}
+\section{Note}{
+  When called with \code{expectation = FALSE} the function
+  does not use the pseudorandom number generator, but when
+  called with the defaults two calls to the pseudorandom
+  number generator are made.
 }
 \examples{
 set.seed(1)

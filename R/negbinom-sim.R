@@ -7,6 +7,16 @@
 ##' species tolerance, and \eqn{h}, the height of the response curve
 ##' at the optimum.
 ##'
+##' If \code{expectation = TRUE} the mean response for the parameters
+##' is returned. If \code{expectation = FALSE} counts are drawn randomly
+##' from a negative binomial distribution with mean (argument \code{lamba})
+##' given by the Gaussian response.
+##'
+##' @section Note:
+##' When called with \code{expectation = FALSE} the function does not use
+##' the pseudorandom number generator, but when called with the defaults
+##' two calls to the pseudorandom number generator are made.
+##'
 ##' @title Simulate negative binomial counts along a single gradient
 ##'
 ##' @param x numeric; gradient locations.
@@ -14,6 +24,8 @@
 ##' @param tol numeric; species tolerances, one per taxon.
 ##' @param h numeric; species abundance at optima, one per taxon.
 ##' @param alpha numeric; dispersion parameter for the negative binomial.
+##' @param expectation logical; should expectations (mean response) be
+##' returned?
 ##'
 ##' @return a matrix of simulated counts.
 ##'
@@ -25,19 +37,26 @@
 ##'
 ##' @examples
 ##' set.seed(1)
-##' x1 <- runif(300, min = 4, max = 6)
+##' x1 <- seq(from = 4, to = 6, length = 100)
 ##' Opt <- seq(4, 6, length = 5)
 ##' Tol <- rep(0.25, 5)
 ##' H <- rep(20, 5)
 ##' y <- sim1dNegbinom(x1, Opt, Tol, H, alpha = 1.1)
 ##'
-`sim1dNegbinom` <- function(x, opt, tol, h, alpha) {
+##' y <- sim1dNegbinom(x1, Opt, Tol, H, expectation = TRUE)
+##' matplot(x1, y, type = "l", lty = "solid")
+##'
+`sim1dNegbinom` <- function(x, opt, tol, h, alpha, expectation = FALSE) {
     n <- length(x)
     ex <- expandGauss(x, opt, tol, h)
     mu <- gaussianResponse(x = ex[,"x"], opt = ex[,"opt"],
                            tol = ex[,"tol"], h = ex[,"h"])
-    nr <- nrow(ex)
-    sim <- rpois(nr, mu * rgamma(nr, shape = alpha, rate = 1/alpha))
+    if (expectation) {
+        sim <- mu
+    } else {
+        nr <- nrow(ex)
+        sim <- rpois(nr, mu * rgamma(nr, shape = alpha, rate = 1/alpha))
+    }
     sim <- matrix(sim, nrow = n)
     sim
 }
@@ -51,6 +70,16 @@
 ##' species tolerance, and \eqn{h}, the height of the response curve
 ##' at the optimum.
 ##'
+##' If \code{expectation = TRUE} the mean response for the parameters
+##' is returned. If \code{expectation = FALSE} counts are drawn randomly
+##' from a negative binomial distribution with mean (argument \code{lamba})
+##' given by the Gaussian response.
+##'
+##' @section Note:
+##' When called with \code{expectation = FALSE} the function does not use
+##' the pseudorandom number generator, but when called with the defaults
+##' two calls to the pseudorandom number generator are made.
+##'
 ##' @title Simulate negative binomial counts along two, possibly
 ##' correlated gradients
 ##' @param x1 numeric; locations along gradient 1.
@@ -62,6 +91,8 @@
 ##' @param tol2 numeric; species tolerance on gradient 2, one per taxon.
 ##' @param corr numeric; the correlation between gradients.
 ##' @param alpha numeric; dispersion parameter for the negative binomial.
+##' @param expectation logical; should expectations (mean response) be
+##' returned?
 ##'
 ##' @return A matrix of simulate counts.
 ##'
@@ -84,7 +115,7 @@
 ##'                    corr = 0.5, alpha = 1.1)
 ##'
 `sim2dNegbinom` <- function(x1, x2, opt1, tol1, h, opt2, tol2,
-                            corr = 0, alpha) {
+                            corr = 0, alpha, expectation = FALSE) {
     stopifnot(isTRUE(all.equal(n1 <- length(x1), n2 <- length(x2))))
     ex1 <- expandGauss(x1, opt1, tol1, h)
     ex2 <- expandGauss(x2, opt2, tol2, h)[, -4] ## don't need extra h
@@ -95,8 +126,12 @@
                              opt1 = ex1[, "opt1"], tol1 = ex1[, "tol1"],
                              opt2 = ex2[, "opt2"], tol2 = ex2[, "tol2"],
                              h = ex1[, "h"], corr = corr)
-    mu <- mu * rgamma(n1, shape = alpha, rate = 1/alpha)
-    sim <- rpois(n1, mu)
+    if (expectation) {
+        sim <- mu
+    } else {
+        mu <- mu * rgamma(n1, shape = alpha, rate = 1/alpha)
+        sim <- rpois(n1, mu)
+    }
     sim <- matrix(sim, nrow = n1)
     sim
 }
