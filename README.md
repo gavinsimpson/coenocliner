@@ -34,6 +34,10 @@ meantime, I'm happy just having something tangible for my own use
 without having to remember the expressions for some of the response 
 models.
 
+Currently coenocliner is licensed under the GPL v2, but I'm happy to 
+reconsider this if you want to contribute code under a more permissive 
+licence.
+
 ## Installation
 
 No binary packages are currently available for coenocliner. If you 
