@@ -3,14 +3,15 @@ coenocliner
 
 An R package to simulate species abundances (counts) along gradients
 
-One of the key ways quantitative ecologists attempt to understand the 
-properties and behaviour of the methods they use or dream up is 
+One of the key ways quantitative ecologists attempt to understand 
+the properties and behaviour of the methods they use or dream up is 
 through the use of simulated data. There are a number of computer 
 programmes for simulating ecological data along gradients, such as 
 Peter Minchin's COMPAS, but none (that I am aware of) that are 
-available for R on CRAN. Dave Robert's coenoflex package for R would 
-be a useful alternative but currently is archived on CRAN because of 
-some problems in the Fortran code underlying the package.
+available for R on CRAN. Dave Robert's 
+[coenoflex](http://cran.r-project.org/package=coenoflex) package for 
+R would be a useful alternative but currently is archived on CRAN 
+because of some problems in the Fortran code underlying the package.
 
 Rather than have to reinvent the wheel each time I wanted to simulate 
 some new data for a paper or to work on a new approach, I decided to 
