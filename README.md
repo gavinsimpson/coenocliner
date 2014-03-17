@@ -25,6 +25,15 @@ from either a Poisson or negative binomial distribution, using the
 parameterised Gaussian response as the expectation or mean of the 
 distribution.
 
+## Development
+
+I would like to see coenocliner be as inclusive as possible; if you 
+have code to simulate ecological species or community data that is 
+just sitting around, consider adding it to coenocliner. In the 
+meantime, I'm happy just having something tangible for my own use 
+without having to remember the expressions for some of the response 
+models.
+
 ## Installation
 
 No binary packages are currently available for coenocliner. If you 
