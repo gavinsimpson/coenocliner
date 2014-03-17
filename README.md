@@ -48,7 +48,7 @@ out how to link git with svn I'll start a project on
 packages of coenocliner.
 
 If you use Hadley Wickham's **devtools** package then you 
-can install ggvegan directly from github using functions that 
+can install coenocliner directly from github using functions that 
 devtools provides. To do this, install **devtools** from CRAN via
 
     install.packages("devtools")
