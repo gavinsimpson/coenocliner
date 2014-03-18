@@ -52,7 +52,7 @@ can detect unimodal species-environment relationships}.
 \examples{
 set.seed(42)
 N <- 100   # Number of locations on gradient (samples)
-glen <- 4 # Gradient length
+glen <- 4  # Gradient length
 grad <- sort(runif(N, -glen/2, glen/2)) # sample locations
 M <- 10    # Number of species
 sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
