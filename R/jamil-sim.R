@@ -81,7 +81,8 @@
     if (expectation) {
         sim <- pij
     } else {
-        sim <- rbinom(n, size = 1, prob = pij)
+        sim <- rbinom(n*m, size = 1, prob = pij)
+        sim <- matrix(sim, nrow = nrow(pij))
     }
 
     sim
