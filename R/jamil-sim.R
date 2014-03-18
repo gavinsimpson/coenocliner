@@ -45,7 +45,12 @@
 ##' M <- 10    # Number of species
 ##' sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
 ##'                 randm = FALSE, expectation = TRUE)
+##' ## visualise the response curves
 ##' matplot(grad, sim, type = "l", lty = "solid")
+##'
+##' ## simulate binomial responses from those response curves
+##' sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
+##'                 randm = FALSE)
 ##'
 `simJamil` <- function(n, m, x, gl = 4, randx = TRUE,
                        tol = 0.5, tau = gl/2, randm = TRUE,
