@@ -57,7 +57,12 @@ grad <- sort(runif(N, -glen/2, glen/2)) # sample locations
 M <- 10    # Number of species
 sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
                 randm = FALSE, expectation = TRUE)
+## visualise the response curves
 matplot(grad, sim, type = "l", lty = "solid")
+
+## simulate binomial responses from those response curves
+sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
+                randm = FALSE)
 }
 \author{
 Gavin L. Simpson
