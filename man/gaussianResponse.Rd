@@ -22,6 +22,6 @@ Gaussian response model.
 Univariate Gaussian response model
 }
 \author{
-Gavin Simpson
+Gavin L. Simpson
 }
 

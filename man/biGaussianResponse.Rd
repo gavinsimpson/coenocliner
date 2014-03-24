@@ -33,6 +33,6 @@ Gaussian repsonse model.
 Bivariate Gaussian response model
 }
 \author{
-Gavin Simpson
+Gavin L. Simpson
 }
 

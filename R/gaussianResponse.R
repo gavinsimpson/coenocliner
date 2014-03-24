@@ -10,7 +10,7 @@
 ##'
 ##' @export
 ##'
-##' @author Gavin Simpson
+##' @author Gavin L. Simpson
 `gaussianResponse` <- function(x, opt, tol, h) {
     h * exp(-((x - opt)^2 / (2*tol^2)))
 }
@@ -31,7 +31,7 @@
 ##'
 ##' @export
 ##'
-##' @author Gavin Simpson
+##' @author Gavin L. Simpson
 `biGaussianResponse` <- function(x1, x2, opt1, tol1, opt2, tol2, h,
                                  corr = 0) {
     h * exp(-(1/(2*(1 - corr^2))) * (((x1 - opt1) / tol1)^2 +
