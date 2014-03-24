@@ -13,3 +13,4 @@ Imports:
 License: GPL-2
 URL: https://github.com/gavinsimpson/coenocliner/
 BugReports: https://github.com/gavinsimpson/coenocliner/issues
+ByteCompile: true
