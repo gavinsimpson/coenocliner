@@ -1,6 +1,8 @@
 coenocliner
 ===========
 
+[![Build Status](https://travis-ci.org/gavinsimpson/coenocliner.png?branch=master)](https://travis-ci.org/gavinsimpson/coenocliner)
+
 An R package to simulate species abundances (counts) along gradients
 
 One of the key ways quantitative ecologists attempt to understand 
