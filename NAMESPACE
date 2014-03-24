@@ -1,3 +1,4 @@
+export(betaResponse)
 export(biGaussianResponse)
 export(expandGauss)
 export(gaussianResponse)
