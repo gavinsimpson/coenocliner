@@ -71,6 +71,8 @@ then run
     require("devtools")
     install_github("coenocliner", "gavinsimpson")
 
-### References Jamil and ter Braak (2013) Generalized linear mixed 
-models can detect unimodal species-environment relationships. *PeerJ*
-**1:e95**; [DOI 10.7717/peerj.95](http://doi.org/10.7717/peerj.95)
+### References
+
+Jamil and ter Braak (2013) Generalized linear mixed models can 
+detect unimodal species-environment relationships. *PeerJ* **1:e95**;
+ [DOI 10.7717/peerj.95](http://doi.org/10.7717/peerj.95)
