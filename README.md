@@ -28,6 +28,16 @@ from either a Poisson or negative binomial distribution, using the
 parameterised Gaussian response as the expectation or mean of the 
 distribution.
 
+Additional response models include:
+
+ 1. The generalised beta response function
+
+A further feature of **coenocliner** that I hope to develop is to 
+include simulation  wrapper functions that replicate the simulation 
+methods used in research papers. A working example is `simJamil`, 
+which produces simlations from a Gaussian logit response following 
+the scheme descibed in Jamil & ter Braak (2013).
+
 ## Development
 
 I would like to see coenocliner be as inclusive as possible; if you 
@@ -60,3 +70,7 @@ then run
 
     require("devtools")
     install_github("coenocliner", "gavinsimpson")
+
+### References Jamil and ter Braak (2013) Generalized linear mixed 
+models can detect unimodal species-environment relationships. *PeerJ*
+**1:e95**; [DOI 10.7717/peerj.95](http://doi.org/10.7717/peerj.95)
