@@ -158,7 +158,7 @@
     if (expectation) {
         sim <- mu
     } else {
-        sim <- rbinom(n1*length(opt1), 1, mu)
+        sim <- rbinom(nrow(ex1), 1, mu)
     }
     sim <- matrix(sim, nrow = n1)
     sim
