@@ -66,14 +66,15 @@ y <- sim2dBinom(x1, x2, Opt1, Tol1, H, Opt2, Tol2, corr = 0, expectation = TRUE)
 
 ## Multiple species
 set.seed(1)
-x1 <- runif(300, min = 4, max = 6)
-Opt1 <- seq(4, 6, length = 5)
-Tol1 <- rep(0.25, 5)
-x2 <- runif(300, min = 2, max = 20)
-Opt2 <- seq(2, 20, length = 5)
-Tol2 <- rep(1, 5)
-H <- rep(0.7, 5)
-y <- sim2dBinom(x1, x2, Opt1, Opt2, Tol1, Tol2, H, corr = 0.5)
+nsp <- 5
+x1 <- runif(100, min = 0, max = 30)
+Opt1 <- seq(5, 25, length = nsp)
+Tol1 <- rep(5, nsp)
+x2 <- runif(100, min = 400, max = 1000)
+Opt2 <- seq(500, 900, length = nsp)
+Tol2 <- rep(100, nsp)
+H <- rep(0.9, 5)
+y <- sim2dBinom(x1, x2, Opt1, Tol1, H, Opt2, Tol2, corr = 0.2)
 }
 \author{
 F. Rodriguez-Sanchez, based on code by Gavin L. Simpson
