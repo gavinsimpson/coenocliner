@@ -129,8 +129,8 @@
     if (expectation) {
         sim <- mu
     } else {
-        mu <- mu * rgamma(n1, shape = alpha, rate = 1/alpha)
-        sim <- rpois(n1, mu)
+        mu <- mu * rgamma(nrow(ex1), shape = alpha, rate = 1/alpha)
+        sim <- rpois(nrow(ex1), mu)
     }
     sim <- matrix(sim, nrow = n1)
     sim
