@@ -6,3 +6,4 @@
 
 ## ignore backup files
 *~
+.Rproj.user
