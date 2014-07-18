@@ -9,11 +9,16 @@ expandBeta(x, m, A0, r, alpha, gamma)
 \arguments{
 \item{x}{numeric; gradient locations.}
 
-\item{opt}{numeric; species optima, one per taxon.}
+\item{m}{numeric; species model abundance, one per taxon.}
 
-\item{tol}{numeric; species tolerances, one per taxon.}
+\item{A0}{numeric; species abundance at \code{m}, one per taxon.}
 
-\item{h}{numeric; species abundance at optima, one per taxon.}
+\item{r}{numeric; range of \code{x} occupied by each species, one
+per taxon.}
+
+\item{alpha}{numeric; shape parameter of the generalised beta function.}
+
+\item{gamma}{numeric; shape parameter of the generalised beta function.}
 }
 \value{
 a matrix of Generalised Beta repsonse model parameters for

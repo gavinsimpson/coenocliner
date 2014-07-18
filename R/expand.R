@@ -59,9 +59,12 @@
 ##' replication of the modal locations.
 ##'
 ##' @param x numeric; gradient locations.
-##' @param opt numeric; species optima, one per taxon.
-##' @param tol numeric; species tolerances, one per taxon.
-##' @param h numeric; species abundance at optima, one per taxon.
+##' @param m numeric; species model abundance, one per taxon.
+##' @param A0 numeric; species abundance at \code{m}, one per taxon.
+##' @param r numeric; range of \code{x} occupied by each species, one
+##' per taxon.
+##' @param alpha numeric; shape parameter of the generalised beta function.
+##' @param gamma numeric; shape parameter of the generalised beta function.
 ##'
 ##' @return a matrix of Generalised Beta repsonse model parameters for
 ##' each gradient location. Specifically, a matrix with columns \code{x},
