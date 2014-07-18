@@ -44,6 +44,26 @@ on the gradient locations and species modela response, and then
 replicates the remaining Beta response parameters to match the
 replication of the modal locations.
 }
+\examples{
+# Recreate Fig. 2 of Minchin (1987)
+A0 <- c(5,4,7,5,9,8) * 10
+m <- c(25,85,10,60,45,60)
+r <- c(3,3,4,4,6,5) * 10
+alpha <- c(0.1,1,2,4,1.5,1)
+gamma <- c(0.1,1,2,4,0.5,4)
+x <- 1:100
+
+# expand parameter set
+pars <- expandBeta(x, m, A0, r, alpha, gamma)
+head(pars)
+
+# Simulate expectation under Generalised Beta response
+sim <- do.call(betaResponse, data.frame(pars))
+sim <- matrix(sim, nrow = 100)
+
+# plot
+matplot(sim, type = "l", lty = "solid")
+}
 \author{
 Gavin L. Simpson
 }
