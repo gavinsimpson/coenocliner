@@ -6,3 +6,7 @@
 
 ## ignore backup files
 *~
+
+## ignore RStudio files
+*.Rproj
+.Rproj.user
