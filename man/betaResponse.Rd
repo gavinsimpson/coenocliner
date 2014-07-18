@@ -30,7 +30,7 @@ specified parameter values.
 \description{
 Species abundances are generated from a generalized beta
 function. The simple beta function is generalized to any
-range of \code{x},the gradient locations. Parameters
+range of \code{x}, the gradient locations. Parameters
 specify the the position of the modal response (\code{m}),
 the maximum abundance at the mode (\code{A0}), and the
 range of occurence of the species on the gradient
