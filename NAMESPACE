@@ -2,6 +2,7 @@
 
 export(betaResponse)
 export(biGaussianResponse)
+export(expandBeta)
 export(expandGauss)
 export(gaussianResponse)
 export(sim1dBinom)

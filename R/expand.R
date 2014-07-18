@@ -37,3 +37,48 @@
     h   <-   h[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
     cbind(x, opt, tol, h)
 }
+
+##' @title Expand gradient locations and species parameters of the
+##' Generalise Beta response
+##'
+##' @description An \code{\link{expand.grid}}-like utility function
+##' for parameters of the Beta response model.
+##'
+##' @details The response model used is the generalised Beta response with
+##' the parameters: the position of the modal response (\code{m}), the
+##' maximum abundance at the mode (\code{A0}), and the range of
+##' occurence of the species on the gradient (\code{r}). In addition,
+##' two positive shape parameters, \code{alpha} and \code{gamma}
+##' constrain the shape of the response.\eqn{\mu}{mu}, the species
+##' optimum, \eqn{t}, the species tolerance, and \eqn{h}, the height of
+##' the response curve at the optimum.
+##'
+##' \code{expandBeta} performs an \code{\link{expand.grid}}-like operation
+##' on the gradient locations and species modela response, and then
+##' replicates the remaining Beta response parameters to match the
+##' replication of the modal locations.
+##'
+##' @param x numeric; gradient locations.
+##' @param opt numeric; species optima, one per taxon.
+##' @param tol numeric; species tolerances, one per taxon.
+##' @param h numeric; species abundance at optima, one per taxon.
+##'
+##' @return a matrix of Generalised Beta repsonse model parameters for
+##' each gradient location. Specifically, a matrix with columns \code{x},
+##' \code{m}, \code{A0}, \code{r}, \code{alpha}, and \code{gamma}.
+##'
+##' @author Gavin L. Simpson
+##'
+##' @export
+`expandBeta` <- function(x, m, A0, r, alpha, gamma) {
+    nx <- length(x)
+    no <- length(m)
+    orep <- nx * no
+    x     <-     x[rep.int(rep.int(seq_len(nx), rep.int(1L, nx)), orep/nx)]
+    m     <-     m[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
+    A0    <-    A0[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
+    r     <-     r[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
+    alpha <- alpha[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
+    gamma <- gamma[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
+    cbind(x, m, A0, r, alpha, gamma)
+}
