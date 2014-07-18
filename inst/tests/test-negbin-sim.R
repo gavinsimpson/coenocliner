@@ -6,6 +6,24 @@ library_if_available("coenocliner")
 
 context("Testing Negative Binomial count simulation")
 
+### 1 gradient
+
+## Set up options for simulations
+set.seed(1)
+x1 <- seq(from = 4, to = 6, length = 100)
+Opt <- seq(4, 6, length = 5)
+Tol <- rep(0.25, 5)
+H <- rep(20, 5)
+y <- sim1dNegbinom(x1, Opt, Tol, H, alpha = 1.1)
+
+test_that("sim1dNegbinom returns correctly a matrix", {
+    expect_that(y, is_a("matrix"))
+    expect_that(NROW(y), equals(length(x1)))
+    expect_that(NCOL(y), equals(length(Opt)))
+})
+
+### 2 correlated gradients
+
 ## Set up options for simulations
 set.seed(1)
 x1 <- runif(300, min = 4, max = 6)
