@@ -36,7 +36,7 @@ A further feature of **coenocliner** that I hope to develop is to
 include simulation  wrapper functions that replicate the simulation 
 methods used in research papers. A working example is `simJamil`, 
 which produces simlations from a Gaussian logit response following 
-the scheme descibed in Jamil & ter Braak (2013).
+the scheme described in Jamil & ter Braak (2013).
 
 ## Development
 
