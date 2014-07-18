@@ -1,0 +1,262 @@
+
+R version 3.0.2 Patched (2013-10-07 r64035) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "coenocliner"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('coenocliner')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("betaResponse")
+> ### * betaResponse
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: betaResponse
+> ### Title: Generalized beta function of Minchin (1987)
+> ### Aliases: betaResponse
+> 
+> ### ** Examples
+> 
+> N <- 100
+> X <- seq(from = 3, to = 7, length.out = N)
+> sim <- betaResponse(X, m = 5, A0 = 50, r = 2.5, alpha = 1.5,
++                     gamma = 0.5)
+> plot(sim ~ X, type = "l")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sim1dBinom")
+> ### * sim1dBinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sim1dBinom
+> ### Title: Simulate species occurrence along a single gradient
+> ### Aliases: sim1dBinom
+> 
+> ### ** Examples
+> 
+> ## One species:
+> set.seed(1)
+> x <- seq(0, 30, length.out = 100)
+> Opt <- 18
+> Tol <- 3
+> H <- 0.7
+> y <- sim1dBinom(x, Opt, Tol, H, expectation = TRUE)
+> plot(x, y, main = "Probability of Presence", type="l")
+> 
+> y <- sim1dBinom(x, Opt, Tol, H, expectation = FALSE)
+> plot(x, y, main = "Occurrence")
+> 
+> 
+> ## Multiple species
+> set.seed(1)
+> x1 <- seq(from = 4, to = 6, length = 100)
+> Opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
+> Tol <- rep(0.25, 5)
+> H <- rep(0.7, 5)
+> y <- sim1dBinom(x1, Opt, Tol, H)
+> 
+> y <- sim1dBinom(x1, Opt, Tol, H, expectation = TRUE)
+> matplot(x1, y, type = "l", lty = "solid")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sim1dNegbinom")
+> ### * sim1dNegbinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sim1dNegbinom
+> ### Title: Simulate negative binomial counts along a single gradient
+> ### Aliases: sim1dNegbinom
+> 
+> ### ** Examples
+> 
+> set.seed(1)
+> x1 <- seq(from = 4, to = 6, length = 100)
+> Opt <- seq(4, 6, length = 5)
+> Tol <- rep(0.25, 5)
+> H <- rep(20, 5)
+> y <- sim1dNegbinom(x1, Opt, Tol, H, alpha = 1.1)
+> 
+> y <- sim1dNegbinom(x1, Opt, Tol, H, expectation = TRUE)
+> matplot(x1, y, type = "l", lty = "solid")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sim1dPoisson")
+> ### * sim1dPoisson
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sim1dPoisson
+> ### Title: Simulate Poisson counts along a single gradient
+> ### Aliases: sim1dPoisson
+> 
+> ### ** Examples
+> 
+> set.seed(1)
+> x1 <- seq(from = 4, to = 6, length = 100)
+> Opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
+> Tol <- rep(0.25, 5)
+> H <- rep(20, 5)
+> y <- sim1dPoisson(x1, Opt, Tol, H)
+> 
+> y <- sim1dPoisson(x1, Opt, Tol, H, expectation = TRUE)
+> matplot(x1, y, type = "l", lty = "solid")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sim2dBinom")
+> ### * sim2dBinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sim2dBinom
+> ### Title: Simulate species occurrence along two, possibly correlated
+> ###   gradients
+> ### Aliases: sim2dBinom
+> 
+> ### ** Examples
+> 
+> ## One species:
+> set.seed(1)
+> x1 <- runif(100, 0, 30)
+> Opt1 <- 18
+> Tol1 <- 5
+> x2 <- runif(100, 400, 1000)
+> Opt2 <- 800
+> Tol2 <- 100
+> H <- 0.8
+> y <- sim2dBinom(x1, x2, Opt1, Tol1, H, Opt2, Tol2, corr = 0, expectation = TRUE)
+> 
+> ## Multiple species
+> set.seed(1)
+> nsp <- 5
+> x1 <- runif(100, min = 0, max = 30)
+> Opt1 <- seq(5, 25, length = nsp)
+> Tol1 <- rep(5, nsp)
+> x2 <- runif(100, min = 400, max = 1000)
+> Opt2 <- seq(500, 900, length = nsp)
+> Tol2 <- rep(100, nsp)
+> H <- rep(0.9, 5)
+> y <- sim2dBinom(x1, x2, Opt1, Tol1, H, Opt2, Tol2, corr = 0.2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sim2dNegbinom")
+> ### * sim2dNegbinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sim2dNegbinom
+> ### Title: Simulate negative binomial counts along two, possibly correlated
+> ###   gradients
+> ### Aliases: sim2dNegbinom
+> 
+> ### ** Examples
+> 
+> set.seed(1)
+> x1 <- runif(300, min = 4, max = 6)
+> Opt1 <- seq(4, 6, length = 5)
+> Tol1 <- rep(0.25, 5)
+> x2 <- runif(300, min = 2, max = 20)
+> Opt2 <- seq(2, 20, length = 5)
+> Tol2 <- rep(1, 5)
+> H <- rep(20, 5)
+> y <- sim2dNegbinom(x1, x2, Opt1, Opt2, Tol1, Tol2, H,
++                    corr = 0.5, alpha = 1.1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sim2dPoisson")
+> ### * sim2dPoisson
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sim2dPoisson
+> ### Title: Simulate Poisson counts along two, possibly correlated gradients
+> ### Aliases: sim2dPoisson
+> 
+> ### ** Examples
+> 
+> set.seed(1)
+> x1 <- runif(300, min = 4, max = 6)
+> Opt1 <- seq(4, 6, length = 5)
+> Tol1 <- rep(0.25, 5)
+> x2 <- runif(300, min = 2, max = 20)
+> Opt2 <- seq(2, 20, length = 5)
+> Tol2 <- rep(1, 5)
+> H <- rep(20, 5)
+> y <- sim2dPoisson(x1, x2, Opt1, Opt2, Tol1, Tol2, H, corr = 0.5)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("simJamil")
+> ### * simJamil
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: simJamil
+> ### Title: Simulate species abundance data following Jamil & ter Braak
+> ###   (2013)
+> ### Aliases: simJamil
+> 
+> ### ** Examples
+> 
+> set.seed(42)
+> N <- 100   # Number of locations on gradient (samples)
+> glen <- 4  # Gradient length
+> grad <- sort(runif(N, -glen/2, glen/2)) # sample locations
+> M <- 10    # Number of species
+> sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
++                 randm = FALSE, expectation = TRUE)
+> ## visualise the response curves
+> matplot(grad, sim, type = "l", lty = "solid")
+> 
+> ## simulate binomial responses from those response curves
+> sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
++                 randm = FALSE)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.185 0.006 0.191 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
