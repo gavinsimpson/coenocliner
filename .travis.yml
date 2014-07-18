@@ -27,4 +27,4 @@ env:
      - CRAN: http://cran.rstudio.com
      - R_BUILD_ARGS=" " 
      - R_CHECK_ARGS="--as-cran"
-     - BOOTSTRAP_LATEX="1"
+     - BOOTSTRAP_LATEX="0"
