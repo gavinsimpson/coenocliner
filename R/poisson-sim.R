@@ -123,7 +123,7 @@
     if (expectation) {
         sim <- mu
     } else {
-        sim <- rpois(n1, mu)
+        sim <- rpois(NROW(ex1), mu)
     }
     sim <- matrix(sim, nrow = n1)
     sim
