@@ -72,13 +72,13 @@
 ##' @export
 `expandBeta` <- function(x, m, A0, r, alpha, gamma) {
     nx <- length(x)
-    no <- length(m)
-    orep <- nx * no
+    nm <- length(m)
+    orep <- nx * nm
     x     <-     x[rep.int(rep.int(seq_len(nx), rep.int(1L, nx)), orep/nx)]
-    m     <-     m[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
-    A0    <-    A0[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
-    r     <-     r[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
-    alpha <- alpha[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
-    gamma <- gamma[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
+    m     <-     m[rep.int(rep.int(seq_len(nm), rep.int(nx, nm)), 1L)]
+    A0    <-    A0[rep.int(rep.int(seq_len(nm), rep.int(nx, nm)), 1L)]
+    r     <-     r[rep.int(rep.int(seq_len(nm), rep.int(nx, nm)), 1L)]
+    alpha <- alpha[rep.int(rep.int(seq_len(nm), rep.int(nx, nm)), 1L)]
+    gamma <- gamma[rep.int(rep.int(seq_len(nm), rep.int(nx, nm)), 1L)]
     cbind(x, m, A0, r, alpha, gamma)
 }
