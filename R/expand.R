@@ -74,6 +74,10 @@
 ##'
 ##' @export
 ##'
+##' @references Minchin P.R. (1987) Simulation of multidimensional
+##' community patterns: towards a comprehensive model. \emph{Vegetatio}
+##' \strong{71}, 145--156.
+##'
 ##' @examples
 ##' # Recreate Fig. 2 of Minchin (1987)
 ##' A0 <- c(5,4,7,5,9,8) * 10

@@ -83,4 +83,9 @@ matplot(y, type = "p", lty = "solid")
 \author{
 Gavin L. Simpson
 }
+\references{
+Minchin P.R. (1987) Simulation of multidimensional
+community patterns: towards a comprehensive model. \emph{Vegetatio}
+\strong{71}, 145--156.
+}
 
