@@ -79,6 +79,28 @@ y <- coenocline(cbind(x1, x2), responseModel = "gaussian",
                 extraParams = list(corr = 0.5),
                 countModel = "poisson")
 head(y)
+
+## Recreate Fig. 2 of Minchin (1987)
+A0 <- c(5,4,7,5,9,8) * 10
+m <- c(25,85,10,60,45,60)
+r <- c(3,3,4,4,6,5) * 10
+alpha <- c(0.1,1,2,4,1.5,1)
+gamma <- c(0.1,1,2,4,0.5,4)
+x <- 1:100
+params <- list(m1 = m, A01 = A0, r1 = r, alpha1 = alpha, gamma1 = gamma)
+
+## Expectations
+set.seed(2)
+y <- coenocline(x, responseModel = "beta",
+                params = params,
+                countModel = "poisson")
+head(y)
+matplot(y, type = "l", lty = "solid")
+
+y <- coenocline(x, responseModel = "beta",
+                params = params,
+                countModel = "poisson", expectation = TRUE)
+matplot(y, type = "l", lty = "solid")
 }
 \author{
 Gavin L. Simpson
