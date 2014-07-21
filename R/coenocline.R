@@ -3,7 +3,7 @@
 ##'
 ##' @description Simulate species abundance (counts) or occurrence along one or two gradients using well-known ecological response models and random draws from a Poisson, negative binomial or binomial distribution.
 ##'
-##' @details \code{simulate()} is a generic interface to coenocline simulation allowing for easy extension and a consistent interface to a range of species response models and statistical distributions.
+##' @details \code{coenocline()} is a generic interface to coenocline simulation allowing for easy extension and a consistent interface to a range of species response models and statistical distributions.
 ##'
 ##' Two species response models are currently available; the Gaussian response and the generalized beta response model. Random count or occurrence data can be produced via random draws from a suitable distribution; in which case the values obtained from the specoes response function are used as the expectation of the distribution from which random draws are made.
 ##'
