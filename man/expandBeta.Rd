@@ -21,7 +21,7 @@ per taxon.}
 \item{gamma}{numeric; shape parameter of the generalised beta function.}
 }
 \value{
-a matrix of Generalised Beta repsonse model parameters for
+a matrix of Generalised Beta response model parameters for
 each gradient location. Specifically, a matrix with columns \code{x},
 \code{m}, \code{A0}, \code{r}, \code{alpha}, and \code{gamma}.
 }

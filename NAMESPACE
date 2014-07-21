@@ -2,6 +2,8 @@
 
 export(betaResponse)
 export(biGaussianResponse)
+export(coenocline)
+export(expand)
 export(expandBeta)
 export(expandGauss)
 export(gaussianResponse)
