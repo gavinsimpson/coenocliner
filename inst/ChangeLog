@@ -1,0 +1,25 @@
+coencliner Change Log
+
+Version 0.0-3
+
+	* coenocline() a generic interface to coenocline simulation.
+
+	* Beta(), Gaussian(); new response model functions for the
+	classic Gaussian response model and the generalised Beta
+	response model.
+
+	* New wrappers for random deviate generation from Poisson,
+	Binomial, and Negative binomial distributions.
+
+	* expand() a new general version of the expand.grid()-like
+	functionality where we repeat sets of parameters for each of
+	n gradient locations.
+
+Version 0.0-2
+
+	* added simulators for occurrence not abundance
+	Code provided by F. Rodriguez-Sanchez.
+
+Version 0.0-1
+
+	* intial alpha version
