@@ -43,22 +43,22 @@ The species response model defines the mean of expected response. (In the case o
 \examples{
 ## Poisson counts along a single gradient, Gaussian response
 
-x1 <- seq(from = 4, to = 6, length = 100)
+x <- seq(from = 4, to = 6, length = 100)
 opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
 tol <- rep(0.25, 5)
 h <- rep(20, 5)
 
 ## set.seed(1)
-y <- coenocline(x1, responseModel = "gaussian",
-                params = cbind(opt1 = opt, tol1 = tol, h = h),
+y <- coenocline(x, responseModel = "gaussian",
+                params = cbind(opt = opt, tol = tol, h = h),
                 countModel = "poisson")
 head(y)
 
-y <- coenocline(x1, responseModel = "gaussian",
-                params = cbind(opt1 = opt, tol1 = tol, h = h),
+y <- coenocline(x, responseModel = "gaussian",
+                params = cbind(opt = opt, tol = tol, h = h),
                 countModel = "poisson",
                 expectation = TRUE)
-matplot(x1, y, type = "l", lty = "solid")
+matplot(x, y, type = "l", lty = "solid")
 
 
 ## Poisson counts along two correlated gradients, Gaussian response
@@ -72,10 +72,11 @@ tol2 <- rep(1, 5)
 h <- rep(20, 5)
 
 set.seed(1)
-y <- coenocline(cbind(x1, x2), responseModel = "gaussian",
-                params = list(opt1 = opt1, opt2 = opt2,
-                              tol1 = tol1, tol2 = tol2,
-                              h = h),
+params <- list(px = list(opt = opt1, tol = tol1, h = h),
+               py = list(opt = opt2, tol = tol2))
+y <- coenocline(cbind(x1, x2),
+                responseModel = "gaussian",
+                params = params,
                 extraParams = list(corr = 0.5),
                 countModel = "poisson")
 head(y)
@@ -87,7 +88,7 @@ r <- c(3,3,4,4,6,5) * 10
 alpha <- c(0.1,1,2,4,1.5,1)
 gamma <- c(0.1,1,2,4,0.5,4)
 x <- 1:100
-params <- list(m1 = m, A01 = A0, r1 = r, alpha1 = alpha, gamma1 = gamma)
+params <- list(m = m, A0 = A0, r = r, alpha = alpha, gamma = gamma)
 
 ## Expectations
 set.seed(2)

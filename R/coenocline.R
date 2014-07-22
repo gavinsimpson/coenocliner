@@ -31,22 +31,22 @@
 ##'
 ##' ## Poisson counts along a single gradient, Gaussian response
 ##'
-##' x1 <- seq(from = 4, to = 6, length = 100)
+##' x <- seq(from = 4, to = 6, length = 100)
 ##' opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
 ##' tol <- rep(0.25, 5)
 ##' h <- rep(20, 5)
 ##'
 ##' ## set.seed(1)
-##' y <- coenocline(x1, responseModel = "gaussian",
-##'                 params = cbind(opt1 = opt, tol1 = tol, h = h),
+##' y <- coenocline(x, responseModel = "gaussian",
+##'                 params = cbind(opt = opt, tol = tol, h = h),
 ##'                 countModel = "poisson")
 ##' head(y)
 ##'
-##' y <- coenocline(x1, responseModel = "gaussian",
-##'                 params = cbind(opt1 = opt, tol1 = tol, h = h),
+##' y <- coenocline(x, responseModel = "gaussian",
+##'                 params = cbind(opt = opt, tol = tol, h = h),
 ##'                 countModel = "poisson",
 ##'                 expectation = TRUE)
-##' matplot(x1, y, type = "l", lty = "solid")
+##' matplot(x, y, type = "l", lty = "solid")
 ##'
 ##'
 ##' ## Poisson counts along two correlated gradients, Gaussian response
@@ -60,10 +60,11 @@
 ##' h <- rep(20, 5)
 ##'
 ##' set.seed(1)
-##' y <- coenocline(cbind(x1, x2), responseModel = "gaussian",
-##'                 params = list(opt1 = opt1, opt2 = opt2,
-##'                               tol1 = tol1, tol2 = tol2,
-##'                               h = h),
+##' params <- list(px = list(opt = opt1, tol = tol1, h = h),
+##'                py = list(opt = opt2, tol = tol2))
+##' y <- coenocline(cbind(x1, x2),
+##'                 responseModel = "gaussian",
+##'                 params = params,
 ##'                 extraParams = list(corr = 0.5),
 ##'                 countModel = "poisson")
 ##' head(y)
@@ -75,7 +76,7 @@
 ##' alpha <- c(0.1,1,2,4,1.5,1)
 ##' gamma <- c(0.1,1,2,4,0.5,4)
 ##' x <- 1:100
-##' params <- list(m1 = m, A01 = A0, r1 = r, alpha1 = alpha, gamma1 = gamma)
+##' params <- list(m = m, A0 = A0, r = r, alpha = alpha, gamma = gamma)
 ##'
 ##' ## Expectations
 ##' set.seed(2)
@@ -114,14 +115,14 @@
     if (ll | mm) { ## 2d
         if (ll) {
             stopifnot(length(x) == 2)
-            x1 <- x[[1]]
-            x2 <- x[[2]]
+            X <- x[[1]]
+            Y <- x[[2]]
         } else {
             stopifnot(NCOL(x) == 2)
-            x1 <- x[, 1]
-            x2 <- x[, 2]
+            X <- x[, 1]
+            Y <- x[, 2]
         }
-        sim <- coenocline2d(x1, x2,
+        sim <- coenocline2d(X, Y,
                             responseModel = responseModel,
                             params = params, extraParams = extraParams,
                             countModel = countModel, countParams = countParams,
@@ -136,33 +137,35 @@
     sim
 }
 
-`coenocline1d` <- function(x1, responseModel, params,
+`coenocline1d` <- function(x, responseModel, params,
                            extraParams = NULL,
                            countModel, countParams = NULL,
                            expectation = FALSE) {
-    n <- length(x1)
+    n <- length(x)
     if (is.matrix(params)) {
-        args <- list(x = x1, params = params)
+        args <- list(x = x, params = params)
     } else if (is.list(params)) {
+        if (is.list(params[[1]])) {
+            params <- params[[1]]
+        }
         args <- vector(mode = "list", length = length(params) + 1)
-        args[[1]] <- x1
+        args[[1]] <- x
         args[-1] <- params
         names(args) <- c("x", names(params))
     }
     ex <- do.call("expand", args)
-    colnames(ex)[1] <- "x1"
     ## build arg list for responseModel
     if (is.null(extraParams)) {
-        args <- as.list(data.frame(ex))
+        rargs <- list(x = ex[,1], px = as.list(data.frame(ex[, -1])))
     } else {
-        lp <- NCOL(ex)
         le <- length(extraParams)
-        args <- vector("list", length = le + lp)
-        args[ss <- seq_len(lp)] <- data.frame(ex)
-        args[-ss] <- extraParams
-        names(args) <- c(colnames(ex), names(extraParams))
+        rargs <- vector("list", length = 2 + le)
+        names(rargs) <- c("x", "px", names(extraParams))
+        rargs[["x"]] <- ex[,1]
+        rargs[["px"]] <- as.list(data.frame(ex[, -1]))
+        rargs[-(1:2)] <- extraParams
     }
-    mu <- do.call(responseModel, args)
+    mu <- do.call(responseModel, rargs)
     if (expectation) {
         sim <- mu
     } else {
@@ -181,41 +184,47 @@
     sim
 }
 
-`coenocline2d` <- function(x1, x2, responseModel, params,
+`coenocline2d` <- function(x, y, responseModel, params,
                            extraParams = NULL,
                            countModel, countParams = NULL,
                            expectation = FALSE) {
-    n1 <- length(x1)
-    n2 <- length(x2)
-    stopifnot(isTRUE(all.equal(n1, n2)))
-    args <- vector(mode = "list", length = length(params) + 1)
-    args[[1]] <- x1
-    args[-1] <- params
-    names(args) <- c("x", names(params))
-    ex <- do.call("expand", args)
-    colnames(ex)[1] <- "x1"
-    ex <- cbind(x1 = ex[,1],
-                x2 = rep(x2, times = NROW(ex) / length(x2)),
-                ex[,-1])
-    if (is.null(extraParams)) {
-        args <- as.list(data.frame(ex))
-    } else {
-        lp <- NCOL(ex)
-        le <- length(extraParams)
-        args <- vector("list", length = le + lp)
-        args[ss <- seq_len(lp)] <- data.frame(ex)
-        args[-ss] <- extraParams
-        names(args) <- c(colnames(ex), names(extraParams))
+    expandFun <- function(x, params) {
+        args <- vector(mode = "list", length = length(params) + 1)
+        args[[1]] <- x
+        args[-1] <- params
+        names(args) <- c("x", names(params))
+        do.call("expand", args)
     }
-    mu <- do.call(responseModel, args)
+    n1 <- length(x)
+    n2 <- length(y)
+    stopifnot(isTRUE(all.equal(n1, n2)))
+    stopifnot(length(params) == 2L)
+    exx <- expandFun(x, params[["px"]])
+    exy <- expandFun(y, params[["py"]])
+    if (is.null(extraParams)) {
+        rargs <- list(x = exx[,1],
+                      y = exy[,1],
+                      px = as.list(data.frame(exx[, -1])),
+                      py = as.list(data.frame(exy[, -1])))
+    } else {
+        le <- length(extraParams)
+        rargs <- vector("list", length = 4 + le)
+        names(rargs) <- c("x", "y", "px", "py", names(extraParams))
+        rargs[["x"]] <- exy[,1]
+        rargs[["y"]] <- exy[,1]
+        rargs[["px"]] <- as.list(data.frame(exx[, -1]))
+        rargs[["py"]] <- as.list(data.frame(exy[, -1]))
+        rargs[-(1:4)] <- extraParams
+    }
+    mu <- do.call(responseModel, rargs)
     if (expectation) {
         sim <- mu
     } else {
         if (is.null(countParams)) {
-            cargs <- list(n = NROW(ex), mu = mu)
+            cargs <- list(n = NROW(exx), mu = mu)
         } else {
             cargs <- vector("list", length = length(countParams) + 2)
-            cargs[[1]] <- NROW(ex)
+            cargs[[1]] <- NROW(exx)
             cargs[[2]] <- mu
             cargs[-(1:2)] <- countParams
             names(cargs) <- c("n", "mu", names(countParams))
