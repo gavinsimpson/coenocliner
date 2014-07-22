@@ -1,9 +1,37 @@
 `Gaussian` <- function(x, y = NULL, px, py = NULL, corr = NULL) {
+    pars <- c("opt", "tol", "h")
     sim <- if (is.null(y)) {
+        stopifnot(length(px) == 3L)
+        check <- pars %in% names(px)
+        if (!all(check)) {
+            stop(paste("One or more of", pars, "not in 'px'. Check names."))
+        }
+        if (length(unique(sapply(px, length))) != 1L) {
+            stop("Parameter vectors supplied in 'px' are of differing lengths.")
+        }
+
+        ## Compute Gaussian response
         px[["h"]] * exp(-((x - px[["opt"]])^2/(2 * px[["tol"]]^2)))
     } else {
+        stopifnot(all.equal(length(x), length(y)))
+        stopifnot(length(px) == 3L)
+        stopifnot(length(py) == 2L)
         if (is.null(corr)) {
             corr <- 0
+        }
+        check <- pars %in% names(px)
+        if (!all(check)) {
+            stop(paste("One or more of", pars, "not in 'px'. Check names."))
+        }
+        check <- pars[1:2] %in% names(py)
+        if (!all(check)) {
+            stop(paste("One or more of", pars, "not in 'py'. Check names."))
+        }
+        if (length(unique(sapply(px, length))) != 1L) {
+            stop("Parameter vectors supplied in 'px' are of differing lengths.")
+        }
+        if (length(unique(sapply(py, length))) != 1L) {
+            stop("Parameter vectors supplied in 'py' are of differing lengths.")
         }
         px[["h"]] * exp(-(1/(2 * (1 - corr^2))) *
                         (((x - px[["opt"]])/px[["tol"]])^2 +
@@ -16,7 +44,18 @@
 }
 
 `Beta` <- function(x, y = NULL, px, py = NULL) {
+    pars <- c("A0", "m", "r", "alpha", "gamma")
     sim <- if (is.null(y)) {
+        ## checks on parameters
+        stopifnot(length(px) == 5L)
+        check <- pars %in% names(px)
+        if (!all(check)) {
+            stop(paste("One or more of", pars, "not in 'px'. Check names."))
+        }
+        if (length(unique(sapply(px, length))) != 1L) {
+            stop("Parameter vectors supplied in 'px' are of differing lengths.")
+        }
+
         ## check alpha and gamma are positive as this gives unimodal curves
         stopifnot(px[["alpha"]] > 0)
         stopifnot(px[["gamma"]] > 0)
