@@ -1,5 +1,14 @@
 coencliner Change Log
 
+Version 0.0-4
+
+	* Gaussian() & Beta() modified to take lists of arguments, `px`
+	and `py`, to simplify the naming of species parameters in these
+	models.
+
+	* coenocline() modified to supply arguments in the format now
+	required by `Gaussian()` and `Beta()`.
+
 Version 0.0-3
 
 	* coenocline() a generic interface to coenocline simulation.
