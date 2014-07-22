@@ -1,5 +1,13 @@
 coencliner Change Log
 
+Version 0.0-5
+
+	* Old code: This version removed all the `simxDfoo()` functions
+	and associated helpers (`betaResponse()`, `gaussianResponse()`,
+	`biGaussianResponse()`, `expandGauss()`, `expandBeta()`) as
+	these are now no longer needed given that we have `coenocline()`
+	as a gneral interface to all these things.
+
 Version 0.0-4
 
 	* Gaussian() & Beta() modified to take lists of arguments, `px`
