@@ -27,6 +27,8 @@
 ##'
 ##' @export
 ##'
+##' @keywords datagen
+##'
 ##' @examples
 ##'
 ##' ## Poisson counts along a single gradient, Gaussian response

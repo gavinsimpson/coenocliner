@@ -106,4 +106,5 @@ matplot(y, type = "l", lty = "solid")
 \author{
 Gavin L. Simpson
 }
+\keyword{datagen}
 
