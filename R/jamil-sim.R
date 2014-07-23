@@ -31,11 +31,13 @@
 ##'
 ##' @author Gavin L. Simpson
 ##'
+##' @importFrom stats runif rbinom plogis rnorm
+##'
+##' @keywords datagen
+##'
 ##' @export
 ##'
-##' @references Jamil and ter Braak (2013) Generalized linear mixed
-##' models can detect unimodal species-environment relationships.
-##' *PeerJ* **1:e95**; DOI 10.7717/peerj.95
+##' @references Jamil and ter Braak (2013) Generalized linear mixed models can detect unimodal species-environment relationships. \emph{PeerJ} \strong{1:e95}; DOI \href{http://doi.org/10.7717/peerj.95}{10.7717/peerj.95}.
 ##'
 ##' @examples
 ##' set.seed(42)

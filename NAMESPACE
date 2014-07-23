@@ -3,3 +3,7 @@
 export(coenocline)
 export(expand)
 export(simJamil)
+importFrom(stats,plogis)
+importFrom(stats,rbinom)
+importFrom(stats,rnorm)
+importFrom(stats,runif)
