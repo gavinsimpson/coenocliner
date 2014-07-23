@@ -1,0 +1,18 @@
+coenocliner 0.1-0
+=================
+
+* An R package for coenocline simulation; generating simulated species
+  abundance or occurence data along one or two gradients
+
+* First public release of coenocliner on CRAN
+
+* Species response can be parameterised using either the classic
+  Gaussian response model or the generalise beta response model
+
+* Random count or occurence data can be simulated from species responses
+  using random draws from a Poisson, Negative Binomial, or Binomial
+  distribution with the parameterised response curve taken as the mean
+  or expectation of the the distribution to draw from
+
+* The main user-facing function is `coenocline()`. See `?coenocliner`
+  and `?coenocline` for further details and examples of usage
