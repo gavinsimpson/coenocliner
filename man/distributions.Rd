@@ -28,4 +28,5 @@ Wrappers to random number generators for use with coenocliner
 \author{
 Gavin L. Simpson
 }
+\keyword{distribution}
 

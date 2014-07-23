@@ -11,6 +11,8 @@
 ##' @rdname distributions
 ##'
 ##' @name distributions
+##'
+##' @keywords distribution
 `NegBin` <- function(n, mu, alpha) {
     mu <- mu * rgamma(n, shape = alpha, rate = 1/alpha)
     rpois(n, lambda = mu)
