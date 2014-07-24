@@ -19,7 +19,7 @@ and random count or occurrence data can be simulated from suitably parameterised
 \itemize{
   \item Poisson
   \item Negative Binomial
-  \item Binomial
+  \item Bernoulli
 }
 from which random draws are made.
 }

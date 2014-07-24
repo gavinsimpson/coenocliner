@@ -1,5 +1,9 @@
 coencliner Change Log
 
+Version 0.0-6
+
+	* Binomial(): this really should have been Bernoulli and now is.
+
 Version 0.0-5
 
 	* Old code: This version removed all the `simxDfoo()` functions
