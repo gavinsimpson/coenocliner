@@ -11,7 +11,7 @@
 ##'
 ##' Some species response models may require additional parameters not specified at the per species level. An example is the correlation between gradients in the bivariate Gaussian response model. Such parameters are passed via list \code{extraParams} and must be named accordingly so that they are passed to the corrct argument in the species response function.
 ##'
-##' The species response model defines the mean of expected response. (In the case of a species occurrence, the probability of occurrence is the expectation.) These represent paramterterised distributions. Random count or occurence data can be produced from these distributions by simulation from those distributions. In this case, a count or binomial model is used and random draws from the distribution are made. Currently, the Poisson, the negative binomial, and the binomial distribution are available. Some distributions may need additional parameters beyond the expectation; an example is the \eqn{\alpha}{alpha} parameter of (one parameterisation of) the negative binomial distribution. These parameters are specied via the list \code{countParams}.
+##' The species response model defines the mean of expected response. (In the case of a species occurrence, the probability of occurrence is the expectation.) These represent paramterterised distributions. Random count or occurence data can be produced from these distributions by simulation from those distributions. In this case, a count or Bernoulli model is used and random draws from the distribution are made. Currently, the Poisson, the negative binomial, and the Bernoulli distribution are available. Some distributions may need additional parameters beyond the expectation; an example is the \eqn{\alpha}{alpha} parameter of (one parameterisation of) the negative binomial distribution. These parameters are specied via the list \code{countParams}.
 ##'
 ##' @param x one of a numeric vector, a list with two components, each a numeric vector, or a matrix with two columns. The vectors are the locations along the gradient(s) at which species responses are to be simulated.
 ##' @param responseModel character; which species response model to use.
@@ -96,7 +96,7 @@
                          responseModel = c("gaussian","beta"),
                          params,
                          extraParams = NULL,
-                         countModel = c("poisson", "negbin", "binomial"),
+                         countModel = c("poisson", "negbin", "bernoulli", "binary"),
                          countParams = NULL,
                          expectation = FALSE) {
     responseModel <- match.arg(responseModel)
@@ -107,7 +107,7 @@
     countModel <- switch(countModel,
                          poisson = Poisson,
                          negbin  = NegBin,
-                         binomial = Binomial)
+                         binomial, binary = Bernoulli)
 
     ## x needs to be a vector, or for bivariate;
     ##   a list of 2 vectors, or a matrix of 2 columns

@@ -1,7 +1,7 @@
 ##' @title Wrappers to random number generators for use with coenocliner
 ##'
 ##' @param n the number of random draws, equal to number of species times the number of gradient locations.
-##' @param mu the mean or expectation of the distribution. For \code{Binomial} this is the probability of occurrence as given by the response function.
+##' @param mu the mean or expectation of the distribution. For \code{Bernoulli} this is the probability of occurrence as given by the response function.
 ##' @param alpha numeric; parameter for the negative binomial distribution.
 ##'
 ##' @return a vector of random draws from the stated distribution.
@@ -24,6 +24,6 @@
 }
 
 ##' @rdname distributions
-`Binomial` <- function(n, mu) {
+`Bernoulli` <- function(n, mu) {
     rbinom(n, size = 1, prob = mu)
 }
