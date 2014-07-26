@@ -47,10 +47,6 @@ For \code{Beta()} the following named components must be supplied:
 
 See the examples here and in \code{\link{coenocline}} for details on how to set up calls to these species response functions.
 }
-\section{Note}{
-
-Currently, the generalised beta distribution is curently implemented for a single gradient.
-}
 \examples{
 # A simple example with a single species
 x <- seq(from = 4, to = 6, length = 100)
@@ -74,7 +70,7 @@ x <- 1:100
 
 # expand parameter set
 pars <- expand(x, m = m, A0 = A0, r = r, alpha = alpha,
-               gamma = gamma)
+gamma = gamma)
 head(pars)
 
 xvec <- pars[, "x"]
@@ -82,6 +78,21 @@ px <- as.list(data.frame(pars[, -1]))
 spprc <- Beta(xvec, px = px)
 matplot(matrix(spprc, ncol = 6), ## 6 species
         type = "l", lty = "solid")
+
+# Bivariate beta, single species
+xx <- 1:100
+yy <- 1:100
+xy <- expand.grid(x = xx, y = yy)
+parx <- expand(xy[, "x"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
+pary <- expand(xy[, "y"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
+
+x <- parx[,1]
+px <- as.list(as.list(data.frame(parx[, -1])))
+y <- pary[,1]
+py <- as.list(as.list(data.frame(pary[, -1])))
+
+spprc <- Beta(x, y, px = px, py = py)
+persp(xx, yy, matrix(spprc, ncol = length(xx)))
 }
 \author{
 Gavin L. Simpson

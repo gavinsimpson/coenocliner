@@ -30,9 +30,6 @@
 ##'
 ##' @return A numeric vector of species "abundances" of length equal to \code{length(x)}.
 ##'
-##' @section Note:
-##' Currently, the generalised beta distribution is curently implemented for a single gradient.
-##'
 ##' @author Gavin L. Simpson
 ##'
 ##' @rdname species-response
@@ -65,7 +62,7 @@
 ##'
 ##' # expand parameter set
 ##' pars <- expand(x, m = m, A0 = A0, r = r, alpha = alpha,
-##'                gamma = gamma)
+##' gamma = gamma)
 ##' head(pars)
 ##'
 ##' xvec <- pars[, "x"]
@@ -73,6 +70,21 @@
 ##' spprc <- Beta(xvec, px = px)
 ##' matplot(matrix(spprc, ncol = 6), ## 6 species
 ##'         type = "l", lty = "solid")
+##'
+##' # Bivariate beta, single species
+##' xx <- 1:100
+##' yy <- 1:100
+##' xy <- expand.grid(x = xx, y = yy)
+##' parx <- expand(xy[, "x"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
+##' pary <- expand(xy[, "y"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
+##'
+##' x <- parx[,1]
+##' px <- as.list(as.list(data.frame(parx[, -1])))
+##' y <- pary[,1]
+##' py <- as.list(as.list(data.frame(pary[, -1])))
+##'
+##' spprc <- Beta(x, y, px = px, py = py)
+##' persp(xx, yy, matrix(spprc, ncol = length(xx)))
 `Gaussian` <- function(x, y = NULL, px, py = NULL, corr = NULL) {
     pars <- c("opt", "tol", "h")
     sim <- if (is.null(y)) {
@@ -122,6 +134,21 @@
 ##' @export
 `Beta` <- function(x, y = NULL, px, py = NULL) {
     pars <- c("A0", "m", "r", "alpha", "gamma")
+
+    ## This implements eqn (5) in Minchin 1987 for the part to the right
+    ## of the product symmbol, call this for each of gradients x and y
+    ## returns 0 if x is outside range of spp on gradient
+    gradfun <- function(x, m, r, alpha, gamma, b) {
+        ## x is vector of gradient locations
+        lwr <- m - (r * b)
+        upr <- m + (r * (1 - b))
+        xmr <- (x - m) / r
+        ifelse(x >= lwr & x <= upr,
+               (xmr + b)^alpha * (1 - (xmr + b))^gamma, ## TRUE
+               0 ## FALSE, outside r of species so 0
+               )
+    }
+
     sim <- if (is.null(y)) {
         ## checks on parameters
         stopifnot(length(px) == 5L)
@@ -146,40 +173,33 @@
         b <- px[["alpha"]] / (px[["alpha"]] + px[["gamma"]])
         d <- b^px[["alpha"]] * (1 - b)^px[["gamma"]]
 
-        ## ranges of spp on gradient
-        lwr <- px[["m"]] - (px[["r"]] * b)
-        upr <- px[["m"]] + (px[["r"]] * (1 - b))
+        ## Using gradfun() compute the part of eqn to the right of the Pi for
+        ## gradient x...
+        g <- gradfun(x, px[["m"]], px[["r"]], px[["alpha"]], px[["gamma"]], b)
 
-        ## output vector A of abundances
-        ## set to zero as outside ranges above, this is the abundance
-        ## A <- numeric(length = n)
-        A <- numeric(length = length(x))
-
-        ## observations where grad locations x within range of spp
-        ind <- x >= lwr & x <= upr
-
-        ## update parameters - simplifies function call for beta response
-        x <- x[ind]
-        px[["alpha"]] <- px[["alpha"]][ind]
-        px[["gamma"]] <- px[["gamma"]][ind]
-        px[["m"]] <- px[["m"]][ind]
-        px[["r"]] <- px[["r"]][ind]
-        px[["A0"]] <- px[["A0"]][ind]
-        b <- b[ind]
-        d <- d[ind]
-
-        ## update A with beta response values
-        xmr <- (x - px[["m"]]) / px[["r"]]
-        term <- xmr + b
-        term2 <- 1 - (xmr + b)
-        A[ind] <- (px[["A0"]] / d) * (term)^px[["alpha"]] *
-            (term2)^px[["gamma"]] ## eqn (2) in Minchin
-
-        ## return
-        attr(A, "params") <- list(px = px, py = py)
+        ## finally Eqn 5 in Minchin 1987
+        A <- (px[["A0"]] / d) * g
         A
     } else {
-        stop("Bivariate generalised beta response not yet implemented")
+        ##stop("Bivariate generalised beta response not yet implemented")
+
+        ## constants bk for k = 1, 2 gradients: Eqn 6 in Minchin
+        bx <- px[["alpha"]] / (px[["alpha"]] + px[["gamma"]])
+        by <- py[["alpha"]] / (py[["alpha"]] + py[["gamma"]])
+
+        ## constant d Eqn 7 in Minchin 1987
+        d <- (bx^px[["alpha"]] * (1 - bx)^px[["gamma"]]) *
+            (by^py[["alpha"]] * (1 - by)^px[["gamma"]])
+
+        ## Using gradfun() compute the part of eqn to the right of the Pi for
+        ## gradient x...
+        gx <- gradfun(x, px[["m"]], px[["r"]], px[["alpha"]], px[["gamma"]], bx)
+        ## ..and gradient y
+        gy <- gradfun(y, py[["m"]], py[["r"]], py[["alpha"]], py[["gamma"]], by)
+
+        ## finally Eqn 5 in Minchin 1987
+        A <- (px[["A0"]] / d) * (gx * gy)
+        A
     }
     sim
 }
