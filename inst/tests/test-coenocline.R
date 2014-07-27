@@ -76,3 +76,19 @@ test_that("coenocline() works with parameters as lists", {
     expect_that(NROW(sim2), equals(length(x)))
     expect_that(sim2, is_identical_to(sim))
 })
+
+test_that("coenocline() works with gradient values supplied as a list", {
+
+    lp <- list(px = list(opt = optx, tol = tolx, h = h),
+               py = list(opt = opty, tol = toly))
+    set.seed(1)
+    sim3 <- coenocline(list(x = x, y = y),
+                       responseModel = "gaussian",
+                       params = lp,
+                       countModel = "poisson")
+
+    expect_that(sim3, is_a("matrix"))
+    expect_that(NCOL(sim3), equals(length(opt)))
+    expect_that(NROW(sim3), equals(length(x)))
+    expect_that(sim3, is_identical_to(sim))
+})
