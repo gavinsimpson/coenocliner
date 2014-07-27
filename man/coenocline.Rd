@@ -6,7 +6,8 @@ gradients}
 \usage{
 coenocline(x, responseModel = c("gaussian", "beta"), params,
   extraParams = NULL, countModel = c("poisson", "negbin", "bernoulli",
-  "binary"), countParams = NULL, expectation = FALSE)
+  "binary", "binomial", "betabinomial"), countParams = NULL,
+  expectation = FALSE)
 }
 \arguments{
 \item{x}{one of a numeric vector, a list with two components, each a numeric vector, or a matrix with two columns. The vectors are the locations along the gradient(s) at which species responses are to be simulated.}

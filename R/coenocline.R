@@ -96,7 +96,8 @@
                          responseModel = c("gaussian","beta"),
                          params,
                          extraParams = NULL,
-                         countModel = c("poisson", "negbin", "bernoulli", "binary"),
+                         countModel = c("poisson", "negbin", "bernoulli", "binary",
+                                        "binomial", "betabinomial"),
                          countParams = NULL,
                          expectation = FALSE) {
     responseModel <- match.arg(responseModel)
@@ -107,7 +108,9 @@
     countModel <- switch(countModel,
                          poisson = Poisson,
                          negbin  = NegBin,
-                         binomial, binary = Bernoulli)
+                         binomial, binary = Bernoulli,
+                         binomial = Binomial,
+                         betabinomial = BetaBinomial)
 
     ## x needs to be a vector, or for bivariate;
     ##   a list of 2 vectors, or a matrix of 2 columns
