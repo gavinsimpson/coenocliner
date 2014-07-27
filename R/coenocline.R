@@ -48,7 +48,8 @@
 ##' tol <- rep(0.25, 5)
 ##' h <- rep(20, 5)
 ##'
-##' ## set.seed(1)
+##' ## simulate
+##' set.seed(1)
 ##' y <- coenocline(x, responseModel = "gaussian",
 ##'                 params = cbind(opt = opt, tol = tol, h = h),
 ##'                 countModel = "poisson")
@@ -211,11 +212,17 @@
                            extraParams = NULL,
                            countModel, countParams = NULL,
                            expectation = FALSE) {
-    expandFun <- function(x, params) {
-        args <- vector(mode = "list", length = length(params) + 1)
-        args[[1]] <- x
-        args[-1] <- params
-        names(args) <- c("x", names(params))
+    ## this should probably be moved out to an unexported function as this
+    ## could also be used in coenocline1d too
+    expandFun <- function(x, params) { 
+        if (is.matrix(params)) {
+            args <- list(x = x, params = params)
+        } else if (is.list(params)) {
+            args <- vector(mode = "list", length = length(params) + 1)
+            args[[1]] <- x
+            args[-1] <- params
+            names(args) <- c("x", names(params))
+        }
         do.call("expand", args)
     }
     n1 <- length(x)
