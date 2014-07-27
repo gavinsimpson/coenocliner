@@ -119,6 +119,13 @@ matplot(y, type = "l", lty = "solid")
 y <- coenocline(x, responseModel = "beta", params = params,
                 countModel = "ZIP", countParams = list(gamma = 0))
 matplot(y, type = "l", lty = "solid")
+
+## Zero-inflated Negative binomial, constant gamma
+y <- coenocline(x, responseModel = "beta",
+                params = params,
+                countModel = "ZINB",
+                countParams = list(alpha = 0.75, gamma = 0))
+matplot(y, type = "l", lty = "solid")
 }
 \author{
 Gavin L. Simpson

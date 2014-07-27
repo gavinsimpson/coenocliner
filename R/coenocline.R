@@ -109,6 +109,12 @@
 ##'                 countModel = "ZIP", countParams = list(gamma = 0))
 ##' matplot(y, type = "l", lty = "solid")
 ##'
+##' ## Zero-inflated Negative binomial, constant gamma
+##' y <- coenocline(x, responseModel = "beta",
+##'                 params = params,
+##'                 countModel = "ZINB",
+##'                 countParams = list(alpha = 0.75, gamma = 0))
+##' matplot(y, type = "l", lty = "solid")
 `coenocline` <- function(x,
                          responseModel = c("gaussian","beta"),
                          params,
@@ -214,7 +220,7 @@
                            expectation = FALSE) {
     ## this should probably be moved out to an unexported function as this
     ## could also be used in coenocline1d too
-    expandFun <- function(x, params) { 
+    expandFun <- function(x, params) {
         if (is.matrix(params)) {
             args <- list(x = x, params = params)
         } else if (is.list(params)) {

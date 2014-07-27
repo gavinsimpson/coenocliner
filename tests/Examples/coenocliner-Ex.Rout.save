@@ -127,6 +127,13 @@ This is coenocliner 0.0-10
 +                 countModel = "ZIP", countParams = list(gamma = 0))
 > matplot(y, type = "l", lty = "solid")
 > 
+> ## Zero-inflated Negative binomial, constant gamma
+> y <- coenocline(x, responseModel = "beta",
++                 params = params,
++                 countModel = "ZINB",
++                 countParams = list(alpha = 0.75, gamma = 0))
+> matplot(y, type = "l", lty = "solid")
+> 
 > 
 > 
 > cleanEx()
@@ -271,7 +278,7 @@ This is coenocliner 0.0-10
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.32 0.003 0.324 0 0 
+Time elapsed:  0.338 0.002 0.342 0 0 
 > grDevices::dev.off()
 null device 
           1 
