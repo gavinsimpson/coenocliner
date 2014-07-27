@@ -86,40 +86,16 @@
 ##' spprc <- Beta(x, y, px = px, py = py)
 ##' persp(xx, yy, matrix(spprc, ncol = length(xx)))
 `Gaussian` <- function(x, y = NULL, px, py = NULL, corr = NULL) {
-    pars <- c("opt", "tol", "h")
     sim <- if (is.null(y)) {
-        stopifnot(length(px) == 3L)
-        check <- pars %in% names(px)
-        if (!all(check)) {
-            stop(paste("One or more of", pars, "not in 'px'. Check names."))
-        }
-        if (length(unique(sapply(px, length))) != 1L) {
-            stop("Parameter vectors supplied in 'px' are of differing lengths.")
-        }
+        .checkGaussianPar(px = px)
 
         ## Compute Gaussian response
         px[["h"]] * exp(-((x - px[["opt"]])^2/(2 * px[["tol"]]^2)))
     } else {
         stopifnot(all.equal(length(x), length(y)))
-        stopifnot(length(px) == 3L)
-        stopifnot(length(py) == 2L)
-        if (is.null(corr)) {
-            corr <- 0
-        }
-        check <- pars %in% names(px)
-        if (!all(check)) {
-            stop(paste("One or more of", pars, "not in 'px'. Check names."))
-        }
-        check <- pars[1:2] %in% names(py)
-        if (!all(check)) {
-            stop(paste("One or more of", pars, "not in 'py'. Check names."))
-        }
-        if (length(unique(sapply(px, length))) != 1L) {
-            stop("Parameter vectors supplied in 'px' are of differing lengths.")
-        }
-        if (length(unique(sapply(py, length))) != 1L) {
-            stop("Parameter vectors supplied in 'py' are of differing lengths.")
-        }
+
+        .checkGaussianPar(px = px, py = py)
+
         px[["h"]] * exp(-(1/(2 * (1 - corr^2))) *
                         (((x - px[["opt"]])/px[["tol"]])^2 +
                          ((y - py[["opt"]])/py[["tol"]])^2 -
@@ -130,11 +106,46 @@
     sim
 }
 
+`.checkGaussianPar` <- function(px, py = NULL) {
+    pars <- c("opt", "tol", "h")
+
+    ## must supply correct number of parameters
+    stopifnot(length(px) == 3L)
+
+    ## check the names match the required parameters
+    check <- pars %in% names(px)
+    if (!all(check)) {
+        stop(paste("One or more of", pars, "not in 'px'. Check names & parameters."))
+    }
+
+    ## check that all parameters supplied are of same length
+    if (length(unique(sapply(px, length))) != 1L) {
+        stop("Parameter vectors supplied in 'px' are of differing lengths.")
+    }
+
+    if (!is.null(py)) {
+        pars <- c("opt", "tol")
+        ## must supply correct number of parameters
+        stopifnot(length(py) == 2L)
+
+        ## check the names match the required parameters
+        check <- pars %in% names(py)
+        if (!all(check)) {
+            stop(paste("One or more of", pars, "not in 'py'. Check names & parameters."))
+        }
+
+        ## check that all parameters supplied are of same length
+        if (length(unique(sapply(py, length))) != 1L) {
+            stop("Parameter vectors supplied in 'py' are of differing lengths.")
+        }
+    }
+
+    TRUE ## return
+}
+
 ##' @rdname species-response
 ##' @export
 `Beta` <- function(x, y = NULL, px, py = NULL) {
-    pars <- c("A0", "m", "r", "alpha", "gamma")
-
     ## This implements eqn (5) in Minchin 1987 for the part to the right
     ## of the product symmbol, call this for each of gradients x and y
     ## returns 0 if x is outside range of spp on gradient
@@ -150,19 +161,9 @@
     }
 
     sim <- if (is.null(y)) {
-        ## checks on parameters
-        stopifnot(length(px) == 5L)
-        check <- pars %in% names(px)
-        if (!all(check)) {
-            stop(paste("One or more of", pars, "not in 'px'. Check names."))
-        }
-        if (length(unique(sapply(px, length))) != 1L) {
-            stop("Parameter vectors supplied in 'px' are of differing lengths.")
-        }
 
-        ## check alpha and gamma are positive as this gives unimodal curves
-        stopifnot(px[["alpha"]] > 0)
-        stopifnot(px[["gamma"]] > 0)
+        ## checks on parameters
+        .checkBetaPar(px = px)
 
         ## some derived parameters, eqns 3 and 4 from Minchin 1987
         b <- px[["alpha"]] / (px[["alpha"]] + px[["gamma"]])
@@ -176,29 +177,10 @@
         A <- (px[["A0"]] / d) * g
         A
     } else {
-        ## checks on parameters
-        stopifnot(length(px) == 5L)
-        stopifnot(length(py) == 4L)
-        check <- pars %in% names(px)
-        if (!all(check)) {
-            stop(paste("One or more of", pars, "not in 'px'. Check names & parameters."))
-        }
-        check <- pars[-1] %in% names(py) ## leave out A0
-        if (!all(check)) {
-            stop(paste("One or more of", pars[-1], "not in 'py'. Check names & parameters."))
-        }
-        if (length(unique(sapply(px, length))) != 1L) {
-            stop("Parameter vectors supplied in 'px' are of differing lengths.")
-        }
-        if (length(unique(sapply(py, length))) != 1L) {
-            stop("Parameter vectors supplied in 'py' are of differing lengths.")
-        }
+        stopifnot(all.equal(length(x), length(y)))
 
-        ## check alpha and gamma are positive as this gives unimodal curves
-        stopifnot(px[["alpha"]] > 0)
-        stopifnot(px[["gamma"]] > 0)
-        stopifnot(py[["alpha"]] > 0)
-        stopifnot(py[["gamma"]] > 0)
+        ## checks on parameters
+        .checkBetaPar(px = px, py = py)
 
         ## constants bk for k = 1, 2 gradients: Eqn 6 in Minchin
         bx <- px[["alpha"]] / (px[["alpha"]] + px[["gamma"]])
@@ -219,4 +201,51 @@
         A
     }
     sim
+}
+
+`.checkBetaPar` <- function(px, py = NULL) {
+    pars <- c("A0", "m", "r", "alpha", "gamma")
+
+    ## must supply correct number of parameters
+    stopifnot(length(px) == 5L)
+
+    ## check the names match the required parameters
+    check <- pars %in% names(px)
+    if (!all(check)) {
+        stop(paste("One or more of", pars, "not in 'px'. Check names & parameters."))
+    }
+
+    ## check that all parameters supplied are of same length
+    if (length(unique(sapply(px, length))) != 1L) {
+        stop("Parameter vectors supplied in 'px' are of differing lengths.")
+    }
+
+    ## check alpha and gamma are positive as this gives unimodal curves
+    stopifnot(px[["alpha"]] > 0)
+    stopifnot(px[["gamma"]] > 0)
+
+    if(!is.null(py)) {
+        pars <- c("m", "r", "alpha", "gamma")
+
+        ## must supply correct number of parameters
+        stopifnot(length(py) == 4L)
+
+        ## check the names match the required parameters
+        check <- pars %in% names(py)
+        if (!all(check)) {
+            stop(paste("One or more of", pars, "not in 'py'. Check names & parameters."))
+        }
+
+        ## check that all parameters supplied are of same length
+        if (length(unique(sapply(py, length))) != 1L) {
+            stop("Parameter vectors supplied in 'py' are of differing lengths.")
+        }
+
+        ## check alpha and gamma are positive as this gives unimodal curves
+        stopifnot(py[["alpha"]] > 0)
+        stopifnot(py[["gamma"]] > 0)
+
+    }
+
+    TRUE
 }
