@@ -14,13 +14,15 @@
 ##'
 ##' @keywords distribution
 ##'
-##' @importFrom stats rpois
+##' @importFrom stats rpois rgamma
 `NegBin` <- function(n, mu, alpha) {
     mu <- mu * rgamma(n, shape = alpha, rate = 1/alpha)
     rpois(n, lambda = mu)
 }
 
 ##' @rdname distributions
+##'
+##' @importFrom stats rpois
 `Poisson` <- function(n, mu) {
     rpois(n, lambda = mu)
 }
@@ -41,7 +43,7 @@
 
 ##' @rdname distributions
 ##'
-##' @param tau numeric; the overdispersion parameter for the Beta-Binomial distribution. This is actually tau^2
+##' @param tau numeric; the overdispersion parameter for the Beta-Binomial distribution. This is actually \eqn{\tau^2}{tau^2}.
 ##'
 ##' @importFrom stats rbeta
 `BetaBinomial` <-  function(n, mu, size, tau) {
@@ -54,4 +56,30 @@
     b  <- t4 * (mu - 1)
     mu <- rbeta(n = n, shape1 = a, shape2 = b)
     rbinom(n = n, size = size, prob = mu)
+}
+
+##' @rdname distributions
+##'
+##' @param gamma numeric; zero-inflation parameter. Leads to the probability of a zero, \eqn{\pi}{pi}, in the binomial part of the ZIP via \eqn{\pi = e^\gamma / (1 + e^\gamma)}{pi = e^gamma / (1 + e^gamma)}. Setting \code{gamma = 0} gives a probability of zero from the binomial part of \eqn{\pi = 0.5}{pi = 0.5}.
+##' @importFrom stats rbinom rpois
+`ZIP` <- function(n, mu, gamma) {
+    e <- exp(1)
+    pi <- e^gamma / (1 + e^gamma)
+    pres <- rbinom(n, size = 1, prob = pi)
+    rand <- ifelse(pres > 0, rpois(n, lambda = mu), 0)
+    rand
+}
+
+##' @rdname distributions
+##'
+##' @importFrom stats rpois rgamma rbinom
+`ZINB` <- function(n, mu, alpha, gamma) {
+    e <- exp(1)
+    pi <- e^gamma / (1 + e^gamma)
+    pres <- rbinom(n, size = 1, prob = pi)
+    rand <- ifelse(pres > 0,
+                   rpois(n, lambda = mu * rgamma(n, shape = alpha,
+                            rate = 1/alpha)),
+                   0)
+    rand
 }

@@ -5,6 +5,8 @@
 \alias{Binomial}
 \alias{NegBin}
 \alias{Poisson}
+\alias{ZINB}
+\alias{ZIP}
 \alias{distributions}
 \title{Wrappers to random number generators for use with coenocliner}
 \usage{
@@ -17,6 +19,10 @@ Bernoulli(n, mu)
 Binomial(n, mu, size)
 
 BetaBinomial(n, mu, size, tau)
+
+ZIP(n, mu, gamma)
+
+ZINB(n, mu, alpha, gamma)
 }
 \arguments{
 \item{n}{the number of random draws, equal to number of species times the number of gradient locations.}
@@ -27,7 +33,9 @@ BetaBinomial(n, mu, size, tau)
 
 \item{size}{numeric; binomial denominator, the total number of individuals counted for example}
 
-\item{tau}{numeric; the overdispersion parameter for the Beta-Binomial distribution. This is actually tau^2}
+\item{tau}{numeric; the overdispersion parameter for the Beta-Binomial distribution. This is actually \eqn{\tau^2}{tau^2}.}
+
+\item{gamma}{numeric; zero-inflation parameter. Leads to the probability of a zero, \eqn{\pi}{pi}, in the binomial part of the ZIP via \eqn{\pi = e^\gamma / (1 + e^\gamma)}{pi = e^gamma / (1 + e^gamma)}. Setting \code{gamma = 0} gives a probability of zero from the binomial part of \eqn{\pi = 0.5}{pi = 0.5}.}
 }
 \value{
 a vector of random draws from the stated distribution.
