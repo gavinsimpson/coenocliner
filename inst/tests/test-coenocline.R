@@ -47,3 +47,32 @@ sim <- coenocline(cbind(x, y),
                   params = list(px = cbind(opt = optx, tol = tolx, h = h),
                                 py = cbind(opt = opty, tol = toly)),
                   countModel = "poisson")
+
+test_that("coenocline() returns an integer matrix with x and y gradients", {
+    expect_that(sim, is_a("matrix"))
+    expect_that(typeof(sim) == "integer", is_true())
+})
+
+test_that("coenocline() returns matrix with correct number of species with x and y gradients", {
+    expect_that(NCOL(sim), equals(length(opt)))
+})
+
+test_that("coenocline() returns matrix with correct number of samples with x and y gradients", {
+    expect_that(NROW(sim), equals(length(x)))
+})
+
+test_that("coenocline() works with parameters as lists", {
+
+    lp <- list(px = list(opt = optx, tol = tolx, h = h),
+               py = list(opt = opty, tol = toly))
+    set.seed(1)
+    sim2 <- coenocline(cbind(x, y),
+                       responseModel = "gaussian",
+                       params = lp,
+                       countModel = "poisson")
+
+    expect_that(sim2, is_a("matrix"))
+    expect_that(NCOL(sim2), equals(length(opt)))
+    expect_that(NROW(sim2), equals(length(x)))
+    expect_that(sim2, is_identical_to(sim))
+})
