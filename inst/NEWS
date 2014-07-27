@@ -9,10 +9,11 @@ coenocliner 0.1-0
 * Species response can be parameterised using either the classic
   Gaussian response model or the generalise beta response model
 
-* Random count or occurence data can be simulated from species responses
-  using random draws from a Poisson, Negative Binomial, or Bernoulli
-  distribution with the parameterised response curve taken as the mean
-  or expectation of the the distribution to draw from
+* Random count or occurence data can be simulated from species
+  responses using random draws from a Poisson, Negative Binomial,
+  Binomial, Beta-binomial, ZIP, ZINB, or Bernoulli distribution with
+  the parameterised response curve taken as the mean or expectation of
+  the distribution to draw from
 
 * The main user-facing function is `coenocline()`. See `?coenocliner`
   and `?coenocline` for further details and examples of usage
