@@ -115,6 +115,13 @@
 ##'                 countModel = "ZINB",
 ##'                 countParams = list(alpha = 0.75, gamma = 0))
 ##' matplot(y, type = "l", lty = "solid")
+##'
+##' ## Binomial counts, constant size (m) of 100
+##' y <- coenocline(x, responseModel = "beta",
+##'                 params = params,
+##'                 countModel = "binomial",
+##'                 countParams = list(size = 100))
+##' matplot(y, type = "l", lty = "solid")
 `coenocline` <- function(x,
                          responseModel = c("gaussian","beta"),
                          params,
