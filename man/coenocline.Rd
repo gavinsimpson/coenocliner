@@ -28,7 +28,7 @@ coenocline(x, responseModel = c("gaussian", "beta"), params,
 a matrix of simulated count or occurrence data, one row per gradient location, one column per species.
 }
 \description{
-Simulate species abundance (counts) or occurrence along one or two gradients using well-known ecological response models and random draws from a Poisson, negative binomial or binomial distribution.
+Simulate species abundance (counts) or occurrence along one or two gradients using well-known ecological response models and random draws from one of a Poisson, negative binomial, Bernoulli, binomial, beta-binomial, zero-inflated Poisson, or zero-inflated neative binomial distribution.
 }
 \details{
 \code{coenocline()} is a generic interface to coenocline simulation allowing for easy extension and a consistent interface to a range of species response models and statistical distributions.
