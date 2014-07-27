@@ -16,6 +16,8 @@
 ##'   \item Bernoulli
 ##'   \item Binomial
 ##'   \item Beta-Binomial
+##'   \item Zero-inflated Poisson (ZIP)
+##'   \item Zero-inflated Negative Binomial (ZINB)
 ##' }
 ##' from which random draws are made.
 ##'
