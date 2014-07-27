@@ -85,7 +85,7 @@
 ##'
 ##' spprc <- Beta(x, y, px = px, py = py)
 ##' persp(xx, yy, matrix(spprc, ncol = length(xx)))
-`Gaussian` <- function(x, y = NULL, px, py = NULL, corr = NULL) {
+`Gaussian` <- function(x, y = NULL, px, py = NULL, corr = 0) {
     sim <- if (is.null(y)) {
         .checkGaussianPar(px = px)
 
