@@ -1,0 +1,49 @@
+## Tests for main coenocline() function
+
+## Load packages
+library("testthat")
+library_if_available("coenocliner")
+
+context("Testing coenocline() functionality")
+
+## set up for tests
+x <- seq(from = 4, to = 6, length = 100)
+opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
+tol <- rep(0.25, 5)
+h <- rep(20, 5)
+
+## simulate
+set.seed(1)
+sim <- coenocline(x,
+                  responseModel = "gaussian",
+                  params = cbind(opt = opt, tol = tol, h = h),
+                  countModel = "poisson")
+
+test_that("coenocline() returns an integer matrix", {
+    expect_that(sim, is_a("matrix"))
+    expect_that(typeof(sim) == "integer", is_true())
+})
+
+test_that("coenocline() returns matrix with correct number of species", {
+    expect_that(NCOL(sim), equals(length(opt)))
+})
+
+test_that("coenocline() returns matrix with correct number of samples (rows)", {
+    expect_that(NROW(sim), equals(length(x)))
+})
+
+## simulate
+x <- seq(from = 4, to = 6, length = 100)
+y <- seq(from = 1, to = 100, length = 100)
+optx <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
+opty <- c(5, 50, 75, 10, 60)
+tolx <- rep(0.25, 5)
+toly <- rep(2, 5)
+h <- rep(30, 5)
+
+set.seed(1)
+sim <- coenocline(cbind(x, y),
+                  responseModel = "gaussian",
+                  params = list(px = cbind(opt = optx, tol = tolx, h = h),
+                                py = cbind(opt = opty, tol = toly)),
+                  countModel = "poisson")
