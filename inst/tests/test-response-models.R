@@ -135,3 +135,58 @@ test_that("Beta throws error on different length params", {
     px <- list(A0 = 70, m = 10, r = 40, alpha = 2, gamma = rep(2, 10))
     expect_error(Beta(x, px = px))
 })
+
+### 2 gradients
+
+## Set up parameters
+x <- seq(from = 4, to = 6, length = 100)
+y <- seq(from = 1, to = 100, length = 100)
+px <- list(A0 = 70, m = 10, r = 40, alpha = 2, gamma = 2)
+py <- list(m = 10, r = 40, alpha = 2, gamma = 2)
+B <- Beta(x, y, px = px, py = py)
+
+test_that("Beta works in two gradients mode", {
+    expect_that(B, is_a("numeric"))
+    expect_that(length(B), equals(length(x)))
+})
+
+test_that("Beta throws errors when px or py have wrong names", {
+    names(px) <- c("foo", "m", "r", "alpha", "gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(px) <- c("A0", "foo", "r", "alpha", "gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(px) <- c("A0", "m", "foo", "alpha", "gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(px) <- c("A0", "m", "r", "foo", "gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(px) <- c("A0", "m", "r", "alpha", "foo")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(px) <- c("foo", "bar", "foobar", "Alpha", "Gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    ## reset
+    names(px) <- c("A0", "m", "r", "alpha", "gamma")
+
+    ## test names on py
+    names(py) <- c("foo", "r", "alpha", "gamma")
+    expect_error(Beta(x, y, py = py, py = py))
+    names(py) <- c("m", "foo", "alpha", "gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(py) <- c("m", "r", "foo", "gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(py) <- c("m", "r", "alpha", "foo")
+    expect_error(Beta(x, y, px = px, py = py))
+    names(py) <- c("bar", "foobar", "Alpha", "Gamma")
+    expect_error(Beta(x, y, px = px, py = py))
+    ## reset
+    names(py) <- c("m", "r", "alpha", "gamma")
+})
+
+test_that("Beta throws error if supplied wrong number of py", {
+    expect_error(Beta(x, y, px = px, py = py[1:2]))
+})
+
+test_that("Beta throws error on different length params", {
+    px <- list(A0 = 70, m = 10, r = 40, alpha = 2, gamma = rep(2, 10))
+    py <- list(m = 10, r = 40, alpha = 2, gamma = rep(2, 10))
+    expect_error(Beta(x, y, px = px, py = py))
+})
