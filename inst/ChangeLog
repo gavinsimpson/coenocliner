@@ -1,5 +1,13 @@
 coencliner Change Log
 
+Version 0.0-9
+
+	* ZIP, ZINB: new wrappers for random number generation for the
+	zero-inflated Poisson (ZIP) and Negative binomial (ZINB)
+	distributions. These functions are simple ZIP and ZINB
+	distributions where the probability of a zero from the binomial
+	part of the model depends only on a mean probability of zero.
+
 Version 0.0-8
 
 	* Binomial, BetaBinomial: New wrappers for random number
@@ -8,11 +16,11 @@ Version 0.0-8
 	from a probability of occurence and binomial denominator, m,
 	the number of trials (number of individuals counted).
 
-	The Beta-Binomial() allows is an extra-variance Binomial
-	distribution and allows simulation of overdispersed binomial
-	count data in a manner similar to that by which the Negative
-	Binomial distribution can be used to generate overdispersed
-	Poisson count data.
+	The Beta-Binomial() is an extra-variance Binomial distribution
+	and allows simulation of overdispersed binomial count data in a
+	manner similar to that by which the Negative binomial
+	distribution can be used to generate overdispersed Poisson
+	count data.
 
 Version 0.0-7
 
