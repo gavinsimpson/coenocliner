@@ -128,6 +128,8 @@ y <- coenocline(x, responseModel = "beta",
 matplot(y, type = "l", lty = "solid")
 
 ## Binomial counts, constant size (m) of 100
+## A0 must be in range, (0,1)
+params[["A0"]] <- c(5,4,7,5,9,8) / 10
 y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "binomial",
