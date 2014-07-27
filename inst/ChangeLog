@@ -1,5 +1,19 @@
 coencliner Change Log
 
+Version 0.0-8
+
+	* Binomial, BetaBinomial: New wrappers for random number
+	generation for the Binomial and Beta-Binomial distributions.
+	The Binomial distribution allows simulation of binomial counts
+	from a probability of occurence and binomial denominator, m,
+	the number of trials (number of individuals counted).
+
+	The Beta-Binomial() allows is an extra-variance Binomial
+	distribution and allows simulation of overdispersed binomial
+	count data in a manner similar to that by which the Negative
+	Binomial distribution can be used to generate overdispersed
+	Poisson count data.
+
 Version 0.0-7
 
 	* Beta: now implemented for one or two gradients.
