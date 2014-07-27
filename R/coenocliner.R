@@ -14,6 +14,8 @@
 ##'   \item Poisson
 ##'   \item Negative Binomial
 ##'   \item Bernoulli
+##'   \item Binomial
+##'   \item Beta-Binomial
 ##' }
 ##' from which random draws are made.
 ##'
@@ -22,4 +24,5 @@
 ##' @name coenocliner
 ##' @aliases coenocliner-package
 ##' @keywords package
+##' @seealso \code{\link{coenocline}} for simulating species data, \code{\link{distributions}} for details of the error distributions tha can be used for simulations, and \code{\link{species-response}} for details on the available species response models and the parameters required to use them.
 NULL
