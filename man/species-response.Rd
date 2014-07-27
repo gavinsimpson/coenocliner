@@ -5,7 +5,7 @@
 \alias{species-response}
 \title{Species response models for coenocline simulation}
 \usage{
-Gaussian(x, y = NULL, px, py = NULL, corr = NULL)
+Gaussian(x, y = NULL, px, py = NULL, corr = 0)
 
 Beta(x, y = NULL, px, py = NULL)
 }
