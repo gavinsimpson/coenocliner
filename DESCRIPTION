@@ -1,7 +1,7 @@
 Package: coenocliner
 Type: Package
 Title: Coenocline simulation
-Version: 0.0-9
+Version: 0.0-10
 Date: 2014-07-27
 Author: Gavin L. Simpson
 Authors@R: c(person(given = c("Gavin", "L."),

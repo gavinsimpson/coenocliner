@@ -1,5 +1,10 @@
 coencliner Change Log
 
+Version 0.0-10
+
+	* Gaussian: default for `corr` changed to `0` so users don't need
+	to specify this unless they want correlated responses.
+
 Version 0.0-9
 
 	* ZIP, ZINB: new wrappers for random number generation for the
