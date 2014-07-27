@@ -75,8 +75,8 @@
 ##' xx <- 1:100
 ##' yy <- 1:100
 ##' xy <- expand.grid(x = xx, y = yy)
-##' parx <- expand(xy[, "x"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
-##' pary <- expand(xy[, "y"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
+##' parx <- expand(xy[, "x"], A0 = 50, m = 60, r = 40, alpha = 4, gamma = 4)
+##' pary <- expand(xy[, "y"], m = 60, r = 40, alpha = 4, gamma = 4)
 ##'
 ##' x <- parx[,1]
 ##' px <- as.list(as.list(data.frame(parx[, -1])))
@@ -164,11 +164,6 @@
         stopifnot(px[["alpha"]] > 0)
         stopifnot(px[["gamma"]] > 0)
 
-        ## store parameters
-        ## params <- list(x = x, m = m, A0 = A0, r = r,
-        ##                alpha = alpha,
-        ##                gamma = gamma)
-
         ## some derived parameters, eqns 3 and 4 from Minchin 1987
         b <- px[["alpha"]] / (px[["alpha"]] + px[["gamma"]])
         d <- b^px[["alpha"]] * (1 - b)^px[["gamma"]]
@@ -181,7 +176,29 @@
         A <- (px[["A0"]] / d) * g
         A
     } else {
-        ##stop("Bivariate generalised beta response not yet implemented")
+        ## checks on parameters
+        stopifnot(length(px) == 5L)
+        stopifnot(length(py) == 4L)
+        check <- pars %in% names(px)
+        if (!all(check)) {
+            stop(paste("One or more of", pars, "not in 'px'. Check names & parameters."))
+        }
+        check <- pars[-1] %in% names(py) ## leave out A0
+        if (!all(check)) {
+            stop(paste("One or more of", pars[-1], "not in 'py'. Check names & parameters."))
+        }
+        if (length(unique(sapply(px, length))) != 1L) {
+            stop("Parameter vectors supplied in 'px' are of differing lengths.")
+        }
+        if (length(unique(sapply(py, length))) != 1L) {
+            stop("Parameter vectors supplied in 'py' are of differing lengths.")
+        }
+
+        ## check alpha and gamma are positive as this gives unimodal curves
+        stopifnot(px[["alpha"]] > 0)
+        stopifnot(px[["gamma"]] > 0)
+        stopifnot(py[["alpha"]] > 0)
+        stopifnot(py[["gamma"]] > 0)
 
         ## constants bk for k = 1, 2 gradients: Eqn 6 in Minchin
         bx <- px[["alpha"]] / (px[["alpha"]] + px[["gamma"]])

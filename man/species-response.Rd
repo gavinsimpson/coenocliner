@@ -83,8 +83,8 @@ matplot(matrix(spprc, ncol = 6), ## 6 species
 xx <- 1:100
 yy <- 1:100
 xy <- expand.grid(x = xx, y = yy)
-parx <- expand(xy[, "x"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
-pary <- expand(xy[, "y"], m = 60, A0 = 50, r = 40, alpha = 4, gamma = 4)
+parx <- expand(xy[, "x"], A0 = 50, m = 60, r = 40, alpha = 4, gamma = 4)
+pary <- expand(xy[, "y"], m = 60, r = 40, alpha = 4, gamma = 4)
 
 x <- parx[,1]
 px <- as.list(as.list(data.frame(parx[, -1])))
