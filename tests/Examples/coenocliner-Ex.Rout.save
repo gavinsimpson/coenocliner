@@ -143,6 +143,15 @@ This is coenocliner 0.0-10
 +                 countParams = list(size = 100))
 > matplot(y, type = "l", lty = "solid")
 > 
+> ## Binomial counts, constant size (m) of 100
+> ## A0 must be in range, (0,1)
+> params[["A0"]] <- c(5,4,7,5,9,8) / 10
+> y <- coenocline(x, responseModel = "beta",
++                 params = params,
++                 countModel = "betabinomial",
++                 countParams = list(size = 100, tau = 0.1))
+> matplot(y, type = "l", lty = "solid")
+> 
 > 
 > 
 > cleanEx()
@@ -287,7 +296,7 @@ This is coenocliner 0.0-10
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.348 0.001 0.35 0 0 
+Time elapsed:  0.352 0.007 0.36 0 0 
 > grDevices::dev.off()
 null device 
           1 
