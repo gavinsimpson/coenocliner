@@ -47,7 +47,7 @@ x <- seq(from = 4, to = 6, length = 100)
 y <- seq(from = 35, to = 120, length = 100)
 px <- list(opt = 4.5, tol = 0.25, h = 20)
 py <- list(opt = 3, tol = 0.5)
-G <- Gaussian(x, y, px = px, py = py)
+G <- Gaussian(x, y, px = px, py = py, corr = 0.5)
 
 test_that("Gaussian works in two gradients mode", {
     expect_that(G, is_a("numeric"))
