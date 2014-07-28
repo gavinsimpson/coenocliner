@@ -1,0 +1,55 @@
+\documentclass[article,shortnames,nojss]{jss}
+
+%\VignetteIndexEntry{An R coenocline simulation package}
+%\VignettePackage{coenocliner}
+%\VignetteEngine{knitr::knitr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% declarations for jss.cls
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% almost as usual
+\author{Gavin L. Simpson\\Institute of Environmental Change and Society --- University of Regina}
+\title{\pkg{coenocliner}: a coenocline simulation package for R}
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Gavin L. Simpson} %% comma-separated
+\Plaintitle{coenocliner: a coenocline package for R} %% without formatting
+\Shorttitle{coenocliner} %% a short title (if necessary)
+
+%% an abstract and keywords
+\Abstract{
+  TODO
+}
+\Keywords{coenocline simulation, \proglang{R}}
+\Plainkeywords{coenocline simulation, R} %% without formatting
+%% at least one keyword must be supplied
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Gavin L. Simpson\\
+  Insitutute of Environmental Change and Society\\
+  University of Regina\\
+  3737 Wascana Parkway\\
+  Regina\\
+  SK, S4S 0A2, Canada\\
+  E-mail: \email{ucfagls@gmail.com}\\
+  URL: \url{http://www.fromthebottomoftheheap.net/}
+} 
+%% It is also possible to add a telephone and fax number
+%% before the e-mail in the following format:
+%% Telephone: +43/1/31336-5053
+%% Fax: +43/1/31336-734
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section{Introduction}
+Some text here
+
+\end{document}

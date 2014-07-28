@@ -16,7 +16,9 @@ Description: Simulate species occurrence and abundances (counts) along
 Imports:
     stats
 Suggests:
-    testthat
+    testthat,
+    knitr
+VignetteBuilder: knitr
 License: GPL-2
 URL: https://github.com/gavinsimpson/coenocliner/
 BugReports: https://github.com/gavinsimpson/coenocliner/issues
