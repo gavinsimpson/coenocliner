@@ -36,7 +36,7 @@
   SK, S4S 0A2, Canada\\
   E-mail: \email{ucfagls@gmail.com}\\
   URL: \url{http://www.fromthebottomoftheheap.net/}
-} 
+}
 %% It is also possible to add a telephone and fax number
 %% before the e-mail in the following format:
 %% Telephone: +43/1/31336-5053
@@ -50,6 +50,44 @@
 \begin{document}
 
 \section{Introduction}
-Some text here
+Coenoclines are, according to the Oxford Dictionary of Ecology, gradients of communities (e.g.~in a transect from the summit to the base of a hill), reflecting the changing importance, frequency, or other appropriate measure of different species populations. In much ecological research, and that of related fields, data on these coenoclines are collected and analyzed in a variety of ways. When developing new statistical methods or when trying to understand the behaviour of existing methods, we often resort to simulating data with known pattern or structure and then torture whatever method is of interest with the simulated data to tease out how well methods work or where they breakdown.
+
+There's a long history of using computers to simulate species abundance data along coenoclines but until recently no \proglang{R} packages were available that performed coenocline simulation. Dave Roberts' \pkg{coenoflex} package was on CRAN for a while but the latest version was unstable and removed from CRAN because of issues with the FORTRAN\footnote{Dave has since fixed these issues but the updated package is not yet, as of August 2014, re-available from CRAN.}. \pkg{coenocliner} was designed to fill this gap.
+
+\pkg{coenocliner} can simulate species abundance or occurrence data along one or two gradients from either a Gaussian or generalised beta response model. Parameters for the response model are supplied for each species and parameterised species repsonse curves along the gradients are returned. Simulated abundance or occurrence data can be produced by sampling from one of several error distributions which use the parameterised species response curves as the expected count or probability of occurrence for the chosen error distribution. The error distributions available in \pkg{coenocliner} are
+
+\begin{itemize}
+  \item Poisson
+  \item Negative binomial
+  \item Bernoulli (occurrence; Binomial with denominator $m = 1$)
+  \item Binomial (counts with specified denominator $m$)
+  \item Beta-binomial
+  \item Zero-inflated Poisson (ZIP)
+  \item Zero-inflated negative binomial (ZINB)
+\end{itemize}
+
+This vignette provides a brief overview of the \pkg{coenocliner} package.
+
+\section[A brief overview of coenocliner]{A brief overview of \pkg{coenocliner}}
+To begin, load \pkg{coenocliner} and check the start-up message to see if you are using the current (0.1-0) release of the package
+<<r load-library>>=
+library("coenocliner")
+@
+
+The main function in \pkg{coenocliner} is \texttt{coenocline()}, which allows a relatively simple interface to coenocline simulation allowing flexible specification of gradient locations and response model parameters for species. Gradient locations are specified via argument \texttt{x}, which can be a single vector, or, in the case of two gradients, a matrix or a list containing vectors of gradient values. The matrix version assumes the first gradient's values are in the first column and those for the second gradient in the second column
+
+<<r show-matrix-grad-locs>>=
+xy <- cbind(x = seq(from = 4, to = 6, length.out = 100),
+            y = seq(from = 1, to = 100, length.out = 100))
+@
+
+Similarly, for the list version, the first component contains the values for the first gradient and the second component the values for the second gradient
+
+<<r show-list-grad-locs>>=
+xy <- list(x = seq(from = 4, to = 6, length.out = 100),
+           y = seq(from = 1, to = 100, length.out = 100))
+@ 
+
+The species response model used is indicated via the \texttt{responseModel} argument; available options are \texttt{"gaussian"} and \texttt{"beta"} for the classic Gaussian response model and the generalise beta response model respectively.
 
 \end{document}
