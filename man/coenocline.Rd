@@ -72,6 +72,19 @@ y <- coenocline(x, responseModel = "gaussian",
                 expectation = TRUE)
 matplot(x, y, type = "l", lty = "solid")
 
+## Bernoulli distribution (occurrence)
+h <- c(1,3,5,7,9) / 10
+y <- coenocline(x, responseModel = "gaussian",
+                params = cbind(opt = opt, tol = tol, h = h),
+                countModel = "bernoulli")
+head(y)
+## probability of occurrence...
+pi <- coenocline(x, responseModel = "gaussian",
+                 params = cbind(opt = opt, tol = tol, h = h),
+                 countModel = "bernoulli", expectation = TRUE)
+## plot
+matplot(y, type = "p", pch = 1) # a random realisation
+matlines(pi, lty = "solid")     # probability of occurrence
 
 ## Poisson counts along two correlated gradients, Gaussian response
 set.seed(1)
