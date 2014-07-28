@@ -22,8 +22,8 @@ install: build
 	cd ..;\
 	R CMD INSTALL coencoliner_$(PKGVERS).tar.gz
 
-move:
-	cp coenocliner.Rcheck/coenocliner-Ex.Rout ./tests/Examples/coenocliner-Ex.Rout.save
+move: check
+	cp ../coenocliner.Rcheck/coenocliner-Ex.Rout ./tests/Examples/coenocliner-Ex.Rout.save
 
 clean:
 	cd ..;\
