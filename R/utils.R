@@ -10,8 +10,6 @@
 ##'
 ##' @export
 ##'
-##' @rdname showParams
-##'
 ##' @seealso \code{\link{Gaussian}} and \code{\link{Beta}} for the species response model functions themselves.
 ##'
 ##' @examples
@@ -36,8 +34,6 @@
     params
 }
 
-##' @rdname showParams
-##'
 ##' @export
 `print.modelParams` <- function(x, ...) {
     onlyx <- attr(x, "onlyx")
