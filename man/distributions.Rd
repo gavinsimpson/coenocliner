@@ -2,6 +2,7 @@
 \name{distributions}
 \alias{Bernoulli}
 \alias{BetaBinomial}
+\alias{BetaBinomial2}
 \alias{Binomial}
 \alias{NegBin}
 \alias{Poisson}
@@ -20,6 +21,8 @@ Binomial(n, mu, size)
 
 BetaBinomial(n, mu, size, tau)
 
+BetaBinomial2(n, mu, size, theta)
+
 ZIP(n, mu, gamma)
 
 ZINB(n, mu, alpha, gamma)
@@ -34,6 +37,8 @@ ZINB(n, mu, alpha, gamma)
 \item{size}{numeric; binomial denominator, the total number of individuals counted for example}
 
 \item{tau}{numeric; the overdispersion parameter for the Beta-Binomial distribution. This is actually \eqn{\tau^2}{tau^2}.}
+
+\item{theta}{numeric; a positive overdispersion parameter for the Beta-Binomial distribution.}
 
 \item{gamma}{numeric; zero-inflation parameter. Leads to the probability of a zero, \eqn{\pi}{pi}, in the binomial part of the ZIP via \eqn{\pi = e^\gamma / (1 + e^\gamma)}{pi = e^gamma / (1 + e^gamma)}. Setting \code{gamma = 0} gives a probability of zero from the binomial part of \eqn{\pi = 0.5}{pi = 0.5}.}
 }
