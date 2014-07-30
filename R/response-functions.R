@@ -96,12 +96,12 @@
 
         .checkGaussianPar(px = px, py = py)
 
-        px[["h"]] * exp(-(1/(2 * (1 - corr^2))) *
-                        (((x - px[["opt"]])/px[["tol"]])^2 +
-                         ((y - py[["opt"]])/py[["tol"]])^2 -
-                         ((2 * corr) *
-                          ((x - px[["opt"]])/px[["tol"]]) *
-                          ((y - py[["opt"]])/py[["tol"]]))))
+        t1 <- 1/(2 * (1 - corr^2))
+        t1x <- (x - px[["opt"]]) / px[["tol"]]
+        t1y <- (y - py[["opt"]]) / py[["tol"]]
+
+        px[["h"]] * exp(-(t1 * ((t1x^2 + t1y^2) -
+                                ((2 * corr) * t1x * t1y))))
     }
     sim
 }
