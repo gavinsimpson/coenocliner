@@ -20,7 +20,7 @@ check-cran: build
 
 install: build
 	cd ..;\
-	R CMD INSTALL coencoliner_$(PKGVERS).tar.gz
+	R CMD INSTALL coenocliner_$(PKGVERS).tar.gz
 
 move: check
 	cp ../coenocliner.Rcheck/coenocliner-Ex.Rout ./tests/Examples/coenocliner-Ex.Rout.save
