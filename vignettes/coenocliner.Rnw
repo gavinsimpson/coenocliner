@@ -53,8 +53,9 @@
 \begin{document}
 <<prelim, echo = FALSE, results = "hide">>=
 library("knitr")
-opts_chunk$set(fig.lp = "fig:", size = "small", out.width = ".7\\linewidth", fig.align = "center")
-@ 
+opts_chunk$set(fig.lp = "fig:", size = "small", out.width = ".7\\linewidth",
+               fig.align = "center", fig.show = "hold")
+@
 \section{Introduction}
 Coenoclines are, according to the Oxford Dictionary of Ecology, gradients of communities (e.g.~in a transect from the summit to the base of a hill), reflecting the changing importance, frequency, or other appropriate measure of different species populations. In much ecological research, and that of related fields, data on these coenoclines are collected and analyzed in a variety of ways. When developing new statistical methods or when trying to understand the behaviour of existing methods, we often resort to simulating data with known pattern or structure and then torture whatever method is of interest with the simulated data to tease out how well methods work or where they breakdown.
 
@@ -92,7 +93,7 @@ Similarly, for the list version, the first component contains the values for the
 <<show-list-grad-locs>>=
 xy <- list(x = seq(from = 4, to = 6, length.out = 100),
            y = seq(from = 1, to = 100, length.out = 100))
-@ 
+@
 
 The species response model used is indicated via the \texttt{responseModel} argument; available options are \texttt{"gaussian"} and \texttt{"beta"} for the classic Gaussian response model and the generalise beta response model respectively. Parameters are supplied to \texttt{coenocline()} via the \texttt{params} argument. \texttt{showParams()} can be used list the parameters for the desired response model. The parameters for the Gaussian response model are
 
@@ -110,7 +111,7 @@ tol <- rep(0.25, 3)
 h <- c(10,20,30)
 parm <- cbind(opt = opt, tol = tol, h = h)
 parl <- list(opt = opt, tol = tol, h = h)
-@ 
+@
 
 In the case of two gradients, a list with two components, one per gradient, is required. The first component contains parameters for the first gradient, the second element contains those for the second gradient. These components can be either a matrix or a list, as described previously. For example a list with parameters supplied as matrices
 
@@ -119,9 +120,9 @@ opty <- c(25, 50, 75)
 tol <- c(5, 10, 20)
 pars <- list(px = parm,
              py = cbind(opt = opty, tol = tol))
-@ 
+@
 
-Note that parameter $h$ is not specified in the second set as this parameter, the height of the response curve at the gradient optima, applies globally --- in the case of two gradients, $h$ refers to the hieght of the bell-shaped curve at the bivariate optimum.
+Note that parameter $h$ is not specified in the second set as this parameter, the height of the response curve at the gradient optima, applies globally --- in the case of two gradients, $h$ refers to the height of the bell-shaped curve at the bivariate optimum.
 
 Notice how parameters are specified at the species level. To evaluate the response curve at the supplied gradient locations each set of parameters needs to be repeated for each gradient location. Thankfully \texttt{coenocline()} takes care of this detail for us.
 
@@ -131,7 +132,7 @@ To simulate realistic count data we need to sample \textit{with error} from the 
 
 <<count-models, echo = FALSE>>=
 c("poisson", "negbin", "bernoulli", "binary", "binomial", "betabinomial", "ZIP", "ZINB")
-@ 
+@
 
 Some of these distributions (all bar \texttt{"poisson"} and \texttt{"bernoulli"}) require additional arguments, such as the $\alpha$ parameter for (one parameterisation of) the negative binomial distribution. These arguments are supplied as a list with named components. Again, due to the same implementation snafu as for \texttt{extraParams}, such parameters act globally for all species\footnote{Again, this is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{countParams} appropriately}.
 
@@ -153,14 +154,14 @@ opt  <- runif(M, min = ming, max = maxg)   # species optima
 tol  <- rep(0.25, M)                       # species tolerances
 h    <- ceiling(rlnorm(M, meanlog = 3))    # max abundances
 pars <- cbind(opt = opt, tol = tol, h = h) # put in a matrix
-@ 
+@
 
 As a check, before simulating any count data, we can look at the coenocline implied by these parameters by returning the expectations only from \texttt{coenocline()}
 
 <<example1-expectations>>=
 mu <- coenocline(locs, responseModel = "gaussian", params = pars,
                  expectation = TRUE)
-@ 
+@
 
 This returns a matrix of values obtained by evaluating each species response curve at the supplied gradient locations. There is one column per species and one row per gradient location
 
@@ -168,7 +169,7 @@ This returns a matrix of values obtained by evaluating each species response cur
 class(mu)
 dim(mu)
 head(mu[, 1:6])
-@ 
+@
 
 A quick way to visualise the parameterised species response is to use \texttt{matplot()}\footnote{until such a time as the \pkg{coenocliner} has a \texttt{plot} method...}
 
@@ -181,7 +182,7 @@ As this looks OK, we can simulate some count data. The simplest model for doing 
 <<example1-sim>>=
 simp <- coenocline(locs, responseModel = "gaussian", params = pars,
                    countModel = "poisson")
-@ 
+@
 
 Again, \texttt{matplot} is useful in visulaising the simluated data
 
@@ -195,7 +196,7 @@ Whilst the simulated counts look reasonable and follow the response curves in Fi
 <<example1-nb-sim>>=
 simnb <- coenocline(locs, responseModel = "gaussian", params = pars,
                     countModel = "negbin", countParams = list(alpha = 0.5))
-@ 
+@
 
 Using \texttt{matplot} it is apparent that the simluated species data are now far more relalistic (Figure~\ref{fig:example1-plot-nb-simulations})
 
@@ -214,8 +215,8 @@ r     <- c(3,3,4,4,6,5) * 10               # species range of occurence on gradi
 alpha <- c(0.1,1,2,4,1.5,1)                # shape parameter
 gamma <- c(0.1,1,2,4,0.5,4)                # shape parameter
 locs  <- 1:100                             # gradient locations
-pars  <- list(m = m, r = r, alpha = alpha, 
-              gamma = gamma, A0 = A0)      # species parameters, this time in list form
+pars  <- list(m = m, r = r, alpha = alpha,
+              gamma = gamma, A0 = A0)      # species parameters, in list form
 @
 
 <<example2-beta-expectations>>=
@@ -227,6 +228,67 @@ matplot(locs, mu, lty = "solid", type = "l", xlab = "Gradient", ylab = "Abundanc
 @
 
 \subsubsection{Gaussian response along two gradients}
-In this example I illustrate how to simulate species abundance in an environment comprising two gradients.
+In this example I illustrate how to simulate species abundance in an environment comprising two gradients. Parameters for the simulation are defined first, including the number of species and samples required, followed by definitions of the gradient units and lengths, species optima, and tolerances for each gradient, and the maximal abundance ($h$).
+
+<<example3-params>>=
+set.seed(10)
+N <- 30                                           # number of samples
+M <- 20                                           # number of species
+## First gradient
+ming1 <- 3.5                                      # 1st gradient minimum...
+maxg1 <- 7                                        # ...and maximum
+loc1 <- seq(ming1, maxg1, length = N)             # 1st gradient locations
+opt1 <- runif(M, min = ming1, max = maxg1)        # species optima
+tol1 <- rep(0.5, M)                               # species tolerances
+h    <- ceiling(rlnorm(M, meanlog = 3))           # max abundances
+par1 <- cbind(opt = opt1, tol = tol1, h = h)      # put in a matrix
+## Second gradient
+ming2 <- 1                                        # 2nd gradient minimum...
+maxg2 <- 100                                      # ...and maximum
+loc2 <- seq(ming2, maxg2, length = N)             # 2nd gradient locations
+opt2 <- runif(M, min = ming2, max = maxg2)        # species optima
+tol2 <- ceiling(runif(M, min = 5, max = 50))      # species tolerances
+par2 <- cbind(opt = opt2, tol = tol2)             # put in a matrix
+## Last steps...
+pars <- list(px = par1, py = par2)                # put parameters into a list
+locs <- expand.grid(x = loc1, y = loc2)           # put gradient locations together
+@
+
+Notice how the parameter sets for each gradient are individual matrices which are combined in a list, \code{pars}, ready for use. Also different this time is the \code{expand.grid()} call which is used to generate all pairwise combinations of the locations on the two gradients. This has the effect of creating a coordinate pair on the two gradients at which we'll evaluate the response curves. In effect this creates a grid of points over the gradient space.
+
+Having set up the parameters, the call to \code{coenocline()} is the same as before, except now we specify a degree of correlation between the two gradients via \code{extraParams = list(corr = 0.5)}
+
+<<example3-expectations>>=
+mu2d <- coenocline(locs, responseModel = "gaussian",
+                   params = pars, extraParams = list(corr = 0.5),
+                   expectation = TRUE)
+@
+
+\code{mu2d} now contains a matrix of expected species abundances, one column per species as before. Because of the way the \code{expand.grid()} function works, the ordering of species abudances in each column has the first gradient locations varying fastest --- the locations on the first gradient are repeated in order for each location on the second gradient
+
+<<example3-head-locs>>=
+head(locs)
+@
+As a result, we can reshape the abundances for a single species into a matrix reflecting the grid of locations over the gradient space via a simple \code{matrix()} call, setting the number of columns in the resultant matrix equal to the number of gradient locations in the simulation. By way of illustration, this approach is used to prepare the expected abundances for four of the species in \code{mu2d} for plotting via the \code{persp()} plotting function
+
+<<example3-persp-plots, fig.cap = "Bivariate Gaussian species responses for four selected species.">>=
+layout(matrix(1:4, ncol = 2))
+op <- par(mar = rep(1, 4))
+for (i in c(2,8,13,19)) {
+    persp(loc1, loc2, matrix(mu2d[, i], ncol = length(loc2)),
+          ticktype = "detailed", zlab = "Abundance",
+          theta = 45, phi = 30)
+}
+par(op)
+layout(1)
+@
+
+The selected species response curves are shown in Figure~\ref{fig:example3-persp-plots}.
+
+<<example3-nb-sim>>=
+sim2d <- coenocline(locs, responseModel = "gaussian",
+                    params = pars, extraParams = list(corr = 0.5),
+                    countModel = "negbin", countParams = list(alpha = 0.5))
+@
 
 \end{document}
