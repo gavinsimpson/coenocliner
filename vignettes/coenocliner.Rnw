@@ -58,9 +58,9 @@ opts_chunk$set(fig.lp = "fig:", size = "small", out.width = ".7\\linewidth",
                fig.align = "center", fig.show = "hold")
 @
 \section{Introduction}
-Coenoclines are, according to the Oxford Dictionary of Ecology \citep{Allaby1998}, gradients of communities (e.g.~in a transect from the summit to the base of a hill), reflecting the changing importance, frequency, or other appropriate measure of different species populations. In much ecological research, and that of related fields, data on these coenoclines are collected and analyzed in a variety of ways. When developing new statistical methods or when trying to understand the behaviour of existing methods, we often resort to simulating data with known pattern or structure and then torture whatever method is of interest with the simulated data to tease out how well methods work or where they breakdown.
+Coenoclines are, according to the Oxford Dictionary of Ecology \citep{Allaby1998}, \textit{``gradients of communities (e.g.~in a transect from the summit to the base of a hill), reflecting the changing importance, frequency, or other appropriate measure of different species populations''}. In much ecological research, and that of related fields, data on these coenoclines are collected and analyzed in a variety of ways. When developing new statistical methods or when trying to understand the behaviour of existing methods, we often resort to simulating data with known pattern or structure and then torture whatever method is of interest with the simulated data to tease out how well methods work or where they breakdown.
 
-There's a long history of using computers to simulate species abundance data along coenoclines but until recently no \proglang{R} packages were available that performed coenocline simulation. Dave Roberts' \pkg{coenoflex} package was on CRAN for a while but the latest version was unstable and removed from CRAN because of issues with the FORTRAN\footnote{Dave has since fixed these issues but the updated package is not yet, as of August 2014, re-available from CRAN.}. \pkg{coenocliner} was designed to fill this gap.
+There's a long history of using computers to simulate species abundance data along coenoclines but until recently no \proglang{R} packages were available that performed coenocline simulation. Dave Roberts' \pkg{coenoflex} package was on CRAN for a while but the latest version was unstable and removed from CRAN because of issues with the \proglang{FORTRAN}\footnote{Dave has since fixed these issues but the updated package is not yet, as of August 2014, re-available from CRAN.}. \pkg{coenocliner} was designed to fill this gap.
 
 \pkg{coenocliner} can simulate species abundance or occurrence data along one or two gradients from either a Gaussian or generalised beta response model. Parameters for the response model are supplied for each species and parameterised species repsonse curves along the gradients are returned. Simulated abundance or occurrence data can be produced by sampling from one of several error distributions which use the parameterised species response curves as the expected count or probability of occurrence for the chosen error distribution. The error distributions available in \pkg{coenocliner} are
 
@@ -82,7 +82,7 @@ To begin, load \pkg{coenocliner} and check the start-up message to see if you ar
 library("coenocliner")
 @
 
-The main function in \pkg{coenocliner} is \texttt{coenocline()}, which allows a relatively simple interface to coenocline simulation allowing flexible specification of gradient locations and response model parameters for species. Gradient locations are specified via argument \texttt{x}, which can be a single vector, or, in the case of two gradients, a matrix or a list containing vectors of gradient values. The matrix version assumes the first gradient's values are in the first column and those for the second gradient in the second column
+The main function in \pkg{coenocliner} is \texttt{coenocline()}, which provides a relatively simple interface to coenocline simulation allowing flexible specification of gradient locations and response model parameters for species. Gradient locations are specified via argument \texttt{x}, which can be a single vector, or, in the case of two gradients, a matrix or a list containing vectors of gradient values. The matrix version assumes the first gradient's values are in the first column and those for the second gradient in the second column
 
 <<show-matrix-grad-locs>>=
 xy <- cbind(x = seq(from = 4, to = 7, length.out = 100),
@@ -104,14 +104,14 @@ showParams("gaussian")
 
 As indicated, some parameters are only supplied once per species, regardless of whether there are one or two gradients. Hence for the Gaussian model, the parameter \texttt{h} is only supplied for the first gradient even if two gradients are required.
 
-Parameters are supplied as a matrix with named columns, or as a list with named components. For example, for Gaussian response for 3 species we could either of the two forms
+Parameters are supplied as a matrix with named columns, or as a list with named components. For example, for a Gaussian response for each of 3 species we could use either of the two forms
 
 <<param-example>>=
 opt <- c(4,5,6)
 tol <- rep(0.25, 3)
 h <- c(10,20,30)
-parm <- cbind(opt = opt, tol = tol, h = h)
-parl <- list(opt = opt, tol = tol, h = h)
+parm <- cbind(opt = opt, tol = tol, h = h)     # matrix form
+parl <- list(opt = opt, tol = tol, h = h)      # list form
 @
 
 In the case of two gradients, a list with two components, one per gradient, is required. The first component contains parameters for the first gradient, the second element contains those for the second gradient. These components can be either a matrix or a list, as described previously. For example a list with parameters supplied as matrices
@@ -125,9 +125,9 @@ pars <- list(px = parm,
 
 Note that parameter $h$ is not specified in the second set as this parameter, the height of the response curve at the gradient optima, applies globally --- in the case of two gradients, $h$ refers to the height of the bell-shaped curve at the bivariate optimum.
 
-Notice how parameters are specified at the species level. To evaluate the response curve at the supplied gradient locations each set of parameters needs to be repeated for each gradient location. Thankfully \texttt{coenocline()} takes care of this detail for us.
+Notice also how parameters are specified at the species level. To evaluate the response curve at the supplied gradient locations each set of parameters needs to be repeated for each gradient location. Thankfully \texttt{coenocline()} takes care of this detail for us.
 
-Additional parameters that may be needed for the response model but which are not specified at the species level are supplied as a list with named components to argument \code{extraParams}. An example is the correlation between Gaussian response curves in case of two gradients. This, unfortunately, means that a single correlation between response curves applies to all species\footnote{This is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{extraParams} appropriately}, and is caused by a poor choice of implementation. Thanks fully this is relatively easy to fix, which will be done for version 0.2-0 along with a fix for a similar issue relating to the statement of additional parameters for the error distribution used (see below).
+Additional parameters that may be needed for the response model but which are not specified at the species level are supplied as a list with named components to argument \code{extraParams}. An example is the correlation between Gaussian response curves in case of two gradients. This, unfortunately, means that a single correlation between response curves applies to all species\footnote{This is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{extraParams} appropriately}, and is caused by a poor choice of implementation. Thankfully this is relatively easy to fix, which will be done for version 0.2-0 along with a fix for a similar issue relating to the statement of additional parameters for the error distribution used (see below).
 
 To simulate realistic count data we need to sample \textit{with error} from the parameterised species response curves. Which of the distributions (listed earlier) is used is specified via argument \texttt{countModel}; available options are
 
@@ -143,7 +143,7 @@ The final argument is \texttt{expectation}, which defaults to \texttt{FALSE}. Wh
 In the next few sections the basic usage of \texttt{coenocline()} is illustrated.
 
 \subsubsection{Gaussian responses along a single gradient}
-This example, of multiple species response along a single environmental gradient, illustrates the simplest usage of \texttt{coenocline()}. The example uses a hypothetical pH gradient with species optima drawn at random uniformally from the gradient. Species tolerances are the same for all species. The maximum abundance of each species, $h$, is drawn from a lognormal distribution with a mean of \textapprox{}20 ($e^3$). This simulation will be for a community of 20 species, evaluated at 100 equally spaced locations. First we set up the parameters
+This example, of multiple species responses along a single environmental gradient, illustrates the simplest usage of \texttt{coenocline()}. The example uses a hypothetical pH gradient with species optima drawn at random uniformally along the gradient. Species tolerances are the same for all species. The maximum abundance of each species, $h$, is drawn from a lognormal distribution with a mean of \textapprox{}20 ($e^3$). This simulation will be for a community of 20 species, evaluated at 100 equally spaced locations. First we set up the parameters
 
 <<example1-params>>=
 set.seed(2)
@@ -178,21 +178,25 @@ A quick way to visualise the parameterised species response is to use \texttt{ma
 matplot(locs, mu, lty = "solid", type = "l", xlab = "pH", ylab = "Abundance")
 @
 
-As this looks OK, we can simulate some count data. The simplest model for doing so is to make random draws from a Poisson distribution with the mean, $\lambda$, for each species set to value of the response curve evaluated at each gradient location. Hence the values in \texttt{mu} that we just created can be thought of as the expected count per species at each of the gradient locations we are interested in. To simulate Poisson count data, use \texttt{expectation = FALSE} or remove this argument from the call. To be more explicit, we should also state \texttt{countModel = "poisson"}.
+The resultant plot is shown in Figure~\ref{example1-plot-expectations}.
+
+As this looks OK, we can simulate some count data. The simplest model for doing so is to make random draws from a Poisson distribution with the mean, $\lambda$, for each species set to value of the response curve evaluated at each gradient location. Hence the values in \texttt{mu} that we just created can be thought of as the expected count per species at each of the gradient locations we are interested in. To simulate Poisson count data, use \texttt{expectation = FALSE} or remove this argument from the call. To be more explicit, we should also state \texttt{countModel = "poisson"}\footnote{\texttt{countModel = "poisson"} is the default so this can be excluded from the call.}.
 
 <<example1-sim>>=
 simp <- coenocline(locs, responseModel = "gaussian", params = pars,
                    countModel = "poisson")
 @
 
-Again, \texttt{matplot} is useful in visulaising the simluated data
+Again, \texttt{matplot} is useful in visualizing the simulated data
 
 <<example1-plot-simulations, fig.cap = "Simulated species abundances with Poisson errors from Gaussian response curves along a hypothetical pH gradient", fig.height = 5>>=
 matplot(locs, simp, lty = "solid", type = "p", pch = 1:10, cex = 0.8,
         xlab = "pH", ylab = "Abundance")
 @
 
-Whilst the simulated counts look reasonable and follow the response curves in Figure~\ref{fig:example1-plot-expectations} there is a problem; the variation around the expected curves is too small. This is due to the error variance implied by the Poisson distribution encapsulating only that variance which due to repeated sampling at the gradient locations. Most species abundance show exhibit much larger degrees of variation than that shown in Figure~\ref{fig:example1-plot-simulations}. A solution to this is to sample from a distribution that incorporates additional variance or \textit{overdispersion}. A natural partner to the Poisson that includes overdispersion is the negative binomial. To simulate count data using the negative binomial distribution we must alter \texttt{countModel} and supply the overdispersion parameter $\alpha$ to use\footnote{Recall that this is only easily specifiable globally in version 0.1-0 of \pkg{coenocliner}.} via \texttt{countParams}.
+The resultant plot is shown in Figure~\ref{example1-plot-simulations}.
+
+Whilst the simulated counts look reasonable and follow the response curves in Figure~\ref{fig:example1-plot-expectations} there is a problem; the variation around the expected curves is too small. This is due to the error variance implied by the Poisson distribution encapsulating only that variance which would arise due to repeated sampling at the gradient locations. Most species abundance data exhibit much larger degrees of variation than that shown in Figure~\ref{fig:example1-plot-simulations}. A solution to this is to sample from a distribution that incorporates additional variance or \textit{overdispersion}. A natural partner to the Poisson that includes overdispersion is the negative binomial. To simulate count data using the negative binomial distribution we must alter \texttt{countModel} and supply the overdispersion parameter $\alpha$ to use\footnote{Recall that this is only easily specifiable globally in version 0.1-0 of \pkg{coenocliner}.} via \texttt{countParams}.
 
 <<example1-nb-sim>>=
 simnb <- coenocline(locs, responseModel = "gaussian", params = pars,
@@ -220,7 +224,7 @@ pars  <- list(m = m, r = r, alpha = alpha,
               gamma = gamma, A0 = A0)      # species parameters, in list form
 @
 
-To recreate figure 2 in \citet{Minchin1987} evaluations at the chosen gradient locations \texttt{locs} of the parameterised generalise beta are required and can be generated by passing \texttt{coenocline()} the gradient locations and the chosen species parameters as before, choosing the generalised beta response and using \texttt{expectation = TRUE}
+To recreate figure 2 in \citet{Minchin1987} evaluations at the chosen gradient locations, \texttt{locs}, of the parameterised generalised beta are required and can be generated by passing \texttt{coenocline()} the gradient locations and the chosen species parameters as before, choosing the generalised beta response model and using \texttt{expectation = TRUE}
 
 <<example2-beta-expectations>>=
 mu <- coenocline(locs, responseModel = "beta", params = pars, expectation = TRUE)
@@ -237,6 +241,8 @@ and as such we can use \texttt{matplot} to draw the species responses
 <<example2-beta-plot-expectations, fig.cap = "Generalised beta function species response curves along a hypothetical environmental gradient recreating Figure 2 in Minchin (1987).", fig.height = 5>>=
 matplot(locs, mu, lty = "solid", type = "l", xlab = "Gradient", ylab = "Abundance")
 @
+
+Figure~\ref{example2-beta-plot-expectations} is a good facsimile of figure 2 in \citet{Minchin1987}.
 
 \subsubsection{Gaussian response along two gradients}
 In this example I illustrate how to simulate species abundance in an environment comprising two gradients. Parameters for the simulation are defined first, including the number of species and samples required, followed by definitions of the gradient units and lengths, species optima, and tolerances for each gradient, and the maximal abundance ($h$).
