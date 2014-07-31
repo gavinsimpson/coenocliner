@@ -43,27 +43,10 @@
 
 ##' @rdname distributions
 ##'
-##' @param tau numeric; the overdispersion parameter for the Beta-Binomial distribution. This is actually \eqn{\tau^2}{tau^2}.
-##'
-##' @importFrom stats rbeta rbinom
-`BetaBinomial` <-  function(n, mu, size, tau) {
-    ## tau is tau^2
-    t1 <- tau * size
-    t2 <- t1 - size - tau + 1
-    t3 <- 1 / (1 + t1 - tau)
-    t4 <- t2 * t3
-    a  <- -t4 * mu
-    b  <- t4 * (mu - 1)
-    mu <- rbeta(n = n, shape1 = a, shape2 = b)
-    rbinom(n = n, size = size, prob = mu)
-}
-
-##' @rdname distributions
-##'
 ##' @param theta numeric; a positive overdispersion parameter for the Beta-Binomial distribution.
 ##'
 ##' @importFrom stats rbeta rbinom
-`BetaBinomial2` <- function(n, mu, size, theta) {
+`BetaBinomial` <- function(n, mu, size, theta) {
     ## follows Bolker (2008) and derive a and b from mu and theta
     ## mu == pi (or prob, or p)
     a <- theta * mu

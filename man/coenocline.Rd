@@ -203,7 +203,7 @@ params[["A0"]] <- c(5,4,7,5,9,8) / 10
 y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "betabinomial",
-                countParams = list(size = 100, tau = 0.1))
+                countParams = list(size = 100, theta = 0.1))
 matplot(y, type = "l", lty = "solid")
 }
 \author{

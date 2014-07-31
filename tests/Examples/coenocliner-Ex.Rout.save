@@ -1,5 +1,5 @@
 
-R version 3.1.1 Patched (2014-07-11 r66127) -- "Sock it to Me"
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -224,7 +224,7 @@ This is coenocliner 0.0-10
 > y <- coenocline(x, responseModel = "beta",
 +                 params = params,
 +                 countModel = "betabinomial",
-+                 countParams = list(size = 100, tau = 0.1))
++                 countParams = list(size = 100, theta = 0.1))
 > matplot(y, type = "l", lty = "solid")
 > 
 > 
@@ -393,7 +393,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.629 0.014 0.646 0 0 
+Time elapsed:  0.55 0.017 0.57 0 0 
 > grDevices::dev.off()
 null device 
           1 

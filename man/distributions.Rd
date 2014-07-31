@@ -2,7 +2,6 @@
 \name{distributions}
 \alias{Bernoulli}
 \alias{BetaBinomial}
-\alias{BetaBinomial2}
 \alias{Binomial}
 \alias{NegBin}
 \alias{Poisson}
@@ -19,9 +18,7 @@ Bernoulli(n, mu)
 
 Binomial(n, mu, size)
 
-BetaBinomial(n, mu, size, tau)
-
-BetaBinomial2(n, mu, size, theta)
+BetaBinomial(n, mu, size, theta)
 
 ZIP(n, mu, gamma)
 
@@ -35,8 +32,6 @@ ZINB(n, mu, alpha, gamma)
 \item{alpha}{numeric; parameter for the negative binomial distribution.}
 
 \item{size}{numeric; binomial denominator, the total number of individuals counted for example}
-
-\item{tau}{numeric; the overdispersion parameter for the Beta-Binomial distribution. This is actually \eqn{\tau^2}{tau^2}.}
 
 \item{theta}{numeric; a positive overdispersion parameter for the Beta-Binomial distribution.}
 

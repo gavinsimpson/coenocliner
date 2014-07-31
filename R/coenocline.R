@@ -192,7 +192,7 @@
 ##' y <- coenocline(x, responseModel = "beta",
 ##'                 params = params,
 ##'                 countModel = "betabinomial",
-##'                 countParams = list(size = 100, tau = 0.1))
+##'                 countParams = list(size = 100, theta = 0.1))
 ##' matplot(y, type = "l", lty = "solid")
 `coenocline` <- function(x,
                          responseModel = c("gaussian","beta"),
