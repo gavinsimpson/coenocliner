@@ -1,9 +1,24 @@
 coencliner Change Log
 
+Version 0.1-0
+
+	* Released to CRAN...
+
 Version 0.0-10
 
-	* Gaussian: default for `corr` changed to `0` so users don't need
-	to specify this unless they want correlated responses.
+	* Gaussian: default for `corr` changed to `0` so users don't
+	need to specify this unless they want correlated responses.
+
+	* vignette: added a basic tutorial vignette document to the
+	package.
+
+	* BetaBinomial: realised I should have asked Jari for
+	permission to copy code to compute the parameters of the
+	beta distribution from a parameter tau^2. This came from his
+	BETASIMU C code. I've temporarily removed this code until such
+	a time as I get permission to include it (Jari is in the field).
+	I've replaced it with a different parameterisation I found in
+	Ben Bolker's Ecological Models and Data in R book.
 
 Version 0.0-9
 
