@@ -190,3 +190,42 @@ test_that("Beta throws error on different length params", {
     py <- list(m = 10, r = 40, alpha = 2, gamma = rep(2, 10))
     expect_error(Beta(x, y, px = px, py = py))
 })
+
+## FIXME: factor this into a set of tests
+## x <- seq(3.5, 7, length = 30)
+## y <- seq(1, 10, length = 30)
+## xy <- expand.grid(x = x, y = y)
+
+## parx <- list(opt = c(5,6), tol = c(0.5,0.3), h = c(50, 75))
+## pary <- list(opt = c(5,7), tol = c(1.5, 1.5))
+
+## exx <- expand(xy[,1], opt = c(5), tol = c(0.5), h = c(50))
+## exy <- expand(xy[,2], opt = c(5), tol = c(1.5))
+## px <- as.list(data.frame(exx[,-1]))
+## py <- as.list(data.frame(exy[,-1]))
+
+## args <- list(x = xy[,1], y = xy[,2], px = px, py = py, corr = 0.5)
+## tmp <- Gaussian(xy[,1], xy[,2], px = px, py = py, corr = 0.5)
+## tmp2 <- do.call("Gaussian", args)
+
+## persp(x, y, matrix(tmp, ncol = length(x)), theta = 45, phi = 30)
+
+## exx <- expand(xy[,1], opt = c(5,6), tol = c(0.5,0.3), h = c(50, 75))
+## exy <- expand(xy[,2], opt = c(5,7), tol = c(1.5,1.5))
+## px <- as.list(data.frame(exx[,-1]))
+## py <- as.list(data.frame(exy[,-1]))
+
+## args <- list(x = xy[,1], y = xy[,2], px = px, py = py, corr = 0.5)
+## tmp <- Gaussian(xy[,1], xy[,2], px = px, py = py, corr = 0.5)
+## tmp2 <- do.call("Gaussian", args)
+## mat <- matrix(tmp, ncol = 2)
+
+## persp(x, y, matrix(mat[,1], ncol = length(x)), theta = 45, phi = 30)
+## persp(x, y, matrix(mat[,2], ncol = length(x)), theta = 45, phi = 30)
+
+## sim <- coenocline(xy, params = list(px = parx, py = pary),
+##                   responseModel = "gaussian", expectation = TRUE,
+##                   extraParams = list(corr = 0.5))
+
+## persp(x, y, matrix(sim[,1], ncol = length(x)), theta = 45, phi = 30)
+## persp(x, y, matrix(sim[,2], ncol = length(x)), theta = 45, phi = 30)
