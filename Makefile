@@ -16,7 +16,7 @@ check: build
 
 check-cran: build
 	cd ..;\
-	R CMD check --as-cran coenocoliner_$(PKGVERS).tar.gz
+	R CMD check --as-cran coenocliner_$(PKGVERS).tar.gz
 
 install: build
 	cd ..;\
