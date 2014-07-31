@@ -17,3 +17,7 @@ coenocliner 0.1-0
 
 * The main user-facing function is `coenocline()`. See `?coenocliner`
   and `?coenocline` for further details and examples of usage
+
+* A basic overview and introductory tutorial for coenocliner is available.
+  Run `browseVignettes("coenocliner")` in R to access the PDF, R code and
+  sources.
