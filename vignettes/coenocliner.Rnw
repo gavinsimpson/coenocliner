@@ -127,7 +127,7 @@ Note that parameter $h$ is not specified in the second set as this parameter, th
 
 Notice also how parameters are specified at the species level. To evaluate the response curve at the supplied gradient locations each set of parameters needs to be repeated for each gradient location. Thankfully \texttt{coenocline()} takes care of this detail for us.
 
-Additional parameters that may be needed for the response model but which are not specified at the species level are supplied as a list with named components to argument \code{extraParams}. An example is the correlation between Gaussian response curves in case of two gradients. This, unfortunately, means that a single correlation between response curves applies to all species\footnote{This is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{extraParams} appropriately}, and is caused by a poor choice of implementation. Thankfully this is relatively easy to fix, which will be done for version 0.2-0 along with a fix for a similar issue relating to the statement of additional parameters for the error distribution used (see below).
+Additional parameters that may be needed for the response model but which are not specified at the species level are supplied as a list with named components to argument \texttt{extraParams}. An example is the correlation between Gaussian response curves in case of two gradients. This, unfortunately, means that a single correlation between response curves applies to all species\footnote{This is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{extraParams} appropriately}, and is caused by a poor choice of implementation. Thankfully this is relatively easy to fix, which will be done for version 0.2-0 along with a fix for a similar issue relating to the statement of additional parameters for the error distribution used (see below).
 
 To simulate realistic count data we need to sample \textit{with error} from the parameterised species response curves. Which of the distributions (listed earlier) is used is specified via argument \texttt{countModel}; available options are
 
@@ -234,7 +234,7 @@ As before \texttt{mu} is a matrix with one column per species
 
 <<example2-head>>=
 head(mu)
-@ 
+@
 
 and as such we can use \texttt{matplot} to draw the species responses
 
@@ -271,9 +271,9 @@ pars <- list(px = par1, py = par2)                # put parameters into a list
 locs <- expand.grid(x = loc1, y = loc2)           # put gradient locations together
 @
 
-Notice how the parameter sets for each gradient are individual matrices which are combined in a list, \code{pars}, ready for use. Also different this time is the \code{expand.grid()} call which is used to generate all pairwise combinations of the locations on the two gradients. This has the effect of creating a coordinate pair on the two gradients at which we'll evaluate the response curves. In effect this creates a grid of points over the gradient space.
+Notice how the parameter sets for each gradient are individual matrices which are combined in a list, \texttt{pars}, ready for use. Also different this time is the \texttt{expand.grid()} call which is used to generate all pairwise combinations of the locations on the two gradients. This has the effect of creating a coordinate pair on the two gradients at which we'll evaluate the response curves. In effect this creates a grid of points over the gradient space.
 
-Having set up the parameters, the call to \code{coenocline()} is the same as before, except now we specify a degree of correlation between the two gradients via \code{extraParams = list(corr = 0.5)}
+Having set up the parameters, the call to \texttt{coenocline()} is the same as before, except now we specify a degree of correlation between the two gradients via \texttt{extraParams = list(corr = 0.5)}
 
 <<example3-expectations>>=
 mu2d <- coenocline(locs, responseModel = "gaussian",
@@ -281,12 +281,12 @@ mu2d <- coenocline(locs, responseModel = "gaussian",
                    expectation = TRUE)
 @
 
-\code{mu2d} now contains a matrix of expected species abundances, one column per species as before. Because of the way the \code{expand.grid()} function works, the ordering of species abudances in each column has the first gradient locations varying fastest --- the locations on the first gradient are repeated in order for each location on the second gradient
+\texttt{mu2d} now contains a matrix of expected species abundances, one column per species as before. Because of the way the \texttt{expand.grid()} function works, the ordering of species abudances in each column has the first gradient locations varying fastest --- the locations on the first gradient are repeated in order for each location on the second gradient
 
 <<example3-head-locs>>=
 head(locs)
 @
-As a result, we can reshape the abundances for a single species into a matrix reflecting the grid of locations over the gradient space via a simple \code{matrix()} call, setting the number of columns in the resultant matrix equal to the number of gradient locations in the simulation. By way of illustration, this approach is used to prepare the expected abundances for four of the species in \code{mu2d} for plotting via the \code{persp()} plotting function
+As a result, we can reshape the abundances for a single species into a matrix reflecting the grid of locations over the gradient space via a simple \texttt{matrix()} call, setting the number of columns in the resultant matrix equal to the number of gradient locations in the simulation. By way of illustration, this approach is used to prepare the expected abundances for four of the species in \texttt{mu2d} for plotting via the \texttt{persp()} plotting function
 
 <<example3-persp-plots, fig.cap = "Bivariate Gaussian species responses for four selected species.">>=
 layout(matrix(1:4, ncol = 2))
@@ -338,6 +338,6 @@ This vignette was created using the following R and add-on package versions
 
 <<sessionInfo, results = "asis", echo = FALSE>>=
 toLatex(sessionInfo())
-@ 
+@
 
 \end{document}
