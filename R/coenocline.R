@@ -244,6 +244,7 @@
                             countModel = countModel, countParams = countParams,
                             expectation = expectation)
     }
+    class(sim) <- c("coenocline", "matrix")
     sim
 }
 
