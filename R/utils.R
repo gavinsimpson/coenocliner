@@ -49,3 +49,26 @@
     }
     invisible(x)
 }
+
+##' @title Stack columns of a species coenocline simulation
+##'
+##' @description Stacks columns of a species coenocline simulation into long format suitable for use in statistical modeling or ggplot/lattice plots.
+##'
+##' @param x an object of class \code{"coenocline"}
+##' @param ... arguments passed to other methods (not used).
+##'
+##' @importFrom utils stack
+##'
+##' @export
+##'
+##' @seealso \code{\link{coenocline}}
+`stack.coenocline` <- function(x, ...) {
+    X <- as.vector(x)
+    vars <- colnames(x)
+    if (is.null(vars)) {
+        vars <- paste0("Spp", seq_len(NCOL(x)))
+    }
+    ind <- factor(rep(vars, each = NROW(x)))
+    out <- cbind.data.frame(Species = ind, Abundance = X)
+    out
+}
