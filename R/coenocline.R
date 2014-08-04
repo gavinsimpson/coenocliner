@@ -352,3 +352,17 @@
     sim
 }
 
+##' @export
+`print.coenocline` <- function(x, ...) {
+    dims <- dim(x)
+    nspp <- dims[2]
+    nlocs <- dims[1]
+
+    msg <- paste("Coenocline simulation of", nspp, "species at",
+                 nlocs, "gradient locations")
+    writeLines(strwrap(msg, prefix = "\n"), sep = "\n\n")
+
+    print(head(x))
+
+    writeLines("....\n")
+}
