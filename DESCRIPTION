@@ -1,6 +1,6 @@
 Package: coenocliner
 Type: Package
-Title: Coenocline simulation
+Title: Coenocline Simulation
 Version: 0.1-0
 Date: 2014-07-31
 Authors@R: c(person(given = c("Gavin", "L."),
