@@ -188,7 +188,7 @@
 
         ## constant d Eqn 7 in Minchin 1987
         d <- (bx^px[["alpha"]] * (1 - bx)^px[["gamma"]]) *
-            (by^py[["alpha"]] * (1 - by)^px[["gamma"]])
+            (by^py[["alpha"]] * (1 - by)^py[["gamma"]])
 
         ## Using gradfun() compute the part of eqn to the right of the Pi for
         ## gradient x...
