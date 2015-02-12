@@ -1,3 +1,27 @@
+coenocliner 0.2-0
+=================
+
+* The object returned by `coenocline()` now has S3 class `"coenocline"`
+  and inherits from the `"matrix"` class.
+
+* A `print()` method has been added for `coenocline()` which displays
+  some summary information and the first `n` lines of the simulated
+  counts. This is rudimentary; I'd like to have something like the
+  way **dplyr** prints data frames implemented for the next release.
+
+* A `stack()` method for `coenocline()` was added. This makes it much
+  easier to reshape the simulated count data into a format suitable for
+  use with **ggplot** or **lattice** graphics, or R's modelling
+  functions.
+
+Bug fixes
+---------
+
+* Jari Oksanen noticed an annoying but important bug in the 2D Beta
+  response function; the `gamma` parameter for the second gradient
+  was being ignored, and the value of `gamma` for the first gradient
+  was used instead.
+
 coenocliner 0.1-0
 =================
 

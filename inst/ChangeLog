@@ -1,5 +1,12 @@
 coencliner Change Log
 
+Version 0.2-0
+
+	* Bug Fix: A typo in the bivariate Beta response function led
+	to the code ignoring `gamma` for the second gradient, which
+	used the value for first gradient instead.
+	Reported by: Jari Oksanen (with patch/fix)
+
 Version 0.1-0
 
 	* Released to CRAN...
