@@ -77,7 +77,7 @@ There's a long history of using computers to simulate species abundance data alo
 This vignette provides a brief overview of the \pkg{coenocliner} package.
 
 \section[A brief overview of coenocliner]{A brief overview of \pkg{coenocliner}}
-To begin, load \pkg{coenocliner} and check the start-up message to see if you are using the current (`r packageVersion("coenocliner")`) release of the package
+To begin, load \pkg{coenocliner} and check the start-up message to see if you are using the current (\Sexpr{packageVersion("coenocliner")}) release of the package
 <<load-library>>=
 library("coenocliner")
 @
