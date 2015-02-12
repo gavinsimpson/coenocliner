@@ -77,7 +77,7 @@ There's a long history of using computers to simulate species abundance data alo
 This vignette provides a brief overview of the \pkg{coenocliner} package.
 
 \section[A brief overview of coenocliner]{A brief overview of \pkg{coenocliner}}
-To begin, load \pkg{coenocliner} and check the start-up message to see if you are using the current (0.1-0) release of the package
+To begin, load \pkg{coenocliner} and check the start-up message to see if you are using the current (`r packageVersion("coenocliner")`) release of the package
 <<load-library>>=
 library("coenocliner")
 @
@@ -127,7 +127,7 @@ Note that parameter $h$ is not specified in the second set as this parameter, th
 
 Notice also how parameters are specified at the species level. To evaluate the response curve at the supplied gradient locations each set of parameters needs to be repeated for each gradient location. Thankfully \texttt{coenocline()} takes care of this detail for us.
 
-Additional parameters that may be needed for the response model but which are not specified at the species level are supplied as a list with named components to argument \texttt{extraParams}. An example is the correlation between Gaussian response curves in case of two gradients. This, unfortunately, means that a single correlation between response curves applies to all species\footnote{This is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{extraParams} appropriately}, and is caused by a poor choice of implementation. Thankfully this is relatively easy to fix, which will be done for version 0.2-0 along with a fix for a similar issue relating to the statement of additional parameters for the error distribution used (see below).
+Additional parameters that may be needed for the response model but which are not specified at the species level are supplied as a list with named components to argument \texttt{extraParams}. An example is the correlation between Gaussian response curves in case of two gradients. This, unfortunately, means that a single correlation between response curves applies to all species\footnote{This is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{extraParams} appropriately}, and is caused by a poor choice of implementation. Thankfully this is relatively easy to fix, which will be done for version 0.3-0 along with a fix for a similar issue relating to the statement of additional parameters for the error distribution used (see below).
 
 To simulate realistic count data we need to sample \textit{with error} from the parameterised species response curves. Which of the distributions (listed earlier) is used is specified via argument \texttt{countModel}; available options are
 
@@ -178,7 +178,7 @@ A quick way to visualise the parameterised species response is to use \texttt{ma
 matplot(locs, mu, lty = "solid", type = "l", xlab = "pH", ylab = "Abundance")
 @
 
-The resultant plot is shown in Figure~\ref{example1-plot-expectations}.
+The resultant plot is shown in Figure~\ref{fig:example1-plot-expectations}.
 
 As this looks OK, we can simulate some count data. The simplest model for doing so is to make random draws from a Poisson distribution with the mean, $\lambda$, for each species set to value of the response curve evaluated at each gradient location. Hence the values in \texttt{mu} that we just created can be thought of as the expected count per species at each of the gradient locations we are interested in. To simulate Poisson count data, use \texttt{expectation = FALSE} or remove this argument from the call. To be more explicit, we should also state \texttt{countModel = "poisson"}\footnote{\texttt{countModel = "poisson"} is the default so this can be excluded from the call.}.
 
@@ -194,7 +194,7 @@ matplot(locs, simp, lty = "solid", type = "p", pch = 1:10, cex = 0.8,
         xlab = "pH", ylab = "Abundance")
 @
 
-The resultant plot is shown in Figure~\ref{example1-plot-simulations}.
+The resultant plot is shown in Figure~\ref{fig:example1-plot-simulations}.
 
 Whilst the simulated counts look reasonable and follow the response curves in Figure~\ref{fig:example1-plot-expectations} there is a problem; the variation around the expected curves is too small. This is due to the error variance implied by the Poisson distribution encapsulating only that variance which would arise due to repeated sampling at the gradient locations. Most species abundance data exhibit much larger degrees of variation than that shown in Figure~\ref{fig:example1-plot-simulations}. A solution to this is to sample from a distribution that incorporates additional variance or \textit{overdispersion}. A natural partner to the Poisson that includes overdispersion is the negative binomial. To simulate count data using the negative binomial distribution we must alter \texttt{countModel} and supply the overdispersion parameter $\alpha$ to use\footnote{Recall that this is only easily specifiable globally in version 0.1-0 of \pkg{coenocliner}.} via \texttt{countParams}.
 
@@ -242,7 +242,7 @@ and as such we can use \texttt{matplot} to draw the species responses
 matplot(locs, mu, lty = "solid", type = "l", xlab = "Gradient", ylab = "Abundance")
 @
 
-Figure~\ref{example2-beta-plot-expectations} is a good facsimile of figure 2 in \citet{Minchin1987}.
+Figure~\ref{fig:example2-beta-plot-expectations} is a good facsimile of figure 2 in \citet{Minchin1987}.
 
 \subsubsection{Gaussian response along two gradients}
 In this example I illustrate how to simulate species abundance in an environment comprising two gradients. Parameters for the simulation are defined first, including the number of species and samples required, followed by definitions of the gradient units and lengths, species optima, and tolerances for each gradient, and the maximal abundance ($h$).
