@@ -72,7 +72,7 @@ y <- coenocline(x, responseModel = "gaussian",
                 params = cbind(opt = opt, tol = tol, h = h),
                 countModel = "poisson",
                 expectation = TRUE)
-matplot(x, y, type = "l", lty = "solid")
+plot(y, type = "l", lty = "solid")
 
 ## Bernoulli distribution (occurrence)
 ## ===================================
@@ -87,8 +87,8 @@ pi <- coenocline(x, responseModel = "gaussian",
                  params = cbind(opt = opt, tol = tol, h = h),
                  countModel = "bernoulli", expectation = TRUE)
 ## plot
-matplot(y, type = "p", pch = 1) # a random realisation
-matlines(pi, lty = "solid")     # probability of occurrence
+plot(y, type = "p", pch = 1) # a random realisation
+lines(pi, lty = "solid")     # probability of occurrence
 
 ## Correlated bivariate Gaussian response, two species
 ## ===================================================
@@ -112,9 +112,10 @@ sim <- coenocline(xy, params = list(px = parx, py = pary),
 ## rows. Need to reshape each species (column) vector into a matrix
 ## with as many rows as length(x) (number of gradient locations) and
 ## fill *column*-wise (the default)
-persp(x, y, matrix(sim[,1], ncol = length(x)),             # spp1
+simSpp <- simulations(sim)
+persp(x, y, matrix(simSpp[,1], ncol = length(x)), # spp1
       theta = 45, phi = 30)
-persp(x, y, matrix(sim[,2], ncol = length(x)),             # spp2
+persp(x, y, matrix(simSpp[,2], ncol = length(x)), # spp2
       theta = 45, phi = 30)
 
 ## Poisson counts along two correlated gradients, Gaussian response
@@ -144,8 +145,8 @@ head(y)
 tail(y)
 
 ## Visualise one species' bivariate count data
-persp(x1, x2, matrix(y[,3], ncol = length(x1)), ticktype = "detailed",
-      zlab = "Abundance")
+persp(x1, x2, matrix(simulations(y)[,3], ncol = length(x1)),
+      ticktype = "detailed", zlab = "Abundance")
 
 ## Recreate beta responses in Fig. 2 of Minchin (1987)
 ## ===================================================
@@ -164,26 +165,26 @@ y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "poisson")
 head(y)
-matplot(y, type = "l", lty = "solid")
+plot(y, type = "l", lty = "solid")
 
 y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "poisson", expectation = TRUE)
-matplot(y, type = "l", lty = "solid")
+plot(y, type = "l", lty = "solid")
 
 ## Zero-inflated Poisson, constant gamma
 ## =====================================
 
 y <- coenocline(x, responseModel = "beta", params = params,
                 countModel = "ZIP", countParams = list(gamma = 0))
-matplot(y, type = "l", lty = "solid")
+plot(y, type = "l", lty = "solid")
 
 ## Zero-inflated Negative binomial, constant gamma
 y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "ZINB",
                 countParams = list(alpha = 0.75, gamma = 0))
-matplot(y, type = "l", lty = "solid")
+plot(y, type = "l", lty = "solid")
 
 ## Binomial counts, constant size (m) of 100
 ## =========================================
@@ -194,7 +195,7 @@ y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "binomial",
                 countParams = list(size = 100))
-matplot(y, type = "l", lty = "solid")
+plot(y, type = "l", lty = "solid")
 
 ## Beta-Binomial counts, constant size (m) of 100
 ## ==============================================
@@ -205,7 +206,7 @@ y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "betabinomial",
                 countParams = list(size = 100, theta = 0.1))
-matplot(y, type = "l", lty = "solid")
+plot(y, type = "l", lty = "solid")
 }
 \author{
 Gavin L. Simpson

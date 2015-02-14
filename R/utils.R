@@ -63,6 +63,7 @@
 ##'
 ##' @seealso \code{\link{coenocline}}
 `stack.coenocline` <- function(x, ...) {
+    x <- x$simulations
     X <- as.vector(x)
     vars <- colnames(x)
     if (is.null(vars)) {
@@ -71,4 +72,52 @@
     ind <- factor(rep(vars, each = NROW(x)))
     out <- cbind.data.frame(Species = ind, Abundance = X)
     out
+}
+
+##' @title Return the First of Last Part of an Object
+##'
+##' @description Returns the first of last \code{n} rows of the simulated counts.
+##'
+##' @param x an object of class \code{"coenocline"}, the result of a call to \code{\link{coenocline}}.
+##' @param ... additional arguments passed to other methods.
+##'
+##' @return A matrix consisting of the first or last \code{n} rows of the matrix of simulated counts.
+##'
+##' @author Gavin L. Simpson
+##'
+##' @importFrom utils head
+##'
+##' @export
+##'
+##' @rdname head.coenocline
+##'
+##' @seealso \code{\link[utils]{head}}, \code{\link{coenocline}}
+`head.coenocline` <- function(x, ...) {
+    head(x$simulations)
+}
+
+##' @export
+##' @rdname head.coenocline
+##'
+##' @importFrom utils tail
+`tail.coenocline` <- function(x, ...) {
+    tail(x$simulations)
+}
+
+##' @title Return the Dimentions of the Simulated Count Matrix
+##'
+##' @description Returns the number of rows and columns of the matrix of simulated counts.
+##'
+##' @param x an object of class \code{"coenocline"}, the result of a call to \code{\link{coenocline}}.
+##' @param ... additional arguments passed to other methods.
+##'
+##' @return A vector of length 2 containing the number of rows and columns of the matrix of simulated counts.
+##'
+##' @author Gavin L. Simpson
+##'
+##' @export
+##'
+##' @seealso \code{\link{dim}}, \code{\link{coenocline}}
+`dim.coenocline` <- function(x, ...) {
+    dim(x$simulations)
 }

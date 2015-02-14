@@ -169,13 +169,13 @@ This returns a matrix of values obtained by evaluating each species response cur
 <<example1-head-expectations>>=
 class(mu)
 dim(mu)
-head(mu[, 1:6])
+head(mu)[, 1:6]
 @
 
-A quick way to visualise the parameterised species response is to use \texttt{matplot()}\footnote{until such a time as the \pkg{coenocliner} has a \texttt{plot} method...}
+A quick way to visualise the parameterised species response is to use the \texttt{plot()} method
 
 <<example1-plot-expectations, fig.cap = "Gaussian species response curves along a hypothetical pH gradient", fig.height = 5>>=
-matplot(locs, mu, lty = "solid", type = "l", xlab = "pH", ylab = "Abundance")
+plot(mu, lty = "solid", type = "l", xlab = "pH", ylab = "Abundance")
 @
 
 The resultant plot is shown in Figure~\ref{fig:example1-plot-expectations}.
@@ -190,8 +190,8 @@ simp <- coenocline(locs, responseModel = "gaussian", params = pars,
 Again, \texttt{matplot} is useful in visualizing the simulated data
 
 <<example1-plot-simulations, fig.cap = "Simulated species abundances with Poisson errors from Gaussian response curves along a hypothetical pH gradient", fig.height = 5>>=
-matplot(locs, simp, lty = "solid", type = "p", pch = 1:10, cex = 0.8,
-        xlab = "pH", ylab = "Abundance")
+plot(simp, lty = "solid", type = "p", pch = 1:10, cex = 0.8,
+     xlab = "pH", ylab = "Abundance")
 @
 
 The resultant plot is shown in Figure~\ref{fig:example1-plot-simulations}.
@@ -203,11 +203,11 @@ simnb <- coenocline(locs, responseModel = "gaussian", params = pars,
                     countModel = "negbin", countParams = list(alpha = 0.5))
 @
 
-Using \texttt{matplot} it is apparent that the simluated species data are now far more relalistic (Figure~\ref{fig:example1-plot-nb-simulations})
+Using \texttt{plot} it is apparent that the simluated species data are now far more relalistic (Figure~\ref{fig:example1-plot-nb-simulations})
 
 <<example1-plot-nb-simulations, fig.cap = "Simulated species abundance with negative binomial errors from Gaussian response curves along a hypothetical pH gradient", fig.height = 5>>=
-matplot(locs, simnb, lty = "solid", type = "p", pch = 1:10, cex = 0.8,
-        xlab = "pH", ylab = "Abundance")
+plot(simnb, lty = "solid", type = "p", pch = 1:10, cex = 0.8,
+     xlab = "pH", ylab = "Abundance")
 @
 
 \subsubsection{Generalised beta responses along a single gradient}
@@ -239,7 +239,7 @@ head(mu)
 and as such we can use \texttt{matplot} to draw the species responses
 
 <<example2-beta-plot-expectations, fig.cap = "Generalised beta function species response curves along a hypothetical environmental gradient recreating Figure 2 in Minchin (1987).", fig.height = 5>>=
-matplot(locs, mu, lty = "solid", type = "l", xlab = "Gradient", ylab = "Abundance")
+plot(mu, lty = "solid", type = "l", xlab = "Gradient", ylab = "Abundance")
 @
 
 Figure~\ref{fig:example2-beta-plot-expectations} is a good facsimile of figure 2 in \citet{Minchin1987}.
@@ -292,7 +292,7 @@ As a result, we can reshape the abundances for a single species into a matrix re
 layout(matrix(1:4, ncol = 2))
 op <- par(mar = rep(1, 4))
 for (i in c(2,8,13,19)) {
-    persp(loc1, loc2, matrix(mu2d[, i], ncol = length(loc2)),
+    persp(loc1, loc2, matrix(mu2d$simulations[, i], ncol = length(loc2)),
           ticktype = "detailed", zlab = "Abundance",
           theta = 45, phi = 30)
 }
@@ -316,7 +316,7 @@ The resulting simulated counts for the same four selected species are shown in F
 layout(matrix(1:4, ncol = 2))
 op <- par(mar = rep(1, 4))
 for (i in c(2,8,13,19)) {
-    persp(loc1, loc2, matrix(sim2d[, i], ncol = length(loc2)),
+    persp(loc1, loc2, matrix(sim2d$simulations[, i], ncol = length(loc2)),
           ticktype = "detailed", zlab = "Abundance",
           theta = 45, phi = 30)
 }
