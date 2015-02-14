@@ -92,13 +92,13 @@
 ##' opt <- seq(4, 7, length = 100)
 ##' tol <- rep(0.25, 100)
 ##' h <- rep(20, 100)
-##' 
+##'
 ##' ## simulate
 ##' set.seed(1)
 ##' y <- coenocline(x, responseModel = "gaussian",
 ##'                 params = cbind(opt = opt, tol = tol, h = h),
 ##'                 countModel = "poisson")
-##' 
+##'
 ##' prettyHead(y)
 ##'
 `prettyHead` <- function(x, n = 10, width = getOption("width")) {
@@ -163,8 +163,7 @@
     print(x$df, ...)
     cat("\n")
     if (x$omitted > 0) {
-        writeLines(strwrap(paste("Counts for", x$omitted, "species not shown."),
-                           prefix = "\n"))
+        writeLines(strwrap(paste("Counts for", x$omitted, "species not shown.")))
         cat("\n")
     }
     invisible(x)
