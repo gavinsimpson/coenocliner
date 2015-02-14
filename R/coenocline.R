@@ -100,10 +100,9 @@
 ##' ## rows. Need to reshape each species (column) vector into a matrix
 ##' ## with as many rows as length(x) (number of gradient locations) and
 ##' ## fill *column*-wise (the default)
-##' simSpp <- simulations(sim)
-##' persp(x, y, matrix(simSpp[,1], ncol = length(x)), # spp1
+##' persp(x, y, matrix(sim[,1], ncol = length(x)), # spp1
 ##'       theta = 45, phi = 30)
-##' persp(x, y, matrix(simSpp[,2], ncol = length(x)), # spp2
+##' persp(x, y, matrix(sim[,2], ncol = length(x)), # spp2
 ##'       theta = 45, phi = 30)
 ##'
 ##' ## Poisson counts along two correlated gradients, Gaussian response
@@ -133,7 +132,7 @@
 ##' tail(y)
 ##'
 ##' ## Visualise one species' bivariate count data
-##' persp(x1, x2, matrix(simulations(y)[,3], ncol = length(x1)),
+##' persp(x1, x2, matrix(y[,3], ncol = length(x1)),
 ##'       ticktype = "detailed", zlab = "Abundance")
 ##'
 ##' ## Recreate beta responses in Fig. 2 of Minchin (1987)
@@ -246,8 +245,8 @@
                             countModel = countModel, countParams = countParams,
                             expectation = expectation)
     }
-    sim <- list(simulations = sim, locations = x)
-    class(sim) <- c("coenocline", "list")
+    sim <- attr(sim, "locations") <- x
+    class(sim) <- c("coenocline", "matrix")
     sim
 }
 

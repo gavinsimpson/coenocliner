@@ -292,7 +292,7 @@ As a result, we can reshape the abundances for a single species into a matrix re
 layout(matrix(1:4, ncol = 2))
 op <- par(mar = rep(1, 4))
 for (i in c(2,8,13,19)) {
-    persp(loc1, loc2, matrix(mu2d$simulations[, i], ncol = length(loc2)),
+    persp(loc1, loc2, matrix(mu2d[, i], ncol = length(loc2)),
           ticktype = "detailed", zlab = "Abundance",
           theta = 45, phi = 30)
 }
@@ -316,7 +316,7 @@ The resulting simulated counts for the same four selected species are shown in F
 layout(matrix(1:4, ncol = 2))
 op <- par(mar = rep(1, 4))
 for (i in c(2,8,13,19)) {
-    persp(loc1, loc2, matrix(sim2d$simulations[, i], ncol = length(loc2)),
+    persp(loc1, loc2, matrix(sim2d[, i], ncol = length(loc2)),
           ticktype = "detailed", zlab = "Abundance",
           theta = 45, phi = 30)
 }
