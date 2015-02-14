@@ -31,7 +31,13 @@
 ##' @param countParams a list of additional parameters required to specify the distribution. An example is the parameter \eqn{\alpha}{alpha} in the negative binomial distribution. Components need to be named.
 ##' @param expectation logical; should the expectation (mean) response be returned (\code{TRUE})? If \code{FALSE} random counts or occurrences are generated using random draws from a suitably parameterised distribution, as stated in \code{countModel}.
 ##'
-##' @return a matrix of simulated count or occurrence data, one row per gradient location, one column per species.
+##' @return a matrix of simulated count or occurrence data, one row per gradient location, one column per species. The object is of class \code{"coenocline"}, which inherits from the \code{"matrix"} class.
+##'
+##' Additional attributes attached to the matrix are:
+##'
+##' \begin{describe}
+##'   \item{\code{locations}{ the gradient locations at which response curves were evaluated or for which counts were simulated.}
+##' \end{describe}
 ##'
 ##' @author Gavin L. Simpson
 ##'
