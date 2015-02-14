@@ -1,7 +1,7 @@
 
-R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
+R version 3.1.2 Patched (2014-12-02 r67096) -- "Pumpkin Helmet"
 Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin10.8.0 (64-bit)
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -268,6 +268,36 @@ This is coenocliner 0.2-0
 > 
 > 
 > cleanEx()
+> nameEx("locations")
+> ### * locations
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: locations
+> ### Title: Extract Gradient Locations
+> ### Aliases: locations locations.default
+> 
+> ### ** Examples
+> 
+> ## Poisson counts along a single gradient, Gaussian response
+> ## =========================================================
+> 
+> x <- seq(from = 4, to = 6, length = 100)
+> opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
+> tol <- rep(0.25, 5)
+> h <- rep(20, 5)
+> 
+> ## simulate
+> set.seed(1)
+> y <- coenocline(x, responseModel = "gaussian",
++                 params = cbind(opt = opt, tol = tol, h = h),
++                 countModel = "poisson")
+> head(locations(y))
+[1] 4.000000 4.020202 4.040404 4.060606 4.080808 4.101010
+> 
+> 
+> 
+> cleanEx()
 > nameEx("showParams")
 > ### * showParams
 > 
@@ -393,7 +423,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.981 0.061 1.105 0 0 
+Time elapsed:  0.632 0.015 0.646 0 0 
 > grDevices::dev.off()
 null device 
           1 
