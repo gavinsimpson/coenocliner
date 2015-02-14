@@ -245,7 +245,7 @@
                             countModel = countModel, countParams = countParams,
                             expectation = expectation)
     }
-    sim <- attr(sim, "locations") <- x
+    attr(sim, "locations") <- x
     class(sim) <- c("coenocline", "matrix")
     sim
 }
