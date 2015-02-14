@@ -16,7 +16,7 @@
 ##'
 ##' @importFrom graphics plot matplot
 `plot.coenocline` <- function(x, type = "p", ...) {
-    matplot(x$locations, x$simulations, type = type, ...)
+    matplot(attr(x, "locations"), x, type = type, ...)
 }
 
 ##' @export
@@ -24,5 +24,5 @@
 ##'
 ##' @importFrom graphics lines matlines
 `lines.coenocline` <- function(x, ...) {
-    matlines(x$simulations, ...)
+    matlines(attr(x, "locations"), x, ...)
 }

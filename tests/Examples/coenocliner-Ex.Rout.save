@@ -1,7 +1,7 @@
 
-R version 3.1.2 Patched (2014-12-02 r67096) -- "Pumpkin Helmet"
+R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
 Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-unknown-linux-gnu (64-bit)
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -111,10 +111,9 @@ This is coenocliner 0.2-0
 > ## rows. Need to reshape each species (column) vector into a matrix
 > ## with as many rows as length(x) (number of gradient locations) and
 > ## fill *column*-wise (the default)
-> simSpp <- simulations(sim)
-> persp(x, y, matrix(simSpp[,1], ncol = length(x)), # spp1
+> persp(x, y, matrix(sim[,1], ncol = length(x)), # spp1
 +       theta = 45, phi = 30)
-> persp(x, y, matrix(simSpp[,2], ncol = length(x)), # spp2
+> persp(x, y, matrix(sim[,2], ncol = length(x)), # spp2
 +       theta = 45, phi = 30)
 > 
 > ## Poisson counts along two correlated gradients, Gaussian response
@@ -158,7 +157,7 @@ This is coenocliner 0.2-0
 [10000,]    0    0    0    0   33
 > 
 > ## Visualise one species' bivariate count data
-> persp(x1, x2, matrix(simulations(y)[,3], ncol = length(x1)),
+> persp(x1, x2, matrix(y[,3], ncol = length(x1)),
 +       ticktype = "detailed", zlab = "Abundance")
 > 
 > ## Recreate beta responses in Fig. 2 of Minchin (1987)
@@ -394,7 +393,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.635 0.008 0.642 0 0 
+Time elapsed:  0.981 0.061 1.105 0 0 
 > grDevices::dev.off()
 null device 
           1 

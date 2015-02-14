@@ -20,19 +20,17 @@ sim <- coenocline(x,
                   countModel = "poisson")
 
 test_that("coenocline() returns an integer matrix", {
-    sims <- simulations(sim)
     expect_that(sim, is_a("coenocline"))
-    expect_that(sim, is_a("list"))
-    expect_that(sims, is_a("matrix"))
-    expect_that(typeof(sims) == "integer", is_true())
+    expect_that(sim, is_a("matrix"))
+    expect_that(typeof(sim) == "integer", is_true())
 })
 
 test_that("coenocline() returns matrix with correct number of species", {
-    expect_that(NCOL(simulations(sim)), equals(length(opt)))
+    expect_that(NCOL(sim), equals(length(opt)))
 })
 
 test_that("coenocline() returns matrix with correct number of samples (rows)", {
-    expect_that(NROW(simulations(sim)), equals(length(x)))
+    expect_that(NROW(sim), equals(length(x)))
 })
 
 ## simulate
@@ -50,13 +48,11 @@ sim <- coenocline(cbind(x, y),
                   params = list(px = cbind(opt = optx, tol = tolx, h = h),
                                 py = cbind(opt = opty, tol = toly)),
                   countModel = "poisson")
-sims <- simulations(sim)
 
 test_that("coenocline() returns an integer matrix with x and y gradients", {
     expect_that(sim, is_a("coenocline"))
-    expect_that(sim, is_a("list"))
-    expect_that(sims, is_a("matrix"))
-    expect_that(typeof(sims) == "integer", is_true())
+    expect_that(sim, is_a("matrix"))
+    expect_that(typeof(sim) == "integer", is_true())
 })
 
 test_that("coenocline() returns matrix with correct number of species with x and y gradients", {
@@ -76,14 +72,12 @@ test_that("coenocline() works with parameters as lists", {
                        responseModel = "gaussian",
                        params = lp,
                        countModel = "poisson")
-    sims2 <- simulations(sim2)
 
     expect_that(sim2, is_a("coenocline"))
-    expect_that(sim2, is_a("list"))
-    expect_that(sims2, is_a("matrix"))
-    expect_that(NCOL(sims2), equals(length(opt)))
-    expect_that(NROW(sims2), equals(length(x)))
-    expect_that(sims2, is_identical_to(sims))
+    expect_that(sim2, is_a("matrix"))
+    expect_that(NCOL(sim2), equals(length(opt)))
+    expect_that(NROW(sim2), equals(length(x)))
+    expect_that(sim2, is_identical_to(sim))
 })
 
 test_that("coenocline() works with gradient values supplied as a list", {
@@ -95,12 +89,10 @@ test_that("coenocline() works with gradient values supplied as a list", {
                        responseModel = "gaussian",
                        params = lp,
                        countModel = "poisson")
-    sims3 <- simulations(sim3)
 
     expect_that(sim3, is_a("coenocline"))
-    expect_that(sim3, is_a("list"))
-    expect_that(sims3, is_a("matrix"))
-    expect_that(NCOL(sims3), equals(length(opt)))
-    expect_that(NROW(sims3), equals(length(x)))
-    expect_that(sims3, is_identical_to(sims))
+    expect_that(sim3, is_a("matrix"))
+    expect_that(NCOL(sim3), equals(length(opt)))
+    expect_that(NROW(sim3), equals(length(x)))
+    expect_that(sim3, is_identical_to(sim))
 })
