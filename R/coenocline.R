@@ -368,9 +368,9 @@
 
     msg <- paste("Coenocline simulation of", nspp, "species at",
                  nlocs, "gradient locations")
-    writeLines(strwrap(msg, prefix = "\n"), sep = "\n\n")
+    writeLines(strwrap(msg, prefix = "\n"), sep = "\n")
 
-    print(head(x))
+    print(prettyHead(x, ...))
 
-    writeLines("....\n")
+    invisible(x)
 }
