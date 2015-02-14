@@ -58,10 +58,9 @@
 ##' @rdname distributions
 ##'
 ##' @param gamma numeric; zero-inflation parameter. Leads to the probability of a zero, \eqn{\pi}{pi}, in the binomial part of the ZIP via \eqn{\pi = e^\gamma / (1 + e^\gamma)}{pi = e^gamma / (1 + e^gamma)}. Setting \code{gamma = 0} gives a probability of zero from the binomial part of \eqn{\pi = 0.5}{pi = 0.5}.
-##' @importFrom stats rbinom rpois
+##' @importFrom stats rbinom rpois plogis
 `ZIP` <- function(n, mu, gamma) {
-    e <- exp(1)
-    pi <- e^gamma / (1 + e^gamma)
+    pi <- plogis(gamma)
     pres <- rbinom(n, size = 1, prob = pi)
     rand <- ifelse(pres > 0, rpois(n, lambda = mu), 0)
     rand
@@ -69,10 +68,9 @@
 
 ##' @rdname distributions
 ##'
-##' @importFrom stats rpois rgamma rbinom
+##' @importFrom stats rpois rgamma rbinom plogis
 `ZINB` <- function(n, mu, alpha, gamma) {
-    e <- exp(1)
-    pi <- e^gamma / (1 + e^gamma)
+    pi <- plogis(gamma)
     pres <- rbinom(n, size = 1, prob = pi)
     rand <- ifelse(pres > 0,
                    rpois(n, lambda = mu * rgamma(n, shape = alpha,
