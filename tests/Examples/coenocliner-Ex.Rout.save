@@ -268,7 +268,6 @@ This is coenocliner 0.2-0
 10   0   0   0   1   2   4   4   4   8    7    8    9    9   11    9
 :    :   :   :   :   :   :   :   :   :    :    :    :    :    :    :
 
-
 Counts for 85 species not shown.
 
 > 
@@ -468,7 +467,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.703 0.01 0.713 0 0 
+Time elapsed:  0.681 0.016 0.697 0 0 
 > grDevices::dev.off()
 null device 
           1 
