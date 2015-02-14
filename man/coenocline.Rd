@@ -26,7 +26,13 @@ coenocline(x, responseModel = c("gaussian", "beta"), params,
 \item{expectation}{logical; should the expectation (mean) response be returned (\code{TRUE})? If \code{FALSE} random counts or occurrences are generated using random draws from a suitably parameterised distribution, as stated in \code{countModel}.}
 }
 \value{
-a matrix of simulated count or occurrence data, one row per gradient location, one column per species.
+a matrix of simulated count or occurrence data, one row per gradient location, one column per species. The object is of class \code{"coenocline"}, which inherits from the \code{"matrix"} class.
+
+Additional attributes attached to the matrix are:
+
+\describe{
+  \item{\code{locations}}{ the gradient locations at which response curves were evaluated or for which counts were simulated.}
+}
 }
 \description{
 Simulate species abundance (counts) or occurrence along one or two gradients using well-known ecological response models and random draws from one of a Poisson, negative binomial, Bernoulli, binomial, beta-binomial, zero-inflated Poisson, or zero-inflated neative binomial distribution.

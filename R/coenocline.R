@@ -35,9 +35,9 @@
 ##'
 ##' Additional attributes attached to the matrix are:
 ##'
-##' \begin{describe}
-##'   \item{\code{locations}{ the gradient locations at which response curves were evaluated or for which counts were simulated.}
-##' \end{describe}
+##' \describe{
+##'   \item{\code{locations}}{ the gradient locations at which response curves were evaluated or for which counts were simulated.}
+##' }
 ##'
 ##' @author Gavin L. Simpson
 ##'
