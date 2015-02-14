@@ -230,6 +230,51 @@ This is coenocliner 0.2-0
 > 
 > 
 > cleanEx()
+> nameEx("coenocliner-internal")
+> ### * coenocliner-internal
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: prettyHead
+> ### Title: Pretty Display of a Matrix or Data Frame
+> ### Aliases: prettyHead
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> x <- seq(from = 4, to = 6, length = 30)
+> opt <- seq(4, 7, length = 100)
+> tol <- rep(0.25, 100)
+> h <- rep(20, 100)
+> 
+> ## simulate
+> set.seed(1)
+> y <- coenocline(x, responseModel = "gaussian",
++                 params = cbind(opt = opt, tol = tol, h = h),
++                 countModel = "poisson")
+> 
+> prettyHead(y)
+
+   Sp1 Sp2 Sp3 Sp4 Sp5 Sp6 Sp7 Sp8 Sp9 Sp10 Sp11 Sp12 Sp13 Sp14 Sp15
+1   17  18  19  27  12  23   8  10  15    9    6    7    4    4    4
+2   25  21  24  18  20  21  16  18  14   14    9   11    8   10    4
+3   22  18  22  15  19  14  18  12  14   20   12   17   17   12    5
+4   15  18  16  12  14  20  18  15  17   28   16   10   16   16   15
+5   15  12  12  24  14  21  20  16  18   24   21   11   21   20   15
+6   10  10  12  11  17  17  15  20  19   24   27   21   24   14   24
+7    5   6   9  11  12   8  11  14  13   11   24   18   20   23   16
+8    4   6   2   5   6   6  14  10  16   11   14   23   14   26   27
+9    6   2   2   4   2   5   4   5  12    5    4    8   10   17   16
+10   0   0   0   1   2   4   4   4   8    7    8    9    9   11    9
+:    :   :   :   :   :   :   :   :   :    :    :    :    :    :    :
+
+
+Counts for 85 species not shown.
+
+> 
+> 
+> 
+> cleanEx()
 > nameEx("expand")
 > ### * expand
 > 
@@ -423,7 +468,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.632 0.015 0.646 0 0 
+Time elapsed:  0.703 0.01 0.713 0 0 
 > grDevices::dev.off()
 null device 
           1 
