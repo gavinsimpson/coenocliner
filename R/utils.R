@@ -63,7 +63,6 @@
 ##'
 ##' @seealso \code{\link{coenocline}}
 `stack.coenocline` <- function(x, ...) {
-    x <- x$simulations
     X <- as.vector(x)
     vars <- colnames(x)
     if (is.null(vars)) {
