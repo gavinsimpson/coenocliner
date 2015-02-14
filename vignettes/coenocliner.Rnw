@@ -169,7 +169,7 @@ This returns a matrix of values obtained by evaluating each species response cur
 <<example1-head-expectations>>=
 class(mu)
 dim(mu)
-head(mu)[, 1:6]
+mu
 @
 
 A quick way to visualise the parameterised species response is to use the \texttt{plot()} method
@@ -233,7 +233,7 @@ mu <- coenocline(locs, responseModel = "beta", params = pars, expectation = TRUE
 As before \texttt{mu} is a matrix with one column per species
 
 <<example2-head>>=
-head(mu)
+mu
 @
 
 and as such we can use \texttt{matplot} to draw the species responses
