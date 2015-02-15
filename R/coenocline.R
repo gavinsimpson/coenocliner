@@ -361,7 +361,7 @@
 }
 
 ##' @export
-`print.coenocline` <- function(x, ...) {
+`print.coenocline` <- function(x, zapsmall = TRUE, ...) {
     dims <- dim(x)
     nspp <- dims[2]
     nlocs <- dims[1]
@@ -370,7 +370,7 @@
                  nlocs, "gradient locations")
     writeLines(strwrap(msg, prefix = "\n"), sep = "\n")
 
-    print(prettyHead(x, ...))
+    print(prettyHead(x, zapsmall = zapsmall, ...))
 
     invisible(x)
 }
