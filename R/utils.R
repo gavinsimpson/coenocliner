@@ -79,6 +79,7 @@
 ##' @param x an R object for which \code{\link{head}} and \code{\link{as.data.frame}} methods exist.
 ##' @param n numeric; the number of rows to display
 ##' @param width numeric; the display width to assume when formatting the data frame. The default is given by \code{getOption("width")}
+##' @param zapsmall logical; should values close to zero be zapped to zero? See \code{\link{zapsmall}} for details.
 ##' @return A \code{\link{format}}-ed data frame with \code{n} rows (or \code{n+1} rows if only a subset is shown) and as many columns/components that can be printed on a single screen width.
 ##' @author Gavin L. Simpson
 ##'

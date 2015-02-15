@@ -4,7 +4,7 @@
 \alias{prettyHead}
 \title{Pretty Display of a Matrix or Data Frame}
 \usage{
-prettyHead(x, n = 10, width = getOption("width"))
+prettyHead(x, n = 10, width = getOption("width"), zapsmall = FALSE)
 }
 \arguments{
 \item{x}{an R object for which \code{\link{head}} and \code{\link{as.data.frame}} methods exist.}
@@ -12,6 +12,8 @@ prettyHead(x, n = 10, width = getOption("width"))
 \item{n}{numeric; the number of rows to display}
 
 \item{width}{numeric; the display width to assume when formatting the data frame. The default is given by \code{getOption("width")}}
+
+\item{zapsmall}{logical; should values close to zero be zapped to zero? See \code{\link{zapsmall}} for details.}
 }
 \value{
 A \code{\link{format}}-ed data frame with \code{n} rows (or \code{n+1} rows if only a subset is shown) and as many columns/components that can be printed on a single screen width.
