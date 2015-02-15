@@ -32,6 +32,7 @@ Additional attributes attached to the matrix are:
 
 \describe{
   \item{\code{locations}}{ the gradient locations at which response curves were evaluated or for which counts were simulated.}
+  \item{\code{expectations}}{ the passed value of the \code{expection}.}
 }
 }
 \description{

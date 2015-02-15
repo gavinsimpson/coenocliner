@@ -37,6 +37,7 @@
 ##'
 ##' \describe{
 ##'   \item{\code{locations}}{ the gradient locations at which response curves were evaluated or for which counts were simulated.}
+##'   \item{\code{expectations}}{ the passed value of the \code{expection}.}
 ##' }
 ##'
 ##' @author Gavin L. Simpson
@@ -252,6 +253,7 @@
                             expectation = expectation)
     }
     attr(sim, "locations") <- x
+    attr(sim, "expectation") <- expectation
     class(sim) <- c("coenocline", "matrix")
     sim
 }
