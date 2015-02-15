@@ -101,12 +101,16 @@
 ##'
 ##' prettyHead(y)
 ##'
-`prettyHead` <- function(x, n = 10, width = getOption("width")) {
+`prettyHead` <- function(x, n = 10, width = getOption("width"),
+                         zapsmall = FALSE) {
     ## some meta data
     nr <- NROW(x)
     nc <- NCOL(x)
     ## truncate x to n rows using appropriate head() method
     df <- as.data.frame(head(x, n = n))
+    if (zapsmall) {
+        df <- zapsmall(df)
+    }
     ## nullify rownames just incase there are any (shouldn't be...)
     rownames(df) <- NULL
     ## add some variable names; should make this user-configurable TODO
@@ -119,12 +123,12 @@
     ## what will get printed on a single line
     strings <- c(format(rownames(fdf))[[1]], unlist(fdf[1, ]))
     ## account for the rownames, hence initial empty string
-    names <- format(c("", colnames(df)))
+    names <- c("", colnames(df))
     ## take length of elements of strings or names, whichever is largest
     ## these are the widths required to display each column of fdf
     widths <- pmax(nchar(strings), nchar(names))
     ## cumulative sum is total width up to & including the nth column
-    cum <- cumsum(widths)
+    cum <- cumsum(widths + 1)
     ## and we find which of these exceeds the current display width
     overfl <- cum[-1] > width           # ignore rownames
 
@@ -153,7 +157,7 @@
     }
 
     ## return object
-    structure(list(df = trimDF, omitted = omitted),
+    structure(list(df = trimDF, omitted = omitted, zapped = zapsmall),
               class = "prettyHead")
 }
 
@@ -164,8 +168,11 @@
     cat("\n")
     if (x$omitted > 0) {
         writeLines(strwrap(paste("Counts for", x$omitted, "species not shown.")))
-        cat("\n")
     }
+    if (x$zapped) {
+        writeLines(strwrap("(Values very close to zero were zapped)"))
+    }
+    cat("\n")
     invisible(x)
 }
 
