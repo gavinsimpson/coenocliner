@@ -38,6 +38,8 @@
 ##' \describe{
 ##'   \item{\code{locations}}{ the gradient locations at which response curves were evaluated or for which counts were simulated.}
 ##'   \item{\code{expectations}}{ the passed value of the \code{expection}.}
+##'   \item{\code{responseModel}}{ the species response model.}
+##'   \item{\code{countModel}}{ the count distribution used to simulate counts from.}
 ##' }
 ##'
 ##' @author Gavin L. Simpson
@@ -209,11 +211,11 @@
                                         "binomial", "betabinomial", "ZIP", "ZINB"),
                          countParams = NULL,
                          expectation = FALSE) {
-    responseModel <- match.arg(responseModel)
+    responseModel <- rModel <- match.arg(responseModel)
     responseModel <- switch(responseModel,
                             gaussian = Gaussian,
                             beta     = Beta)
-    countModel <- match.arg(countModel)
+    countModel <- cModel <- match.arg(countModel)
     countModel <- switch(countModel,
                          poisson = Poisson,
                          negbin  = NegBin,
@@ -253,6 +255,8 @@
                             expectation = expectation)
     }
     attr(sim, "locations") <- x
+    attr(sim, "responseModel") <- rModel
+    attr(sim, "countModel") <- cModel
     attr(sim, "expectation") <- expectation
     class(sim) <- c("coenocline", "matrix")
     sim
