@@ -1,6 +1,6 @@
 
-R version 3.1.2 Patched (2014-12-02 r67096) -- "Pumpkin Helmet"
-Copyright (C) 2014 The R Foundation for Statistical Computing
+R Under development (unstable) (2015-02-17 r67835) -- "Unsuffered Consequences"
+Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -191,18 +191,18 @@ This is coenocliner 0.2-0
 +                 countModel = "poisson", expectation = TRUE)
 > plot(y, type = "l", lty = "solid")
 > 
-> ## Zero-inflated Poisson, constant gamma
-> ## =====================================
+> ## Zero-inflated Poisson, constant zero-inflation
+> ## ==============================================
 > 
 > y <- coenocline(x, responseModel = "beta", params = params,
-+                 countModel = "ZIP", countParams = list(gamma = 0))
++                 countModel = "ZIP", countParams = list(zprobs = 0.2))
 > plot(y, type = "l", lty = "solid")
 > 
-> ## Zero-inflated Negative binomial, constant gamma
+> ## Zero-inflated Negative binomial, constant zero-inflation
 > y <- coenocline(x, responseModel = "beta",
 +                 params = params,
 +                 countModel = "ZINB",
-+                 countParams = list(alpha = 0.75, gamma = 0))
++                 countParams = list(alpha = 0.75, zprobs = 0.2))
 > plot(y, type = "l", lty = "solid")
 > 
 > ## Binomial counts, constant size (m) of 100
@@ -467,7 +467,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.686 0.007 0.693 0 0 
+Time elapsed:  0.343 0.016 0.358 0 0 
 > grDevices::dev.off()
 null device 
           1 

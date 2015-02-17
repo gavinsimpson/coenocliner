@@ -6,6 +6,8 @@
 \alias{Binomial}
 \alias{NegBin}
 \alias{Poisson}
+\alias{ZIB}
+\alias{ZIBB}
 \alias{ZINB}
 \alias{ZIP}
 \alias{distributions}
@@ -21,9 +23,13 @@ Binomial(n, mu, size)
 
 BetaBinomial(n, mu, size, theta)
 
-ZIP(n, mu, gamma)
+ZIP(n, mu, zprobs)
 
-ZINB(n, mu, alpha, gamma)
+ZINB(n, mu, alpha, zprobs)
+
+ZIB(n, mu, size, zprobs)
+
+ZIBB(n, mu, size, theta, zprobs)
 }
 \arguments{
 \item{n}{the number of random draws, equal to number of species times the number of gradient locations.}
@@ -34,9 +40,9 @@ ZINB(n, mu, alpha, gamma)
 
 \item{size}{numeric; binomial denominator, the total number of individuals counted for example}
 
-\item{theta}{numeric; a positive overdispersion parameter for the Beta-Binomial distribution.}
+\item{theta}{numeric; a positive \emph{inverse} overdispersion parameter for the Beta-Binomial distribution. Low values give high overdispersion. The variance is  \code{size*mu*(1-mu)*(1+(size-1)/(theta+1))} (Bolker, 2008)}
 
-\item{gamma}{numeric; zero-inflation parameter. Leads to the probability of a zero, \eqn{\pi}{pi}, in the binomial part of the ZIP via \eqn{\pi = e^\gamma / (1 + e^\gamma)}{pi = e^gamma / (1 + e^gamma)}. Setting \code{gamma = 0} gives a probability of zero from the binomial part of \eqn{\pi = 0.5}{pi = 0.5}.}
+\item{zprobs}{numeric; zero-inflation parameter giving the proportion of extraneous zeros. Must be in range \eqn{0 \dots 1}{0 to 1}.}
 }
 \value{
 a vector of random draws from the stated distribution.
@@ -46,6 +52,10 @@ Wrappers to random number generators for use with coenocliner
 }
 \author{
 Gavin L. Simpson
+}
+\references{
+Bolker, B.M. (2008) \emph{Ecological Models and Data
+in R.} Princeton University Press.
 }
 \keyword{distribution}
 

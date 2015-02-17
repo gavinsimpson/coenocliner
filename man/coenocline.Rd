@@ -7,8 +7,8 @@ gradients}
 \usage{
 coenocline(x, responseModel = c("gaussian", "beta"), params,
   extraParams = NULL, countModel = c("poisson", "negbin", "bernoulli",
-  "binary", "binomial", "betabinomial", "ZIP", "ZINB"), countParams = NULL,
-  expectation = FALSE)
+  "binary", "binomial", "betabinomial", "ZIP", "ZINB", "ZIB", "ZIBB"),
+  countParams = NULL, expectation = FALSE)
 }
 \arguments{
 \item{x}{one of a numeric vector, a list with two components, each a numeric vector, or a matrix with two columns. The vectors are the locations along the gradient(s) at which species responses are to be simulated.}
@@ -54,9 +54,12 @@ The species response model defines the mean of expected response. (In the case o
   \item Poisson,
   \item Negative binomial,
   \item Bernoulli,
+  \item Binomial,
   \item Beta-Binomial,
-  \item Zero-inflated Poisson, and
-  \item Zero-inflated Negative binomial
+  \item Zero-inflated Poisson,
+  \item Zero-inflated Negative binomial,
+  \item Zero-inflated Binomial, and
+  \item Zero-inflated Beta-Binomial
 }
 
 Some distributions may need additional parameters beyond the expectation; an example is the \eqn{\alpha}{alpha} parameter of (one parameterisation of) the negative binomial distribution. These parameters are specied via the list \code{countParams}.
@@ -180,18 +183,18 @@ y <- coenocline(x, responseModel = "beta",
                 countModel = "poisson", expectation = TRUE)
 plot(y, type = "l", lty = "solid")
 
-## Zero-inflated Poisson, constant gamma
-## =====================================
+## Zero-inflated Poisson, constant zero-inflation
+## ==============================================
 
 y <- coenocline(x, responseModel = "beta", params = params,
-                countModel = "ZIP", countParams = list(gamma = 0))
+                countModel = "ZIP", countParams = list(zprobs = 0.2))
 plot(y, type = "l", lty = "solid")
 
-## Zero-inflated Negative binomial, constant gamma
+## Zero-inflated Negative binomial, constant zero-inflation
 y <- coenocline(x, responseModel = "beta",
                 params = params,
                 countModel = "ZINB",
-                countParams = list(alpha = 0.75, gamma = 0))
+                countParams = list(alpha = 0.75, zprobs = 0.2))
 plot(y, type = "l", lty = "solid")
 
 ## Binomial counts, constant size (m) of 100
