@@ -16,6 +16,7 @@
 ##'   \item Poisson,
 ##'   \item Negative binomial,
 ##'   \item Bernoulli,
+##'   \item Binomial,
 ##'   \item Beta-Binomial,
 ##'   \item Zero-inflated Poisson,
 ##'   \item Zero-inflated Negative binomial,
