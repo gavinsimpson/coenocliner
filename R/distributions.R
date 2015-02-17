@@ -2,7 +2,7 @@
 ##'
 ##' @references Bolker, B.M. (2008) \emph{Ecological Models and Data
 ##' in R.} Princeton University Press.
-##' 
+##'
 ##' @param n the number of random draws, equal to number of species times the number of gradient locations.
 ##' @param mu the mean or expectation of the distribution. For \code{Bernoulli}, \code{Binomial}, and \code{BetaBinomial()} this is the probability of occurrence as given by the response function.
 ##' @param alpha numeric; parameter for the negative binomial distribution.
@@ -39,6 +39,8 @@
 
 ##' @rdname distributions
 ##'
+##' @importFrom stats rbinom
+##'
 ##' @param size numeric; binomial denominator, the total number of individuals counted for example
 `Binomial` <- function(n, mu, size) {
     rbinom(n = n, size = size, prob = mu)
@@ -46,10 +48,7 @@
 
 ##' @rdname distributions
 ##'
-##' @param theta numeric; a positive inverse overdispersion parameter
-##' for the Beta-Binomial distribution. Low values give high
-##' overdispersion. The variance is
-##' \code{size*mu*(1-mu)*(1+(size-1)/(theta+1))} (Bolker, 2008)
+##' @param theta numeric; a positive \emph{inverse} overdispersion parameter for the Beta-Binomial distribution. Low values give high overdispersion. The variance is  \code{size*mu*(1-mu)*(1+(size-1)/(theta+1))} (Bolker, 2008)
 ##'
 ##' @importFrom stats rbeta rbinom
 `BetaBinomial` <- function(n, mu, size, theta) {
@@ -63,9 +62,7 @@
 
 ##' @rdname distributions
 ##'
-##' @param zprobs numeric; zero-inflation parameter giving the
-##' proportion of extraneous zeros. Must be in range
-##' \eqn{0 \dots 1}{0 to 1}.
+##' @param zprobs numeric; zero-inflation parameter giving the proportion of extraneous zeros. Must be in range \eqn{0 \dots 1}{0 to 1}.
 ##' @importFrom stats runif rpois
 `ZIP` <- function(n, mu, zprobs) {
     ifelse(runif(n) > zprobs, rpois(n, lambda = mu), 0)
@@ -76,25 +73,25 @@
 ##' @importFrom stats rpois rgamma runif
 `ZINB` <- function(n, mu, alpha, zprobs) {
     ifelse(runif(n) > zprobs,
-           rpois(n, lambda = mu * rgamma(n, shape = alpha,
-                    rate = 1/alpha)),
+           rpois(n, lambda = mu *
+                 rgamma(n, shape = alpha, rate = 1/alpha)),
            0)
 }
 
-#' @rdname distributions
-#'
-#' @importFrom stats rbinom runif
-# Zero-inflated Binomial
+##' @rdname distributions
+##'
+##' @importFrom stats rbinom runif
+## Zero-inflated Binomial
 `ZIB` <- function(n, mu, size, zprobs) {
     ifelse(runif(n) > zprobs,
            rbinom(n, size = size, prob = mu),
            0)
 }
 
-#' @rdname distributions
-#'
-#' @importFrom stats runif
-# Zero-inflated Beta-Binomial
+##' @rdname distributions
+##'
+##' @importFrom stats runif
+## Zero-inflated Beta-Binomial
 `ZIBB` <- function(n, mu, size, theta, zprobs) {
     ifelse(runif(n) > zprobs,
            BetaBinomial(n, mu = mu, size = size, theta = theta),
