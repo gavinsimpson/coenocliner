@@ -74,3 +74,23 @@
                     rate = 1/alpha)),
            0)
 }
+
+#' @rdname distributions
+#'
+#' @importFrom stats rbinom runif
+# Zero-inflated Binomial
+`ZIB` <- function(n, mu, size, zprobs) {
+    ifelse(runif(n) > zprobs,
+           rbinom(n, size = size, prob = mu),
+           0)
+}
+
+#' @rdname distributions
+#'
+#' @importFrom stats runif
+# Zero-inflated Beta-Binomial
+`ZIBB` <- function(n, mu, size, theta, zprobs) {
+    ifelse(runif(n) > zprobs,
+           BetaBinomial(n, mu = mu, size = size, theta = theta),
+           0)
+}

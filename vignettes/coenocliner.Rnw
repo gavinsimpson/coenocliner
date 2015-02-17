@@ -72,6 +72,8 @@ There's a long history of using computers to simulate species abundance data alo
   \item Beta-binomial
   \item Zero-inflated Poisson (ZIP)
   \item Zero-inflated negative binomial (ZINB)
+  \item Zero-inflated Binomial (ZIB)
+  \item Zero-inflated Beta-Binomial (ZIBB)
 \end{itemize}
 
 This vignette provides a brief overview of the \pkg{coenocliner} package.

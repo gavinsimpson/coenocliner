@@ -17,8 +17,10 @@
 ##'   \item Negative binomial,
 ##'   \item Bernoulli,
 ##'   \item Beta-Binomial,
-##'   \item Zero-inflated Poisson, and
-##'   \item Zero-inflated Negative binomial
+##'   \item Zero-inflated Poisson, 
+##'   \item Zero-inflated Negative binomial,
+##'   \item Zero-inflated Binomial, and
+##'   \item Zero-inflated Beta-Binomial
 ##' }
 ##'
 ##' Some distributions may need additional parameters beyond the expectation; an example is the \eqn{\alpha}{alpha} parameter of (one parameterisation of) the negative binomial distribution. These parameters are specied via the list \code{countParams}.
@@ -168,18 +170,18 @@
 ##'                 countModel = "poisson", expectation = TRUE)
 ##' plot(y, type = "l", lty = "solid")
 ##'
-##' ## Zero-inflated Poisson, constant gamma
-##' ## =====================================
+##' ## Zero-inflated Poisson, constant zero-inflation
+##' ## ==============================================
 ##'
 ##' y <- coenocline(x, responseModel = "beta", params = params,
-##'                 countModel = "ZIP", countParams = list(gamma = 0))
+##'                 countModel = "ZIP", countParams = list(zprobs = 0.2))
 ##' plot(y, type = "l", lty = "solid")
 ##'
-##' ## Zero-inflated Negative binomial, constant gamma
+##' ## Zero-inflated Negative binomial, constant zero-inflation
 ##' y <- coenocline(x, responseModel = "beta",
 ##'                 params = params,
 ##'                 countModel = "ZINB",
-##'                 countParams = list(alpha = 0.75, gamma = 0))
+##'                 countParams = list(alpha = 0.75, zprobs = 0.2))
 ##' plot(y, type = "l", lty = "solid")
 ##'
 ##' ## Binomial counts, constant size (m) of 100
@@ -208,7 +210,8 @@
                          params,
                          extraParams = NULL,
                          countModel = c("poisson", "negbin", "bernoulli", "binary",
-                                        "binomial", "betabinomial", "ZIP", "ZINB"),
+                                        "binomial", "betabinomial", "ZIP", "ZINB",
+                                         "ZIB", "ZIBB"),
                          countParams = NULL,
                          expectation = FALSE) {
     responseModel <- rModel <- match.arg(responseModel)
@@ -224,7 +227,9 @@
                          binomial = Binomial,
                          betabinomial = BetaBinomial,
                          ZIP = ZIP,
-                         ZINB = ZINB)
+                         ZINB = ZINB,
+                         ZIB = ZIB,
+                         ZIBB = ZIBB)
 
     ## x needs to be a vector, or for bivariate;
     ##   a list of 2 vectors, or a matrix of 2 columns

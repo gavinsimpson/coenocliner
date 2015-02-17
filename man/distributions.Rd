@@ -6,6 +6,8 @@
 \alias{Binomial}
 \alias{NegBin}
 \alias{Poisson}
+\alias{ZIB}
+\alias{ZIBB}
 \alias{ZINB}
 \alias{ZIP}
 \alias{distributions}
@@ -24,6 +26,10 @@ BetaBinomial(n, mu, size, theta)
 ZIP(n, mu, zprobs)
 
 ZINB(n, mu, alpha, zprobs)
+
+ZIB(n, mu, size, zprobs)
+
+ZIBB(n, mu, size, theta, zprobs)
 }
 \arguments{
 \item{n}{the number of random draws, equal to number of species times the number of gradient locations.}

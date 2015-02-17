@@ -25,6 +25,8 @@ and random count or occurrence data can be simulated from suitably parameterised
   \item Beta-Binomial
   \item Zero-inflated Poisson (ZIP)
   \item Zero-inflated Negative Binomial (ZINB)
+  \item Zero-inflated Binomial (ZIB)
+  \item Zero-inflated Beta-Binomial (ZIBB)
 }
 from which random draws are made.
 }
