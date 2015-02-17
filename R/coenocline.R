@@ -17,7 +17,7 @@
 ##'   \item Negative binomial,
 ##'   \item Bernoulli,
 ##'   \item Beta-Binomial,
-##'   \item Zero-inflated Poisson, 
+##'   \item Zero-inflated Poisson,
 ##'   \item Zero-inflated Negative binomial,
 ##'   \item Zero-inflated Binomial, and
 ##'   \item Zero-inflated Beta-Binomial
@@ -211,7 +211,7 @@
                          extraParams = NULL,
                          countModel = c("poisson", "negbin", "bernoulli", "binary",
                                         "binomial", "betabinomial", "ZIP", "ZINB",
-                                         "ZIB", "ZIBB"),
+                                        "ZIB", "ZIBB"),
                          countParams = NULL,
                          expectation = FALSE) {
     responseModel <- rModel <- match.arg(responseModel)
