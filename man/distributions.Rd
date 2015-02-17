@@ -40,7 +40,10 @@ ZIBB(n, mu, size, theta, zprobs)
 
 \item{size}{numeric; binomial denominator, the total number of individuals counted for example}
 
-\item{theta}{numeric; a positive overdispersion parameter for the Beta-Binomial distribution.}
+\item{theta}{numeric; a positive inverse overdispersion parameter
+for the Beta-Binomial distribution. Low values give high
+overdispersion. The variance is
+\code{size*mu*(1-mu)*(1+(size-1)/(theta+1))} (Bolker, 2008)}
 
 \item{zprobs}{numeric; zero-inflation parameter giving the
 proportion of extraneous zeros. Must be in range
@@ -54,6 +57,10 @@ Wrappers to random number generators for use with coenocliner
 }
 \author{
 Gavin L. Simpson
+}
+\references{
+Bolker, B.M. (2008) \emph{Ecological Models and Data
+in R.} Princeton University Press.
 }
 \keyword{distribution}
 

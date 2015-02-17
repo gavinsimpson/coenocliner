@@ -1,5 +1,8 @@
 ##' @title Wrappers to random number generators for use with coenocliner
 ##'
+##' @references Bolker, B.M. (2008) \emph{Ecological Models and Data
+##' in R.} Princeton University Press.
+##' 
 ##' @param n the number of random draws, equal to number of species times the number of gradient locations.
 ##' @param mu the mean or expectation of the distribution. For \code{Bernoulli}, \code{Binomial}, and \code{BetaBinomial()} this is the probability of occurrence as given by the response function.
 ##' @param alpha numeric; parameter for the negative binomial distribution.
@@ -43,7 +46,10 @@
 
 ##' @rdname distributions
 ##'
-##' @param theta numeric; a positive overdispersion parameter for the Beta-Binomial distribution.
+##' @param theta numeric; a positive inverse overdispersion parameter
+##' for the Beta-Binomial distribution. Low values give high
+##' overdispersion. The variance is
+##' \code{size*mu*(1-mu)*(1+(size-1)/(theta+1))} (Bolker, 2008)
 ##'
 ##' @importFrom stats rbeta rbinom
 `BetaBinomial` <- function(n, mu, size, theta) {
