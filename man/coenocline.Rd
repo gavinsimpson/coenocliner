@@ -54,6 +54,7 @@ The species response model defines the mean of expected response. (In the case o
   \item Poisson,
   \item Negative binomial,
   \item Bernoulli,
+  \item Binomial,
   \item Beta-Binomial,
   \item Zero-inflated Poisson,
   \item Zero-inflated Negative binomial,

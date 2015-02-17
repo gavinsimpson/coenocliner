@@ -40,14 +40,9 @@ ZIBB(n, mu, size, theta, zprobs)
 
 \item{size}{numeric; binomial denominator, the total number of individuals counted for example}
 
-\item{theta}{numeric; a positive inverse overdispersion parameter
-for the Beta-Binomial distribution. Low values give high
-overdispersion. The variance is
-\code{size*mu*(1-mu)*(1+(size-1)/(theta+1))} (Bolker, 2008)}
+\item{theta}{numeric; a positive \emph{inverse} overdispersion parameter for the Beta-Binomial distribution. Low values give high overdispersion. The variance is  \code{size*mu*(1-mu)*(1+(size-1)/(theta+1))} (Bolker, 2008)}
 
-\item{zprobs}{numeric; zero-inflation parameter giving the
-proportion of extraneous zeros. Must be in range
-\eqn{0 \dots 1}{0 to 1}.}
+\item{zprobs}{numeric; zero-inflation parameter giving the proportion of extraneous zeros. Must be in range \eqn{0 \dots 1}{0 to 1}.}
 }
 \value{
 a vector of random draws from the stated distribution.
