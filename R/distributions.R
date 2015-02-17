@@ -57,24 +57,20 @@
 
 ##' @rdname distributions
 ##'
-##' @param gamma numeric; zero-inflation parameter. Leads to the probability of a zero, \eqn{\pi}{pi}, in the binomial part of the ZIP via \eqn{\pi = e^\gamma / (1 + e^\gamma)}{pi = e^gamma / (1 + e^gamma)}. Setting \code{gamma = 0} gives a probability of zero from the binomial part of \eqn{\pi = 0.5}{pi = 0.5}.
-##' @importFrom stats rbinom rpois plogis
-`ZIP` <- function(n, mu, gamma) {
-    pi <- plogis(gamma)
-    pres <- rbinom(n, size = 1, prob = pi)
-    rand <- ifelse(pres > 0, rpois(n, lambda = mu), 0)
-    rand
+##' @param zprobs numeric; zero-inflation parameter giving the
+##' proportion of extraneous zeros. Must be in range
+##' \eqn{0 \dots 1}{0 to 1}.
+##' @importFrom stats runif rpois
+`ZIP` <- function(n, mu, zprobs) {
+    ifelse(runif(n) > zprobs, rpois(n, lambda = mu), 0)
 }
 
 ##' @rdname distributions
 ##'
-##' @importFrom stats rpois rgamma rbinom plogis
-`ZINB` <- function(n, mu, alpha, gamma) {
-    pi <- plogis(gamma)
-    pres <- rbinom(n, size = 1, prob = pi)
-    rand <- ifelse(pres > 0,
-                   rpois(n, lambda = mu * rgamma(n, shape = alpha,
-                            rate = 1/alpha)),
-                   0)
-    rand
+##' @importFrom stats rpois rgamma runif
+`ZINB` <- function(n, mu, alpha, zprobs) {
+    ifelse(runif(n) > zprobs,
+           rpois(n, lambda = mu * rgamma(n, shape = alpha,
+                    rate = 1/alpha)),
+           0)
 }

@@ -21,9 +21,9 @@ Binomial(n, mu, size)
 
 BetaBinomial(n, mu, size, theta)
 
-ZIP(n, mu, gamma)
+ZIP(n, mu, zprobs)
 
-ZINB(n, mu, alpha, gamma)
+ZINB(n, mu, alpha, zprobs)
 }
 \arguments{
 \item{n}{the number of random draws, equal to number of species times the number of gradient locations.}
@@ -36,7 +36,9 @@ ZINB(n, mu, alpha, gamma)
 
 \item{theta}{numeric; a positive overdispersion parameter for the Beta-Binomial distribution.}
 
-\item{gamma}{numeric; zero-inflation parameter. Leads to the probability of a zero, \eqn{\pi}{pi}, in the binomial part of the ZIP via \eqn{\pi = e^\gamma / (1 + e^\gamma)}{pi = e^gamma / (1 + e^gamma)}. Setting \code{gamma = 0} gives a probability of zero from the binomial part of \eqn{\pi = 0.5}{pi = 0.5}.}
+\item{zprobs}{numeric; zero-inflation parameter giving the
+proportion of extraneous zeros. Must be in range
+\eqn{0 \dots 1}{0 to 1}.}
 }
 \value{
 a vector of random draws from the stated distribution.
