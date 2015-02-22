@@ -134,7 +134,7 @@ Additional parameters that may be needed for the response model but which are no
 To simulate realistic count data we need to sample \textit{with error} from the parameterised species response curves. Which of the distributions (listed earlier) is used is specified via argument \texttt{countModel}; available options are
 
 <<count-models, echo = FALSE>>=
-c("poisson", "negbin", "bernoulli", "binary", "binomial", "betabinomial", "ZIP", "ZINB")
+c("poisson", "negbin", "bernoulli", "binary", "binomial", "betabinomial", "ZIP", "ZINB", "ZIB", "ZIBB")
 @
 
 Some of these distributions (all bar \texttt{"poisson"} and \texttt{"bernoulli"}) require additional arguments, such as the $\alpha$ parameter for (one parameterisation of) the negative binomial distribution. These arguments are supplied as a list with named components. Again, due to the same implementation snafu as for \texttt{extraParams}, such parameters act globally for all species\footnote{Again, this is not strictly true as you can work out how the species parameters are replicated relative to gradient values and hence pass a vector of the correct length with the species-specific values included. Study the outputs from \texttt{expand()} when supplied gradient locations and parameters to work out how to specify \texttt{countParams} appropriately}.
