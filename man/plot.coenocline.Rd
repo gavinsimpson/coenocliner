@@ -5,16 +5,20 @@
 \alias{plot.coenocline}
 \title{Plot species simulations along gradients}
 \usage{
-\method{plot}{coenocline}(x, type = "p", ...)
+\method{plot}{coenocline}(x, type = "p", pch = 1, ...)
 
-\method{lines}{coenocline}(x, ...)
+\method{lines}{coenocline}(x, lty = "solid", ...)
 }
 \arguments{
 \item{x}{an object of class \code{"coenocline"}, the result of a call to \code{\link{coenocline}}.}
 
 \item{type}{character; the type of plot to produce. See \code{\link{plot.default}} for details.}
 
+\item{pch}{the plotting character to use. See \code{\link{plot.default}} for details.}
+
 \item{...}{additional arguments to \code{\link{matplot}}.}
+
+\item{lty}{the line type to use. See \code{\link{plot.default}} for details.}
 }
 \value{
 A plot is drawn on the current device.

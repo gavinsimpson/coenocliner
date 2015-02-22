@@ -4,6 +4,7 @@
 ##'
 ##' @param x an object of class \code{"coenocline"}, the result of a call to \code{\link{coenocline}}.
 ##' @param type character; the type of plot to produce. See \code{\link{plot.default}} for details.
+##' @param pch the plotting character to use. See \code{\link{plot.default}} for details.
 ##' @param ... additional arguments to \code{\link{matplot}}.
 ##' @return A plot is drawn on the current device.
 ##' @author Gavin L. Simpson
@@ -37,18 +38,30 @@
 ##'                 countModel = "poisson",
 ##'                 expectation = TRUE)
 ##' plot(y, type = "l", lty = "solid")
-`plot.coenocline` <- function(x, type = "p", ...) {
+`plot.coenocline` <- function(x, type = "p", pch = 1, ...) {
     locs <- locations(x)
-    ord <- order(locs)
-    matplot(locs[ord], x[ord, ], type = type, ...)
+    if (NCOL(locs) > 1) {
+        stop("`plot()` method not yet implemented for multiple gradients.")
+    } else {
+        ord <- order(locs)
+        matplot(locs[ord], x[ord, ], type = type, pch = pch, ...)
+    }
+    invisible()
 }
 
 ##' @export
 ##' @rdname plot.coenocline
 ##'
+##' @param lty the line type to use. See \code{\link{plot.default}} for details.
+##'
 ##' @importFrom graphics lines matlines
-`lines.coenocline` <- function(x, ...) {
+`lines.coenocline` <- function(x, lty = "solid", ...) {
     locs <- locations(x)
-    ord <- order(locs)
-    matlines(locs[ord], x[ord, ], ...)
+    if (NCOL(locs) > 1) {
+        stop("`lines()` method not applicable to multiple gradients.")
+    } else {
+        ord <- order(locs)
+        matlines(locs[ord], x[ord, ], lty = lty, ...)
+    }
+    invisible()
 }
