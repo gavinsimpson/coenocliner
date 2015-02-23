@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2015-02-17 r67835) -- "Unsuffered Consequences"
-Copyright (C) 2015 The R Foundation for Statistical Computing
+R version 3.1.2 Patched (2014-12-02 r67096) -- "Pumpkin Helmet"
+Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -342,6 +342,117 @@ Counts for 83 species not shown.
 > 
 > 
 > cleanEx()
+> nameEx("persp.coenocline")
+> ### * persp.coenocline
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: persp.coenocline
+> ### Title: Perspective Plot of Species Simulations Along Gradients
+> ### Aliases: persp.coenocline
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> ## Poisson counts along two correlated gradients, Gaussian response
+> ## ================================================================
+> 
+> set.seed(1)
+> N <-  40
+> x1 <- seq(from = 4, to = 6, length = N)
+> opt1 <- seq(4, 6, length = 5)
+> tol1 <- rep(0.25, 5)
+> x2 <- seq(from = 2, to = 20, length = N)
+> opt2 <- seq(2, 20, length = 5)
+> tol2 <- rep(1, 5)
+> h <- rep(30, 5)
+> xy <- expand.grid(x = x1, y = x2)
+> 
+> set.seed(1)
+> params <- list(px = list(opt = opt1, tol = tol1, h = h),
++                py = list(opt = opt2, tol = tol2))
+> y <- coenocline(xy,
++                 responseModel = "gaussian",
++                 params = params,
++                 extraParams = list(corr = 0.5),
++                 countModel = "poisson")
+> 
+> ## perspective plot(s) of simulated counts
+> layout(matrix(1:6, ncol = 3))
+> op <- par(mar = rep(1, 4))
+> persp(y)
+> par(op)
+> layout(1)
+> 
+> ## as before but now just expectations
+> y <- coenocline(xy,
++                 responseModel = "gaussian",
++                 params = params,
++                 extraParams = list(corr = 0.5),
++                 countModel = "poisson",
++                 expectation = TRUE)
+> 
+> ## perspective plots of response curves
+> layout(matrix(1:6, ncol = 3))
+> op <- par(mar = rep(1, 4))
+> persp(y)
+> par(op)
+> layout(1)
+> 
+> ## Same plots generated using the `plot` method
+> layout(matrix(1:6, ncol = 3))
+> op <- par(mar = rep(1, 4))
+> persp(y)
+> par(op)
+> layout(1)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("plot.coenocline")
+> ### * plot.coenocline
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.coenocline
+> ### Title: Plot species simulations along gradients
+> ### Aliases: lines.coenocline plot.coenocline
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> ## Poisson counts along a single gradient, Gaussian response
+> ## =========================================================
+> 
+> x <- seq(from = 4, to = 6, length = 100)
+> opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
+> tol <- rep(0.25, 5)
+> h <- rep(20, 5)
+> 
+> ## simulate
+> set.seed(1)
+> y <- coenocline(x, responseModel = "gaussian",
++                 params = cbind(opt = opt, tol = tol, h = h),
++                 countModel = "poisson")
+> head(y)
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    9    3    0    0    0
+[2,]   17    8    0    0    0
+[3,]   18    4    0    0    0
+[4,]   16    5    0    0    0
+[5,]   21    5    0    0    0
+[6,]   19    4    0    0    0
+> 
+> y <- coenocline(x, responseModel = "gaussian",
++                 params = cbind(opt = opt, tol = tol, h = h),
++                 countModel = "poisson",
++                 expectation = TRUE)
+> plot(y, type = "l", lty = "solid")
+> 
+> 
+> 
+> cleanEx()
 > nameEx("showParams")
 > ### * showParams
 > 
@@ -467,7 +578,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.343 0.016 0.358 0 0 
+Time elapsed:  1.043 0.015 1.057 0 0 
 > grDevices::dev.off()
 null device 
           1 
