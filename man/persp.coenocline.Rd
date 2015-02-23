@@ -66,6 +66,13 @@ op <- par(mar = rep(1, 4))
 persp(y)
 par(op)
 layout(1)
+
+## Same plots generated using the `plot` method
+layout(matrix(1:6, ncol = 3))
+op <- par(mar = rep(1, 4))
+persp(y)
+par(op)
+layout(1)
 }
 \author{
 Gavin L. Simpson

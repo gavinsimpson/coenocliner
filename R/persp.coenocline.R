@@ -64,6 +64,13 @@
 ##' persp(y)
 ##' par(op)
 ##' layout(1)
+##'
+##' ## Same plots generated using the `plot` method
+##' layout(matrix(1:6, ncol = 3))
+##' op <- par(mar = rep(1, 4))
+##' persp(y)
+##' par(op)
+##' layout(1)
 `persp.coenocline` <- function(x, species = NULL, theta = 45, phi = 30, ...) {
     locs <- locations(x)
     if (NCOL(locs) != 2L) {

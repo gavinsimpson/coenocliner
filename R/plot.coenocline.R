@@ -40,8 +40,13 @@
 ##' plot(y, type = "l", lty = "solid")
 `plot.coenocline` <- function(x, type = "p", pch = 1, ...) {
     locs <- locations(x)
-    if (NCOL(locs) > 1) {
-        stop("`plot()` method not yet implemented for multiple gradients.")
+    nlocs <- NCOL(locs)
+    if (nlocs > 1) {
+        if (nlocs == 2L) {
+            persp(x, ...)
+        } else {
+            stop("`plot()` method not implemented for more than two gradients.")
+        }
     } else {
         ord <- order(locs)
         matplot(locs[ord], x[ord, ], type = type, pch = pch, ...)
