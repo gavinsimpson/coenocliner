@@ -288,16 +288,13 @@ mu2d <- coenocline(locs, responseModel = "gaussian",
 <<example3-head-locs>>=
 head(locs)
 @
-As a result, we can reshape the abundances for a single species into a matrix reflecting the grid of locations over the gradient space via a simple \texttt{matrix()} call, setting the number of columns in the resultant matrix equal to the number of gradient locations in the simulation. By way of illustration, this approach is used to prepare the expected abundances for four of the species in \texttt{mu2d} for plotting via the \texttt{persp()} plotting function
+As a result, we can reshape the abundances for a single species into a matrix reflecting the grid of locations over the gradient space via a simple \texttt{matrix()} call, setting the number of columns in the resultant matrix equal to the number of gradient locations in the simulation. Thankfully this is taken care of for you in the \texttt{persp()} method\footnote{The \texttt{plot()} methods for class \texttt{"coenocline"} will use the \texttt{persp()} if you try to plot an object with two gradients.}. The method will draw perspective plots for all species in the simulation; it is keft to the user to handle how these should be displayed on the current graphics device. By way of illustration, I plot the expected abundance for four of the species in \texttt{mu2d}
 
 <<example3-persp-plots, fig.cap = "Bivariate Gaussian species responses for four selected species.">>=
 layout(matrix(1:4, ncol = 2))
 op <- par(mar = rep(1, 4))
-for (i in c(2,8,13,19)) {
-    persp(loc1, loc2, matrix(mu2d[, i], ncol = length(loc2)),
-          ticktype = "detailed", zlab = "Abundance",
-          theta = 45, phi = 30)
-}
+persp(mu2d, species = c(2, 8, 13, 19), ticktype = "detailed",
+      zlab = "Abundance")
 par(op)
 layout(1)
 @
@@ -317,11 +314,8 @@ The resulting simulated counts for the same four selected species are shown in F
 <<example3-persp-plots2, fig.cap = "Simulated counts using negative binomial errors from bivariate Gaussian species responses for four selected species.">>=
 layout(matrix(1:4, ncol = 2))
 op <- par(mar = rep(1, 4))
-for (i in c(2,8,13,19)) {
-    persp(loc1, loc2, matrix(sim2d[, i], ncol = length(loc2)),
-          ticktype = "detailed", zlab = "Abundance",
-          theta = 45, phi = 30)
-}
+persp(sim2d, species = c(2, 8, 13, 19), ticktype = "detailed",
+      zlab = "Abundance")
 par(op)
 layout(1)
 @
