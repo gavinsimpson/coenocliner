@@ -96,3 +96,22 @@ test_that("coenocline() works with gradient values supplied as a list", {
     expect_that(NROW(sim3), equals(length(x)))
     expect_that(sim3, is_identical_to(sim))
 })
+
+## test 2d simulations with different numbers of locations per gradient
+x <- seq(from = 4, to = 6, length = 100)
+y <- seq(from = 1, to = 100, length = 50)
+optx <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
+opty <- c(5, 50, 75, 10, 60)
+tolx <- rep(0.25, 5)
+toly <- rep(2, 5)
+h <- rep(30, 5)
+
+test_that("coenocline() works with different numbers of locations per gradient", {
+    set.seed(1)
+    sim <- coenocline(cbind(x, y),
+                      responseModel = "gaussian",
+                      params = list(px = cbind(opt = optx, tol = tolx, h = h),
+                      py = cbind(opt = opty, tol = toly)),
+                      countModel = "poisson")
+    expect_is(sim, "coenocline")
+})
