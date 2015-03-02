@@ -28,3 +28,7 @@ move: check
 clean:
 	cd ..;\
 	rm -r coenocliner.Rcheck/
+
+purl:
+	cd ..;\
+	R -q -e 'library("knitr"); purl("./coenocliner/vignettes/coenocliner.Rnw")'
