@@ -313,15 +313,8 @@
             cargs <- list(n = NROW(ex), mu = mu)
         } else {
             nex <- NROW(ex)
-            ## expand the count parameters to correct length if req'd
-            clen <- vapply(countParams, FUN = length, FUN.VALUE = integer(1))
-            take <- which(clen != nspp)
-            if (length(take) > 0) {
-                countParams[take] <- lapply(countParams[take], FUN = rep_len,
-                                            length.out = nspp)
-            }
-            countParams <- lapply(countParams, FUN = expandToLen,
-                                  nx = n, no = nspp)
+            ## expand the count parameters to correct length
+            countParams <- expandMoreParams(countParams, n = n, nspp = nspp)
             cargs <- vector("list", length = length(countParams) + 2)
             cargs[[1]] <- nex
             cargs[[2]] <- mu
@@ -332,6 +325,22 @@
     }
     sim <- matrix(sim, nrow = n)
     sim
+}
+
+`expandMoreParams` <- function(pars, n, nspp) {
+    ## expand the count parameters to correct length if req'd
+    ## at this point we are expanding parameters that ar the same for
+    ## all species and hence passed as a single value
+    clen <- vapply(pars, FUN = length, FUN.VALUE = integer(1))
+    take <- which(clen != nspp)
+    if (length(take) > 0) {
+        pars[take] <- lapply(pars[take], FUN = rep_len,
+                                    length.out = nspp)
+    }
+    ## now expand to match the way the repsonse params are expanded
+    pars <- lapply(pars, FUN = expandToLen,
+                          nx = n, no = nspp)
+    pars
 }
 
 `coenocline2d` <- function(x, y, responseModel, params,
@@ -353,6 +362,7 @@
     }
     n1 <- length(x)
     n2 <- length(y)
+    nspp <- length(params[["px"]][[1]])
     stopifnot(isTRUE(all.equal(n1, n2)))
     stopifnot(length(params) == 2L)
     exx <- expandFun(x, params[["px"]])
@@ -379,6 +389,8 @@
         if (is.null(countParams)) {
             cargs <- list(n = NROW(exx), mu = mu)
         } else {
+            ## expand the count parameters to correct length
+            countParams <- expandMoreParams(countParams, n = n1, nspp = nspp)
             cargs <- vector("list", length = length(countParams) + 2)
             cargs[[1]] <- NROW(exx)
             cargs[[2]] <- mu
