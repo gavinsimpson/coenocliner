@@ -22,6 +22,8 @@
 ##'
 ##' @keywords utilities
 ##'
+##' @rdname expand
+##'
 ##' @references Minchin P.R. (1987) Simulation of multidimensional
 ##' community patterns: towards a comprehensive model. \emph{Vegetatio}
 ##' \strong{71}, 145--156.
@@ -57,10 +59,15 @@
     out
 }
 
+##' @rdname expand
+##'
+##' @param nx numeric, the length of \code{x}
+##' @param no numeric, the number of other arguments for which we need to expand \code{x}
+`expandToLen` <- function(x, nx, no) {
+    x[rep.int(rep.int(seq_len(no), rep.int(nx, no)), 1L)]
+}
+
 `expandList` <- function(x, ...) {
-    expandFun <- function(x, r1, r2) {
-        x[rep.int(rep.int(seq_len(r2), rep.int(r1, r2)), 1L)]
-    }
     dots <- list(...)
     nams <- names(dots)
     ## nams could be NULL or have zero length values
@@ -71,12 +78,12 @@
         namsD[want] <- nams[want]
     }
     nx <- length(x)
-    n1 <- length(dots[[1]])
-    orep <- nx * n1
+    no <- length(dots[[1]])
+    orep <- nx * no
     x <- x[rep.int(rep.int(seq_len(nx), rep.int(1L, nx)), orep / nx)]
-    other <- vapply(dots, FUN = expandFun,
+    other <- vapply(dots, FUN = expandToLen,
                     FUN.VALUE = numeric(length = length(x)),
-                    r1 = nx, r2 = n1)
+                    nx = nx, no = no)
     out <- cbind(x, other)
     colnames(out)[-1] <- namsD
     out

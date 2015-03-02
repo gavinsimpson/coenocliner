@@ -275,11 +275,20 @@
     n <- length(x)
     if (is.matrix(params)) {
         args <- list(x = x, params = params)
+        nargs <- NCOL(params)
+        nspp <- NROW(params)
     } else if (is.list(params)) {
+        ## Check that components of list are of correct length
+        plen <- unique(vapply(params, FUN = length, FUN.VALUE = integer(1)))
+        if (length(plen) > 1L) {
+            stop("Different lengths found for elements of 'params'.")
+        }
         if (is.list(params[[1]])) {
             params <- params[[1]]
         }
-        args <- vector(mode = "list", length = length(params) + 1)
+        nargs <- length(params)
+        nspp <- length(params[[1]])
+        args <- vector(mode = "list", length = nargs + 1)
         args[[1]] <- x
         args[-1] <- params
         names(args) <- c("x", names(params))
@@ -303,8 +312,18 @@
         if (is.null(countParams)) {
             cargs <- list(n = NROW(ex), mu = mu)
         } else {
+            nex <- NROW(ex)
+            ## expand the count parameters to correct length if req'd
+            clen <- vapply(countParams, FUN = length, FUN.VALUE = integer(1))
+            take <- which(clen != nspp)
+            if (length(take) > 0) {
+                countParams[take] <- lapply(countParams[take], FUN = rep_len,
+                                            length.out = nspp)
+            }
+            countParams <- lapply(countParams, FUN = expandToLen,
+                                  nx = n, no = nspp)
             cargs <- vector("list", length = length(countParams) + 2)
-            cargs[[1]] <- NROW(ex)
+            cargs[[1]] <- nex
             cargs[[2]] <- mu
             cargs[-(1:2)] <- countParams
             names(cargs) <- c("n", "mu", names(countParams))

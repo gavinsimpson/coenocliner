@@ -2,10 +2,13 @@
 % Please edit documentation in R/expand.R
 \name{expand}
 \alias{expand}
+\alias{expandToLen}
 \title{An \code{expand.grid}-like function that repeats sets of
 vectors for every value in a reference vector.}
 \usage{
 expand(x, ...)
+
+expandToLen(x, nx, no)
 }
 \arguments{
 \item{x}{numeric; vector of data points which are to be replicated
@@ -14,6 +17,10 @@ for each of the sets of vectors supplied to \code{...}.}
 \item{...}{additional vector arguments to be expanded to the correct
 length. These are taken to be a set of values to be replicated for
 each of the elements of \code{x}.}
+
+\item{nx}{numeric, the length of \code{x}}
+
+\item{no}{numeric, the number of other arguments for which we need to expand \code{x}}
 }
 \value{
 a matrix of replicated vectors, with column names for \code{x}
