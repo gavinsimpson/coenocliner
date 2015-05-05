@@ -71,8 +71,7 @@ devtools provides. To do this, install **devtools** from CRAN via
 
 then run
 
-    require("devtools")
-    install_github("coenocliner", "gavinsimpson")
+    devtools::install_github("gavinsimpson/coenocliner")
 
 ### References
 
