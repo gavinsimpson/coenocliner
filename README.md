@@ -1,7 +1,10 @@
 coenocliner
 ===========
 
-[![Build Status](https://travis-ci.org/gavinsimpson/coenocliner.svg?branch=master)](https://travis-ci.org/gavinsimpson/coenocliner)
+Linux       | Windows    | CRAN Downloads
+------------|------------|----------------
+[![Build Status](https://travis-ci.org/gavinsimpson/coenocliner.svg?branch=master)](https://travis-ci.org/gavinsimpson/coenocliner) | [![Build status](https://ci.appveyor.com/api/projects/status/hc8dbxrim2nj3c1i/branch/master)](https://ci.appveyor.com/project/gavinsimpson/coenocliner/branch/master) | [![](http://cranlogs.r-pkg.org/badges/grand-total/coenocliner)](http://cran.rstudio.com/web/packages/coenocliner/index.html)
+
 
 An R package to simulate species abundances (counts) along gradients
 
