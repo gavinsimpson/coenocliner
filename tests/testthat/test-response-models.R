@@ -2,7 +2,7 @@
 
 ## Load packages
 library("testthat")
-library_if_available("coenocliner")
+library("coenocliner")
 
 context("Testing Response Model Functions")
 

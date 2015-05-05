@@ -1,8 +1,8 @@
 ## Tests for main coenocline() function
 
 ## Load packages
-## library("testthat")
-## library("coenocliner")
+library("testthat")
+library("coenocliner")
 
 context("Testing coenocline() functionality")
 
