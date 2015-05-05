@@ -2,7 +2,6 @@
 
 ## Setup
 library("testthat")
-library("coenocliner")
 
 ## Runs the tests in inst/tests
-test_package("coenocliner")
+test_check("coenocliner")
