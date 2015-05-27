@@ -1,18 +1,35 @@
 coenocliner 0.2-0
 =================
 
+* Jari Oksanen is now listed as a contributor to the package having
+  added several new stochastic distributions.
+
 * The object returned by `coenocline()` now has S3 class `"coenocline"`
   and inherits from the `"matrix"` class.
 
 * A `print()` method has been added for `coenocline()` which displays
   some summary information and the first `n` lines of the simulated
-  counts. This is rudimentary; I'd like to have something like the
-  way **dplyr** prints data frames implemented for the next release.
+  counts. The `print()` method uses a new internal function modelled
+  on the way **dplyr** prints data frames.
 
 * A `stack()` method for `coenocline()` was added. This makes it much
   easier to reshape the simulated count data into a format suitable for
   use with **ggplot** or **lattice** graphics, or R's modelling
   functions.
+
+* An enhanced `plot()` method for `coenocline()` objects is provided,
+  which can draw 1-d plots of single gradient simulations.
+
+* A `persp()` method is now provided which can produced 3-d perspective
+  plots od simulations with 2 gradients.
+
+* Two new stochastic distributions were added by Jari Oksanen
+
+    - Zero-inflated Binomial
+    - Zero-inflated Beta-binomial
+
+* A new extractor function is provided, `locations()`, which extracts
+  the gradient locations at which counts were simulated.
 
 Bug fixes
 ---------
