@@ -7,6 +7,12 @@ Version 0.2-0
 	used the value for first gradient instead.
 	Reported by: Jari Oksanen (with patch/fix)
 
+	* For additional details, please see the github commit log:
+	http://github.com/gavinsimpson/coenocliner/commits/master
+
+	For higher-level news of chanegs to the package, see the NEWS
+	file.
+
 Version 0.1-0
 
 	* Released to CRAN...
