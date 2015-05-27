@@ -21,7 +21,7 @@ Type 'q()' to quit R.
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
 > library('coenocliner')
-This is coenocliner 0.2-1
+This is coenocliner 0.2-0
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
@@ -578,7 +578,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.423 0.029 1.459 0 0 
+Time elapsed:  1.467 0.041 1.516 0 0 
 > grDevices::dev.off()
 null device 
           1 
