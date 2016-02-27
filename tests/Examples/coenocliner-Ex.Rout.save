@@ -1,7 +1,7 @@
 
-R version 3.2.0 Patched (2015-05-01 r68289) -- "Full of Ingredients"
-Copyright (C) 2015 The R Foundation for Statistical Computing
-Platform: x86_64-unknown-linux-gnu (64-bit)
+R version 3.2.3 Patched (2016-01-03 r69846) -- "Wooden Christmas-Tree"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -21,7 +21,7 @@ Type 'q()' to quit R.
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
 > library('coenocliner')
-This is coenocliner 0.2-0
+This is coenocliner 0.2-1
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
@@ -37,6 +37,7 @@ This is coenocliner 0.2-0
 > ### Keywords: datagen
 > 
 > ### ** Examples
+> 
 > 
 > ## Poisson counts along a single gradient, Gaussian response
 > ## =========================================================
@@ -242,6 +243,7 @@ This is coenocliner 0.2-0
 > 
 > ### ** Examples
 > 
+> 
 > x <- seq(from = 4, to = 6, length = 30)
 > opt <- seq(4, 7, length = 100)
 > tol <- rep(0.25, 100)
@@ -270,6 +272,7 @@ This is coenocliner 0.2-0
 
 Counts for 83 species not shown.
 
+> 
 > 
 > 
 > 
@@ -322,6 +325,7 @@ Counts for 83 species not shown.
 > ### Aliases: locations locations.default
 > 
 > ### ** Examples
+> 
 > 
 > ## Poisson counts along a single gradient, Gaussian response
 > ## =========================================================
@@ -504,6 +508,7 @@ Parameters:
 > 
 > 
 > 
+> 
 > cleanEx()
 > nameEx("species-response")
 > ### * species-response
@@ -516,6 +521,7 @@ Parameters:
 > ### Keywords: datagen
 > 
 > ### ** Examples
+> 
 > 
 > # A simple example with a single species
 > x <- seq(from = 4, to = 6, length = 100)
@@ -578,7 +584,7 @@ Parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.467 0.041 1.516 0 0 
+Time elapsed:  1.079 0.014 1.093 0 0 
 > grDevices::dev.off()
 null device 
           1 
