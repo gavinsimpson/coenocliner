@@ -85,6 +85,7 @@
 ##'
 ##' @rdname coenocliner-internal
 ##' @keywords internal
+##' @importFrom utils head
 ##' @export
 ##'
 ##' @examples
