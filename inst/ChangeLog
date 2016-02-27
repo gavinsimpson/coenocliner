@@ -1,5 +1,9 @@
 coencliner Change Log
 
+Version 0.2-1
+
+	* Fix problems identified by R CMD check under R-devel
+
 Version 0.2-0
 
 	* Bug Fix: A typo in the bivariate Beta response function led
