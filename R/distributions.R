@@ -1,5 +1,7 @@
 ##' @title Wrappers to random number generators for use with coenocliner
 ##'
+##' @description These functions are simple wrappers around existing random number generators in R to provide stochasic count data for simulated species.
+##'
 ##' @references Bolker, B.M. (2008) \emph{Ecological Models and Data
 ##' in R.} Princeton University Press.
 ##'
