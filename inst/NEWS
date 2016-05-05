@@ -1,3 +1,13 @@
+coenocliner 0.2-2
+=================
+
+* `NegBin()` and `ZINB()` incorrectly specified the gamma part of the
+  distribution. The `shape` argument to `rgamma()` should have been
+  `1/alpha` where `alpha` was used previously.
+
+    Also clarified the paramterization of the negative binomial used
+    by `NegBin()` and `ZINB` as the NB2 version.
+
 coenocliner 0.2-1
 =================
 

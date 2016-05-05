@@ -1,5 +1,11 @@
 coencliner Change Log
 
+Version 0.2-2
+
+	* Fix bug in `NegBin()` and `ZINB()` which had incorrect
+	specification of the gamma mixture part of the distribution.
+	Reported by: @nlhuong #24
+
 Version 0.2-1
 
 	* Fix problems identified by R CMD check under R-devel
