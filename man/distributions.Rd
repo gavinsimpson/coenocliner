@@ -36,7 +36,7 @@ ZIBB(n, mu, size, theta, zprobs)
 
 \item{mu}{the mean or expectation of the distribution. For \code{Bernoulli}, \code{Binomial}, and \code{BetaBinomial()} this is the probability of occurrence as given by the response function.}
 
-\item{alpha}{numeric; parameter for the negative binomial distribution.}
+\item{alpha}{numeric; dispersion parameter for the negative binomial distribution. The NB2 parametrization of the negative binomial is used here, in which \eqn{\alpha} is positively related to the amount of extra dispersion in the simulated data. As such, where \eqn{\alpha = 0}, we would have a Poisson distribution. \code{alpha} can be supplied a value of \code{0}, in which case \code{NegBin} and \code{ZINB} return random draws from the Poisson or zero-inflated Poisson distributions, respectively. Negative values of \code{alpha} are not allowed and will generate an error.}
 
 \item{size}{numeric; binomial denominator, the total number of individuals counted for example}
 
@@ -48,7 +48,7 @@ ZIBB(n, mu, size, theta, zprobs)
 a vector of random draws from the stated distribution.
 }
 \description{
-These functions are simple wrappers around existing random number generators in R to provide stochasic count data for simulated species.
+These functions are simple wrappers around existing random number generators in R to provide stochastic count data for simulated species.
 }
 \author{
 Gavin L. Simpson
