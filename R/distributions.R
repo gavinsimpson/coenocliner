@@ -21,12 +21,11 @@
 ##'
 ##' @importFrom stats rpois rgamma
 `NegBin` <- function(n, mu, alpha) {
-    if (alpha < 0L) {
+    if (any(alpha < 0L)) {
         stop("Negative values of 'alpha' are not supported")
     }
-    if (!isTRUE(all.equal(alpha, 0L))) {
-        mu <- mu * rgamma(n, shape = 1/alpha, rate = 1/alpha)
-    }
+    ind <- alpha > 0L
+    mu[ind] <- mu[ind] * rgamma(sum(ind), shape = 1/alpha[ind], rate = 1/alpha[ind])
     rpois(n, lambda = mu)
 }
 
@@ -72,22 +71,21 @@
 ##' @param zprobs numeric; zero-inflation parameter giving the proportion of extraneous zeros. Must be in range \eqn{0 \dots 1}{0 to 1}.
 ##' @importFrom stats runif rpois
 `ZIP` <- function(n, mu, zprobs) {
-    ifelse(runif(n) > zprobs, rpois(n, lambda = mu), 0)
+    ifelse(runif(n) > zprobs, rpois(n, lambda = mu), 0L)
 }
 
 ##' @rdname distributions
 ##'
 ##' @importFrom stats rpois rgamma runif
 `ZINB` <- function(n, mu, alpha, zprobs) {
-    if (alpha < 0L) {
+    if (any(alpha < 0L)) {
         stop("Negative values of 'alpha' are not supported")
     }
-    if (!isTRUE(all.equal(alpha, 0L))) {
-        mu <- mu * rgamma(n, shape = 1/alpha, rate = 1/alpha)
-    }
+    ind <- alpha > 0L
+    mu[ind] <- mu[ind] * rgamma(sum(ind), shape = 1/alpha[ind], rate = 1/alpha[ind])
     ifelse(runif(n) > zprobs,
            rpois(n, lambda = mu),
-           0)
+           0L)
 }
 
 ##' @rdname distributions
@@ -97,7 +95,7 @@
 `ZIB` <- function(n, mu, size, zprobs) {
     ifelse(runif(n) > zprobs,
            rbinom(n, size = size, prob = mu),
-           0)
+           0L)
 }
 
 ##' @rdname distributions
@@ -107,5 +105,5 @@
 `ZIBB` <- function(n, mu, size, theta, zprobs) {
     ifelse(runif(n) > zprobs,
            BetaBinomial(n, mu = mu, size = size, theta = theta),
-           0)
+           0L)
 }
