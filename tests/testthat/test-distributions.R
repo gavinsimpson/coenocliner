@@ -74,3 +74,15 @@ test_that("ZINB returns same as ZIP for alpha = 0", {
     rnd2 <- ZIP(n, mu = mu, zprobs = zprobs)
     expect_identical(rnd1, rnd2)
 })
+
+test_that("NegBin and ZINB work with vector alpha argument", {
+    mu <- 2
+    zprobs <- 0.2
+    set.seed(1)
+    rndNegBin <- NegBin(n, mu = mu, alpha = 0)
+    rndZINB   <- ZINB(n, mu = mu, alpha = 0, zprobs = zprobs)
+    expect_is(rndNegBin, "integer")
+    expect_length(rndNegBin, 10L)
+    expect_is(rndZINB, "integer")
+    expect_length(rndZINB, 10L)
+})
