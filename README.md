@@ -2,7 +2,7 @@ coenocliner
 ===========
 
 #### Released version
-[![CRAN version](http://www.r-pkg.org/badges/version/coenocliner)](http://cran.rstudio.com/web/packages/coenocliner/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/coenocliner)](http://cran.rstudio.com/web/packages/coenocliner/index.html)
+[![CRAN version](http://www.r-pkg.org/badges/version/coenocliner)](https://cran.rstudio.com/web/packages/coenocliner/index.html) [![](https://cranlogs.r-pkg.org/badges/grand-total/coenocliner)](https://cran.rstudio.com/web/packages/coenocliner/index.html)
 
 #### Build status
 [![Build Status](https://travis-ci.org/gavinsimpson/coenocliner.svg?branch=master)](https://travis-ci.org/gavinsimpson/coenocliner)  [![Build status](https://ci.appveyor.com/api/projects/status/hc8dbxrim2nj3c1i/branch/master)](https://ci.appveyor.com/project/gavinsimpson/coenocliner/branch/master)
@@ -17,7 +17,7 @@ through the use of simulated data. There are a number of computer
 programmes for simulating ecological data along gradients, such as 
 Peter Minchin's COMPAS, but none (that I am aware of) that are 
 available for R on CRAN. Dave Robert's 
-[coenoflex](http://cran.r-project.org/package=coenoflex) package for 
+[coenoflex](https://cran.r-project.org/package=coenoflex) package for 
 R would be a useful alternative but currently is archived on CRAN 
 because of some problems in the Fortran code underlying the package.
 
