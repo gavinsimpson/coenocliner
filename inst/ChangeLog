@@ -6,9 +6,11 @@ Version 0.2-2
 	specification of the gamma mixture part of the distribution.
 	Reported by: @nlhuong #24
 
+	* Allow for vector `alpha` in `NegBin()` and `ZINB()`
+
 Version 0.2-1
 
-	* Fix problems identified by R CMD check under R-devel
+	* Fix problems identified by `R CMD check` under R-devel
 
 Version 0.2-0
 

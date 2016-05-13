@@ -8,6 +8,8 @@ coenocliner 0.2-2
     Also clarified the paramterization of the negative binomial used
     by `NegBin()` and `ZINB` as the NB2 version.
 
+* `NegBin()` and `ZINB()` allow for vector `alpha` inputs. #25
+
 coenocliner 0.2-1
 =================
 
