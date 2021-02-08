@@ -5,10 +5,16 @@
 \title{Simulate species abundance (counts) or occurrence along one or two
 gradients}
 \usage{
-coenocline(x, responseModel = c("gaussian", "beta"), params,
-  extraParams = NULL, countModel = c("poisson", "negbin", "bernoulli",
-  "binary", "binomial", "betabinomial", "ZIP", "ZINB", "ZIB", "ZIBB"),
-  countParams = NULL, expectation = FALSE)
+coenocline(
+  x,
+  responseModel = c("gaussian", "beta"),
+  params,
+  extraParams = NULL,
+  countModel = c("poisson", "negbin", "bernoulli", "binary", "binomial",
+    "betabinomial", "ZIP", "ZINB", "ZIB", "ZIBB"),
+  countParams = NULL,
+  expectation = FALSE
+)
 }
 \arguments{
 \item{x}{one of a numeric vector, a list with two components, each a numeric vector, or a matrix with two columns. The vectors are the locations along the gradient(s) at which species responses are to be simulated.}
@@ -224,4 +230,3 @@ plot(y, type = "l", lty = "solid")
 Gavin L. Simpson
 }
 \keyword{datagen}
-

@@ -41,4 +41,3 @@ prettyHead(y)
 Gavin L. Simpson
 }
 \keyword{internal}
-

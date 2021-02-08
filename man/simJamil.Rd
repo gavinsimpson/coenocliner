@@ -5,8 +5,17 @@
 \title{Simulate species abundance data following Jamil & ter Braak
 (2013)}
 \usage{
-simJamil(n, m, x, gl = 4, randx = TRUE, tol = 0.5, tau = gl/2,
-  randm = TRUE, expectation = FALSE)
+simJamil(
+  n,
+  m,
+  x,
+  gl = 4,
+  randx = TRUE,
+  tol = 0.5,
+  tau = gl/2,
+  randm = TRUE,
+  expectation = FALSE
+)
 }
 \arguments{
 \item{n}{numeric; the number of samples/sites.}
@@ -63,11 +72,10 @@ sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
                 randm = FALSE)
 
 }
-\author{
-Gavin L. Simpson
-}
 \references{
 Jamil and ter Braak (2013) Generalized linear mixed models can detect unimodal species-environment relationships. \emph{PeerJ} \strong{1:e95}; DOI \href{http://doi.org/10.7717/peerj.95}{10.7717/peerj.95}.
 }
+\author{
+Gavin L. Simpson
+}
 \keyword{datagen}
-

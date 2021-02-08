@@ -18,10 +18,9 @@ Returns the parameters of the indicated response model.
 \examples{
 showParams("gaussian")
 }
-\author{
-Gavin L. Simpson
-}
 \seealso{
 \code{\link{Gaussian}} and \code{\link{Beta}} for the species response model functions themselves.
 }
-
+\author{
+Gavin L. Simpson
+}

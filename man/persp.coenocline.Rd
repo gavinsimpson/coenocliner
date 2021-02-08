@@ -78,4 +78,3 @@ layout(1)
 Gavin L. Simpson
 }
 \keyword{hplot}
-

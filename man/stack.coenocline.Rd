@@ -17,4 +17,3 @@ Stacks columns of a species coenocline simulation into long format suitable for 
 \seealso{
 \code{\link{coenocline}}
 }
-

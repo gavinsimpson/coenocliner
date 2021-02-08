@@ -42,13 +42,12 @@ pars <- expand(x, m = m, A0 = A0, r = r, alpha = alpha,
                gamma = gamma)
 head(pars)
 }
-\author{
-Gavin L. Simpson
-}
 \references{
 Minchin P.R. (1987) Simulation of multidimensional
 community patterns: towards a comprehensive model. \emph{Vegetatio}
 \strong{71}, 145--156.
 }
+\author{
+Gavin L. Simpson
+}
 \keyword{utilities}
-

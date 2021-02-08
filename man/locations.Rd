@@ -40,4 +40,3 @@ head(locations(y))
 \author{
 Gavin L. Simpson
 }
-
