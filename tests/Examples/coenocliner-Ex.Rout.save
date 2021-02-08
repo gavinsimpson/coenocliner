@@ -1,7 +1,7 @@
 
-R version 3.2.3 Patched (2015-12-10 r69760) -- "Wooden Christmas-Tree"
-Copyright (C) 2015 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-redhat-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -21,9 +21,10 @@ Type 'q()' to quit R.
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
 > library('coenocliner')
-This is coenocliner 0.2-2
+This is coenocliner 0.2-3
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 > cleanEx()
 > nameEx("coenocline")
 > ### * coenocline
@@ -150,11 +151,11 @@ This is coenocliner 0.2-2
 [6,]   29    0    0    0    0
 > tail(y)
          [,1] [,2] [,3] [,4] [,5]
-[9995,]     0    0    0    0   30
-[9996,]     0    0    0    0   32
-[9997,]     0    0    0    0   35
-[9998,]     0    0    0    0   34
-[9999,]     0    0    0    0   27
+ [9995,]    0    0    0    0   30
+ [9996,]    0    0    0    0   32
+ [9997,]    0    0    0    0   35
+ [9998,]    0    0    0    0   34
+ [9999,]    0    0    0    0   27
 [10000,]    0    0    0    0   33
 > 
 > ## Visualise one species' bivariate count data
@@ -421,7 +422,7 @@ Counts for 83 species not shown.
 > 
 > ### Name: plot.coenocline
 > ### Title: Plot species simulations along gradients
-> ### Aliases: lines.coenocline plot.coenocline
+> ### Aliases: plot.coenocline lines.coenocline
 > ### Keywords: hplot
 > 
 > ### ** Examples
@@ -517,7 +518,7 @@ Parameters:
 > 
 > ### Name: species-response
 > ### Title: Species response models for coenocline simulation
-> ### Aliases: Beta Gaussian species-response
+> ### Aliases: species-response Gaussian Beta
 > ### Keywords: datagen
 > 
 > ### ** Examples
@@ -582,9 +583,10 @@ Parameters:
 > 
 > ### * <FOOTER>
 > ###
+> cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.279 0.031 1.319 0 0 
+Time elapsed:  0.429 0.016 0.447 0 0 
 > grDevices::dev.off()
 null device 
           1 

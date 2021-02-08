@@ -49,7 +49,7 @@
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{textcomp}
-\newcommand{\textapprox}{\raisebox{0.5ex}{\texttildelow}}
+\newcommand{\glstextapprox}{\raisebox{0.5ex}{\texttildelow}}
 
 \begin{document}
 <<prelim, echo = FALSE, results = "hide">>=
@@ -145,7 +145,7 @@ The final argument is \texttt{expectation}, which defaults to \texttt{FALSE}. Wh
 In the next few sections the basic usage of \texttt{coenocline()} is illustrated.
 
 \subsubsection{Gaussian responses along a single gradient}
-This example, of multiple species responses along a single environmental gradient, illustrates the simplest usage of \texttt{coenocline()}. The example uses a hypothetical pH gradient with species optima drawn at random uniformally along the gradient. Species tolerances are the same for all species. The maximum abundance of each species, $h$, is drawn from a lognormal distribution with a mean of \textapprox{}20 ($e^3$). This simulation will be for a community of 20 species, evaluated at 100 equally spaced locations. First we set up the parameters
+This example, of multiple species responses along a single environmental gradient, illustrates the simplest usage of \texttt{coenocline()}. The example uses a hypothetical pH gradient with species optima drawn at random uniformally along the gradient. Species tolerances are the same for all species. The maximum abundance of each species, $h$, is drawn from a lognormal distribution with a mean of \glstextapprox{}20 ($e^3$). This simulation will be for a community of 20 species, evaluated at 100 equally spaced locations. First we set up the parameters
 
 <<example1-params>>=
 set.seed(2)
