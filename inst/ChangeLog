@@ -1,5 +1,11 @@
 coencliner Change Log
 
+Version 0.2-3
+
+	* Fix an issue related to an upgrade to the *hyperref* LaTeX
+	package that was causing vignette compilation to fail.
+	Reported by: Brian Ripley.
+
 Version 0.2-2
 
 	* Fix bug in `NegBin()` and `ZINB()` which had incorrect

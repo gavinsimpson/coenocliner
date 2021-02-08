@@ -1,3 +1,9 @@
+coenocliner 0.2-3
+=================
+
+* Fix an issue causing vignette compiling to fail due to an update to the
+  LaTeX package *hyperref*.
+
 coenocliner 0.2-2
 =================
 
