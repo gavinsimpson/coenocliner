@@ -22,7 +22,7 @@ sim <- coenocline(x,
 test_that("coenocline() returns an integer matrix", {
     expect_that(sim, is_a("coenocline"))
     expect_that(sim, is_a("matrix"))
-    expect_that(typeof(sim) == "integer", is_true())
+    expect_true(typeof(sim) == "integer")
 })
 
 test_that("coenocline() returns matrix with correct number of species", {
@@ -52,7 +52,7 @@ sim <- coenocline(cbind(x, y),
 test_that("coenocline() returns an integer matrix with x and y gradients", {
     expect_that(sim, is_a("coenocline"))
     expect_that(sim, is_a("matrix"))
-    expect_that(typeof(sim) == "integer", is_true())
+    expect_true(typeof(sim) == "integer")
 })
 
 test_that("coenocline() returns matrix with correct number of species with x and y gradients", {
