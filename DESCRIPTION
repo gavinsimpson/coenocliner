@@ -2,7 +2,7 @@ Package: coenocliner
 Type: Package
 Title: Coenocline Simulation
 Version: 0.2-3
-Date: 2021-02-08
+Date: 2021-02-13
 Authors@R: c(person(given = c("Gavin", "L."),
     family = "Simpson",
     role = c("aut","cre"),

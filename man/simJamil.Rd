@@ -73,7 +73,7 @@ sim <- simJamil(n = N, m = M, x = grad, gl = glen, randx = FALSE,
 
 }
 \references{
-Jamil and ter Braak (2013) Generalized linear mixed models can detect unimodal species-environment relationships. \emph{PeerJ} \strong{1:e95}; DOI \href{http://doi.org/10.7717/peerj.95}{10.7717/peerj.95}.
+Jamil and ter Braak (2013) Generalized linear mixed models can detect unimodal species-environment relationships. \emph{PeerJ} \strong{1:e95}; DOI \doi{10.7717/peerj.95}.
 }
 \author{
 Gavin L. Simpson
