@@ -1,11 +1,10 @@
-coenocliner
-===========
+# coenocliner
 
-#### Released version
+<!-- badges: start -->
 [![CRAN version](http://www.r-pkg.org/badges/version/coenocliner)](https://cran.r-project.org/package=coenocliner) [![](https://cranlogs.r-pkg.org/badges/grand-total/coenocliner)](https://cran.r-project.org/package=coenocliner)
 
-#### Build status
-[![Build Status](https://travis-ci.org/gavinsimpson/coenocliner.svg?branch=master)](https://travis-ci.org/gavinsimpson/coenocliner)  [![Build status](https://ci.appveyor.com/api/projects/status/hc8dbxrim2nj3c1i/branch/master)](https://ci.appveyor.com/project/gavinsimpson/coenocliner/branch/master)
+[![R-CMD-check](https://github.com/gavinsimpson/coenocliner/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gavinsimpson/coenocliner/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 ## What is coenocliner?
 

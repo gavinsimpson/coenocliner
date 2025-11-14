@@ -7,3 +7,4 @@ appveyor.yml
 .gitattributes
 .gitignore
 revdep
+^\.github$
