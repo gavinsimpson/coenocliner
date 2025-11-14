@@ -10,8 +10,8 @@ coenocline(
   responseModel = c("gaussian", "beta"),
   params,
   extraParams = NULL,
-  countModel = c("poisson", "negbin", "bernoulli", "binary", "binomial",
-    "betabinomial", "ZIP", "ZINB", "ZIB", "ZIBB"),
+  countModel = c("poisson", "negbin", "bernoulli", "binary", "binomial", "betabinomial",
+    "ZIP", "ZINB", "ZIB", "ZIBB"),
   countParams = NULL,
   expectation = FALSE
 )
