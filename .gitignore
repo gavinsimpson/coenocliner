@@ -23,3 +23,6 @@ vignettes/*.pdf
 
 ## ignore backup files
 *~
+
+# ignore the revdep folder
+revdep
