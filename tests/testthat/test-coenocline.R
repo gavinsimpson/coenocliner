@@ -4,8 +4,6 @@
 library("testthat")
 library("coenocliner")
 
-context("Testing coenocline() functionality")
-
 ## set up for tests
 x <- seq(from = 4, to = 6, length = 100)
 opt <- c(3.75, 4, 4.55, 5, 5.5) + 0.5
@@ -14,23 +12,25 @@ h <- rep(20, 5)
 
 ## simulate
 set.seed(1)
-sim <- coenocline(x,
-                  responseModel = "gaussian",
-                  params = cbind(opt = opt, tol = tol, h = h),
-                  countModel = "poisson")
+sim <- coenocline(
+  x,
+  responseModel = "gaussian",
+  params = cbind(opt = opt, tol = tol, h = h),
+  countModel = "poisson"
+)
 
 test_that("coenocline() returns an integer matrix", {
-    expect_that(sim, is_a("coenocline"))
-    expect_that(sim, is_a("matrix"))
-    expect_true(typeof(sim) == "integer")
+  expect_s3_class(sim, "coenocline")
+  expect_s3_class(sim, "matrix")
+  expect_type(sim, "integer")
 })
 
 test_that("coenocline() returns matrix with correct number of species", {
-    expect_that(NCOL(sim), equals(length(opt)))
+  expect_identical(NCOL(sim), length(opt))
 })
 
 test_that("coenocline() returns matrix with correct number of samples (rows)", {
-    expect_that(NROW(sim), equals(length(x)))
+  expect_identical(NROW(sim), length(x))
 })
 
 ## simulate
@@ -50,49 +50,45 @@ sim <- coenocline(cbind(x, y),
                   countModel = "poisson")
 
 test_that("coenocline() returns an integer matrix with x and y gradients", {
-    expect_that(sim, is_a("coenocline"))
-    expect_that(sim, is_a("matrix"))
-    expect_true(typeof(sim) == "integer")
+  expect_s3_class(sim, "coenocline")
+  expect_s3_class(sim, "matrix")
+  expect_type(sim, "integer")
 })
 
 test_that("coenocline() returns matrix with correct number of species with x and y gradients", {
-    expect_that(NCOL(sim), equals(length(opt)))
+  expect_identical(NCOL(sim), length(opt))
 })
 
 test_that("coenocline() returns matrix with correct number of samples with x and y gradients", {
-    expect_that(NROW(sim), equals(length(x)))
+  expect_identical(NROW(sim), length(x))
 })
 
 test_that("coenocline() works with parameters as lists", {
-
-    lp <- list(px = list(opt = optx, tol = tolx, h = h),
-               py = list(opt = opty, tol = toly))
-    set.seed(1)
-    sim2 <- coenocline(cbind(x, y),
-                       responseModel = "gaussian",
-                       params = lp,
-                       countModel = "poisson")
-
-    expect_that(sim2, is_a("coenocline"))
-    expect_that(sim2, is_a("matrix"))
-    expect_that(NCOL(sim2), equals(length(opt)))
-    expect_that(NROW(sim2), equals(length(x)))
-    expect_that(sim2, is_identical_to(sim))
+  lp <- list(px = list(opt = optx, tol = tolx, h = h),
+             py = list(opt = opty, tol = toly))
+  set.seed(1)
+  sim2 <- coenocline(cbind(x, y),
+                     responseModel = "gaussian",
+                     params = lp,
+                     countModel = "poisson")
+  expect_s3_class(sim2, "coenocline")
+  expect_s3_class(sim2, "matrix")
+  expect_identical(NCOL(sim2), length(opt))
+  expect_identical(NROW(sim2), length(x))
+  expect_identical(sim2, sim)
 })
 
 test_that("coenocline() works with gradient values supplied as a list", {
-
-    lp <- list(px = list(opt = optx, tol = tolx, h = h),
-               py = list(opt = opty, tol = toly))
-    set.seed(1)
-    sim3 <- coenocline(list(x = x, y = y),
-                       responseModel = "gaussian",
-                       params = lp,
-                       countModel = "poisson")
-
-    expect_that(sim3, is_a("coenocline"))
-    expect_that(sim3, is_a("matrix"))
-    expect_that(NCOL(sim3), equals(length(opt)))
-    expect_that(NROW(sim3), equals(length(x)))
-    expect_that(sim3, is_identical_to(sim))
+  lp <- list(px = list(opt = optx, tol = tolx, h = h),
+             py = list(opt = opty, tol = toly))
+  set.seed(1)
+  sim3 <- coenocline(list(x = x, y = y),
+                     responseModel = "gaussian",
+                     params = lp,
+                     countModel = "poisson")
+  expect_s3_class(sim3, "coenocline")
+  expect_s3_class(sim3, "matrix")
+  expect_identical(NCOL(sim3), length(opt))
+  expect_identical(NROW(sim3), length(x))
+  expect_identical(sim3, sim)
 })
