@@ -4,6 +4,7 @@
 [![CRAN version](http://www.r-pkg.org/badges/version/coenocliner)](https://cran.r-project.org/package=coenocliner) [![](https://cranlogs.r-pkg.org/badges/grand-total/coenocliner)](https://cran.r-project.org/package=coenocliner)
 
 [![R-CMD-check](https://github.com/gavinsimpson/coenocliner/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gavinsimpson/coenocliner/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/gavinsimpson/coenocliner/graph/badge.svg)](https://app.codecov.io/gh/gavinsimpson/coenocliner)
 <!-- badges: end -->
 
 ## What is coenocliner?
