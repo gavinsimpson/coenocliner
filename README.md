@@ -18,63 +18,68 @@ programmes for simulating ecological data along gradients, such as
 Peter Minchin's COMPAS, but none (that I am aware of) that are 
 available for R on CRAN. Dave Robert's 
 [coenoflex](https://cran.r-project.org/package=coenoflex) package for 
-R would be a useful alternative but currently is archived on CRAN 
-because of some problems in the Fortran code underlying the package.
+R is a useful alternative but at the time I started writing this, coenoflex was 
+archived on CRAN (it is now back on CRAN).
 
 Rather than have to reinvent the wheel each time I wanted to simulate 
 some new data for a paper or to work on a new approach, I decided to 
 start my own R package to contain a range of simulators encapsulating 
 different response models, numbers of gradients, etc.
 
-At the moment, coenocliner is limited in what it can do practically. 
-There is a single response model, the Gaussian response, which is a 
-symmetric model of the parameters; the optimum, tolerance and height 
-of the response curve. Count data can be generated from this model 
-from either a Poisson or negative binomial distribution, using the 
-parameterised Gaussian response as the expectation or mean of the 
-distribution.
+At the moment, **coenocliner** is limited in what it can do practically. 
+There are two response models, the Gaussian response, which is a 
+symmetric model of the parameters (the optimum, tolerance and height 
+of the response curve) and the generalized beta response model.
+Count data can be generated from this model from several distributions, including the Poisson or negative binomial distributions, using the 
+parameterised response model as the expectation or mean of the 
+distribution. The complete list of distributions supported are:
 
-Additional response models include:
-
- 1. The generalised beta response function
+* Poisson,
+* Negative binomial,
+* Bernoulli,
+* Binomial,
+* Beta binomial,
+* Zero-inflated Poisson,
+* Zero-inflated negative binomial,
+* Zero-inflated binomial,
+* Zero-inflated beta binomial.
 
 A further feature of **coenocliner** that I hope to develop is to 
-include simulation  wrapper functions that replicate the simulation 
+include simulation wrapper functions that replicate the simulation 
 methods used in research papers. A working example is `simJamil`, 
-which produces simlations from a Gaussian logit response following 
+which produces simulations from a Gaussian logit response following 
 the scheme described in Jamil & ter Braak (2013).
 
 ## Development
 
-I would like to see coenocliner be as inclusive as possible; if you 
+I would like to see **coenocliner** be as inclusive as possible; if you 
 have code to simulate ecological species or community data that is 
-just sitting around, consider adding it to coenocliner. In the 
+just sitting around, consider adding it to **coenocliner**. In the 
 meantime, I'm happy just having something tangible for my own use 
 without having to remember the expressions for some of the response 
 models.
 
-Currently coenocliner is licensed under the GPL v2, but I'm happy to 
+Currently **coenocliner** is licensed under the GPL v2, but I'm happy to 
 reconsider this if you want to contribute code under a more permissive 
 licence.
 
 ## Installation
 
-No binary packages are currently available for coenocliner. If you 
-have the correct development tools you can compile the package 
-yourself after downloading the source code from github. Once I work 
-out how to link git with svn I'll start a project on 
-[R-forge](http://r-forge.r-project.org) which will host binary 
-packages of coenocliner.
+You can install the released version directly from CRAN using
 
-If you use Hadley Wickham's **devtools** package then you 
-can install coenocliner directly from github using functions that 
-devtools provides. To do this, install **devtools** from CRAN via
+```r
+install.packages("coenocliner")
+```
 
-    install.packages("devtools")
+If you use the **remotes** package then you  can install **coenocliner**
+directly from GitHub using functions that **remotes** provides. To do this, 
+install **remotes** from CRAN via
+
+    install.packages("remotes")
 
 then run
 
-    devtools::install_github("gavinsimpson/coenocliner")
+    remotes::install_github("gavinsimpson/coenocliner")
 
 ### References
 
