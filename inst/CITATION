@@ -2,7 +2,7 @@ if(!exists("meta") || is.null(meta)) meta <- packageDescription("coenocliner")
 
 citHeader("To cite coenocliner in publications use:")
 
-bibentry(entry = "Manual",
+bibentry(bibtype = "Manual",
          title = "coenocliner: A coenocline simulation package for R",
          author = person(
             given = "Gavin L.",
