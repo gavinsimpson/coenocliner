@@ -8,7 +8,7 @@ docs:
 
 build: docs
 	cd ..;\
-	R CMD build coenocliner
+	R CMD build --compact-vignettes=both coenocliner
 
 check: build
 	cd ..;\
