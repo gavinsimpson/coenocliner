@@ -2,10 +2,16 @@ if(!exists("meta") || is.null(meta)) meta <- packageDescription("coenocliner")
 
 citHeader("To cite coenocliner in publications use:")
 
-citEntry(entry = "Manual",
+bibentry(entry = "Manual",
          title = "coenocliner: A coenocline simulation package for R",
-         author = personList(as.person("Gavin L. Simpson")),
-         address = "Regina, Canada",
+         author = person(
+            given = "Gavin L.",
+            family = "Simpson",
+            email = "ucfagls@gmail.com",
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0002-9084-8413")
+         ),
+         address = "Aarhus, Denmark",
          year = sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date),
          url = "https://github.com/gavinsimpson/coenocliner",
 
